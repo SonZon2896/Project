@@ -10,14 +10,14 @@ public:
         y = y_;
     }
 
-    Point& operator+=(Point& new_coord)
+    Point& operator+=(const Point& new_coord)
     {
         x += new_coord.x;
         y += new_coord.y;
         return *this;
     }
 
-    Point& operator*=(double speed)
+    Point& operator*=(const double& speed)
     {
         x *= speed;
         y *= speed;
@@ -32,16 +32,32 @@ public:
     double money = 0;
     double speed = 1;
 
-    Student_money(double money_new)
+    Student_money(const double& money_new)
     {
         money = money_new;
     }
 
-    void update(double time)
+    void update(const double& time)
     {
         money += (time * speed);
     }
 };
+
+
+class Trigger
+{
+    Point left_down;
+    Point right_up;
+
+    Trigger (Point&& left, Point&& right)
+    {
+        left_down = left;
+        right_up = right;
+    }
+
+    
+
+}
 
 
 
