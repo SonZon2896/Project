@@ -1,3 +1,5 @@
+#pragma once
+#include <vector>
 class Point
 {
 public:
@@ -17,7 +19,7 @@ public:
         return *this;
     }
 
-    Point& operator*=(const double& speed)
+    Point& operator*=(double speed)
     {
         x *= speed;
         y *= speed;
@@ -36,28 +38,57 @@ class Student_money
 {
 public:
     double money = 0;
-    double speed = 1;
+    double speed;
 
-    Student_money(const double& money_new)
+    Student_money(double money_new)
     {
         money = money_new;
     }
 
-    void update(const double& time)
+    void update(double time)
     {
         money += (time * speed);
     }
 };
 
+class Road
+{
+public:
+    std::vector<Point> points;
+
+    Road(std::vector<Point> points): points{points} {}
+};
+
+class Trigger;
+class Cocroach
+{
+private:
+    const Road road;
+    std::size_t point_on_road = 0;
+public:
+    double health;
+    Point pos;
+    double speed;
+
+    Cocroach() = delete;
+    Cocroach(const Road& road, Point pos = {0., 0.}, double speed = 0, double health = 100.)
+        : road{road}, pos{pos}, speed{speed}, health{health}
+        {}
+
+    void Move();
+    void CheckTrigger(const std::vector<Trigger*> triggers);
+};
 
 class Trigger
 {
     Point ld;
     Point ru;
+    std::vector<Cocroach*> cocroaches;
 
+    Trigger() = delete;
     Trigger(const Point& left, const Point& right)
         : ld(left), ru(right) {}
 
-    
-
+    void CheckCocroaches();
+    bool In(const Point& pos);
 };
