@@ -1,25 +1,42 @@
 #pragma once
 #include <vector>
+#include <math.h>
+
 class Point
 {
 public:
     double x;
     double y;
 
+    Point() = default;
     Point(double x, double y)
         :x{x}, y{y} {}
 
-    Point& operator+=(const Point& new_coord)
+    Point& operator+=(const Point& point)
     {
-        x += new_coord.x;
-        y += new_coord.y;
+        x += point.x;
+        y += point.y;
         return *this;
     }
 
-    Point& operator*=(double speed)
+    Point& operator-=(const Point& point)
     {
-        x *= speed;
-        y *= speed;
+        x -= point.x;
+        y -= point.y;
+        return *this;
+    }
+
+    Point& operator*=(double value)
+    {
+        x *= value;
+        y *= value;
+        return *this;
+    }
+
+    Point& operator/=(double value)
+    {
+        x /= value;
+        y /= value;
         return *this;
     }
 
@@ -28,8 +45,9 @@ public:
         x = point.x;
         y = point.y;
     }
-};
 
+    double Dist();
+};
 
 class Student_money
 {
@@ -52,23 +70,29 @@ public:
     std::vector<Point> points;
 
     Road(std::vector<Point> points): points{points} {}
+
+    Point& operator[](int index);
 };
 
 class Trigger;
+
 class Cocroach
 {
 private:
-    const Road road;
-    std::size_t point_on_road = 0;
+    Road road;
+    Point direction;
+    std::size_t point_on_road = 1;
+    bool is_in_trig = false;
+
+    void UpdateDir();
 public:
+    friend Trigger;
     double health;
     Point pos;
     double speed;
 
     Cocroach() = delete;
-    Cocroach(const Road& road, Point pos = {0., 0.}, double speed = 0, double health = 100.)
-        : road{road}, pos{pos}, speed{speed}, health{health}
-        {}
+    Cocroach(const Road& road, const Point& pos = {0., 0.}, double speed = 0, double health = 100.);
 
     void Move(double time);
     void CheckTrigger(const std::vector<Trigger*>& triggers);
