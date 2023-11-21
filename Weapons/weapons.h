@@ -1,23 +1,10 @@
-#include <heads.h>
-class Trigger;
-class Point;
-
-
-
-
-
-
+#include "../Headers/heads.h"
 
 class Weapon
 {
 protected:
     Weapon(const Point& coordinate, const Trigger& trigger_, double time_sleep, double damage_)
-    {
-        damage = damage_;
-        time = time_sleep; 
-        coord = coordinate;
-        trigger = trigger_;
-    }
+    : coord{coordinate}, trigger{trigger_}, time{time_sleep}, damage{damage_} {}
 public:
     double damage;
     double time;
