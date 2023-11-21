@@ -1,3 +1,4 @@
+#include <head.h>
 class Trigger;
 class Point;
 
@@ -22,7 +23,15 @@ public:
         trigger = trigger_;
     }
 
-    trigger_.cocroachers
+    std::vector<Cocroach*> cocr = trigger_.cocroaches;
+
+    void DamageForCocroaches()
+    {
+        for(auto taracan: cocr)
+            taracan.health -= damage;
+    }
+
+    
 
 
 
