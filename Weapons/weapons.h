@@ -22,7 +22,7 @@ public:
         trigger = trigger_;
     }
 
-    trigger.cocroachers
+    trigger_.cocroachers
 
 
 
