@@ -60,7 +60,7 @@ void Cocroach::CheckTrigger(const std::vector<Trigger*>& triggers)
 {
     if (is_in_trig)
         return;
-    for (auto trigger : triggers)
+    for (auto& trigger : triggers)
     {
         if (trigger->In(pos))
         {
@@ -81,4 +81,12 @@ void Trigger::CheckCocroaches()
             cocroaches.erase(cocroaches.begin() + i--);
         }
     }
+}
+
+bool Trigger::In(const Point& pos)
+{
+    if (ld.x <= pos.x && pos.x <= ru.x &&
+        ld.y <= pos.y && pos.y <= ru.y)
+        return true;
+    return false;
 }
