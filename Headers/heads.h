@@ -6,11 +6,8 @@ public:
     double x;
     double y;
 
-    Point(double x_, double y_)
-    {
-        x = x_;
-        y = y_;
-    }
+    Point(double x, double y)
+        :x{x}, y{y} {}
 
     Point& operator+=(const Point& new_coord)
     {
@@ -40,10 +37,8 @@ public:
     double money = 0;
     double speed;
 
-    Student_money(double money_new)
-    {
-        money = money_new;
-    }
+    Student_money(double money)
+        :money{money} {}
 
     void update(double time)
     {
@@ -76,11 +71,12 @@ public:
         {}
 
     void Move(double time);
-    void CheckTrigger(const std::vector<Trigger*> triggers);
+    void CheckTrigger(const std::vector<Trigger*>& triggers);
 };
 
 class Trigger
 {
+public:
     Point ld;
     Point ru;
     std::vector<Cocroach*> cocroaches;
