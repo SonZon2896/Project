@@ -75,7 +75,7 @@ public:
         : road{road}, pos{pos}, speed{speed}, health{health}
         {}
 
-    void Move();
+    void Move(double time);
     void CheckTrigger(const std::vector<Trigger*> triggers);
 };
 
