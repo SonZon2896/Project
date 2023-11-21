@@ -23,6 +23,12 @@ public:
         y *= speed;
         return *this;
     }
+
+    Point& operator=(const Point& point)
+    {
+        x = point.x;
+        y = point.y;
+    }
 };
 
 
@@ -46,18 +52,12 @@ public:
 
 class Trigger
 {
-    Point left_down;
-    Point right_up;
+    Point ld;
+    Point ru;
 
-    Trigger (Point&& left, Point&& right)
-    {
-        left_down = left;
-        right_up = right;
-    }
+    Trigger(const Point& left, const Point& right)
+        : ld(left), ru(right) {}
 
     
 
-}
-
-
-
+};
