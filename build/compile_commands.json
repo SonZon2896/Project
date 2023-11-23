@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/mnt/547AF2557AF232FA/lessons/projects/Project/build",
+  "command": "/usr/bin/c++   -g -o CMakeFiles/testing.dir/main.cpp.o -c /mnt/547AF2557AF232FA/lessons/projects/Project/main.cpp",
+  "file": "/mnt/547AF2557AF232FA/lessons/projects/Project/main.cpp"
+},
+{
+  "directory": "/mnt/547AF2557AF232FA/lessons/projects/Project/build",
+  "command": "/usr/bin/c++   -g -o CMakeFiles/testing.dir/Cpp/Heads.cpp.o -c /mnt/547AF2557AF232FA/lessons/projects/Project/Cpp/Heads.cpp",
+  "file": "/mnt/547AF2557AF232FA/lessons/projects/Project/Cpp/Heads.cpp"
+}
+]

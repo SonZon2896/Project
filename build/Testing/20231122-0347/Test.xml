@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Linux-c++"
+	BuildStamp="20231122-0347-Experimental"
+	Name="vanek-NX140A-S"
+	Generator="ctest-3.22.1"
+	CompilerName="/usr/bin/c++"
+	CompilerVersion="11.4.0"
+	OSName="Linux"
+	Hostname="vanek-NX140A-S"
+	OSRelease="5.15.0-41-generic"
+	OSVersion="#44-Ubuntu SMP Wed Jun 22 14:20:53 UTC 2022"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="GenuineIntel"
+	VendorID="Intel Corporation"
+	FamilyID="6"
+	ModelID="122"
+	ProcessorCacheSize="4096"
+	NumberOfLogicalCPU="4"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="2047"
+	TotalPhysicalMemory="7772"
+	LogicalProcessorsPerPhysical="1"
+	ProcessorClockFrequency="1047.92"
+	>
+	<Testing>
+		<StartDateTime>Nov 22 16:25 MSK</StartDateTime>
+		<StartTestTime>1700659518</StartTestTime>
+		<TestList/>
+		<EndDateTime>Nov 22 16:25 MSK</EndDateTime>
+		<EndTestTime>1700659518</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

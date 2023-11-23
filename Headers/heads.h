@@ -12,42 +12,48 @@ public:
     Point(double x, double y)
         :x{x}, y{y} {}
 
-    Point& operator+=(const Point& point)
+    Point operator+=(const Point& point)
     {
         x += point.x;
         y += point.y;
         return *this;
     }
 
-    Point& operator-=(const Point& point)
+    Point operator-=(const Point& point)
     {
         x -= point.x;
         y -= point.y;
         return *this;
     }
 
-    Point& operator*=(double value)
+    Point operator*=(double value)
     {
         x *= value;
         y *= value;
         return *this;
     }
 
-    Point& operator/=(double value)
+    Point operator/=(double value)
     {
         x /= value;
         y /= value;
         return *this;
     }
 
-    Point& operator=(const Point& point)
+    Point operator=(const Point& second)
     {
-        x = point.x;
-        y = point.y;
+        this->x = second.x;
+        this->y = second.y;
+        return *this;
     }
 
     double Dist();
 };
+
+Point operator+(Point first, const Point& second);
+Point operator-(Point first, const Point& second);
+Point operator/(Point first, double second);
+Point operator*(Point first, double second);
 
 class Student_money
 {
@@ -81,7 +87,7 @@ class Cocroach
 private:
     Road road;
     Point direction;
-    std::size_t point_on_road = 1;
+    std::size_t point_on_road = 0;
     bool is_in_trig = false;
 
     void UpdateDir();
@@ -92,7 +98,7 @@ public:
     double speed;
 
     Cocroach() = delete;
-    Cocroach(const Road& road, const Point& pos = {0., 0.}, double speed = 0, double health = 100.);
+    Cocroach(const Road& road, double speed = 0, double health = 100.);
 
     void Move(double time);
     void CheckTrigger(const std::vector<Trigger*>& triggers);

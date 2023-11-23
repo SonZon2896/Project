@@ -1,21 +1,21 @@
 #include "../Headers/heads.h"
 
-Point& operator+(Point first, const Point& second)
+Point operator+(Point first, const Point& second)
 {
     return first += second;
 }
 
-Point& operator-(Point first, const Point& second)
+Point operator-(Point first, const Point& second)
 {
     return first -= second;
 }
 
-Point& operator*(Point first, double second)
+Point operator*(Point first, double second)
 {
     return first *= second;
 }
 
-Point& operator/(Point first, double second)
+Point operator/(Point first, double second)
 {
     return first /= second;
 }
@@ -30,18 +30,17 @@ Point& Road::operator[](int index)
     return points[index];
 }
 
-Cocroach::Cocroach(const Road& road, const Point& pos, double speed, double health)
-    : road{road}, pos{pos}, speed{speed}, health{health}
+Cocroach::Cocroach(const Road& road, double speed, double health)
+    : road{road}, pos{this->road[0]}, speed{speed}, health{health}
 {
-    double distance = (this->road[1] - this->road[0]).Dist();
-    direction = (this->road[1] - this->road[0]) / distance;
+    UpdateDir();
 }
 
 void Cocroach::UpdateDir()
 {
     ++point_on_road;
     double distance = (road[point_on_road] - road[point_on_road-1]).Dist();
-    direction = (this->road[point_on_road] - this->road[point_on_road-1]) / distance;
+    direction = {(this->road[point_on_road] - this->road[point_on_road-1]) / distance};
 }
 
 void Cocroach::Move(double time)
@@ -52,7 +51,7 @@ void Cocroach::Move(double time)
     {
         double extra_dist = (pos - road[point_on_road]).Dist();
         UpdateDir();
-        pos = road[point_on_road] + direction * extra_dist;
+        pos = road[point_on_road-1] + direction * extra_dist;
     }
 }
 
