@@ -15,12 +15,13 @@ public:
     std::string s;
     std::string s_second;
 
-    Event(std::string& str){
+    Event(const std::string& str){
         s = str;
     }
 
-    Event(std::string& str){
+    Event(const std::string& str, const std::string& str2){
         s = str;
+        s_second = str2;
     }
 
     void print(){
@@ -42,7 +43,7 @@ public:
 
     void checking(std::vector<Cockroach*>& cocroaches){
         int count = 0; 
-        for(int i = 0; i < n; i++){
+        for(int i = 0; i < cocroaches.size(); i++){
             if(cocroaches[i]->health > 0){
                 count++;
             }
