@@ -70,22 +70,12 @@ public:
     }
 };
 
-class Road
-{
-public:
-    std::vector<Point> points;
-
-    Road(std::vector<Point> points): points{points} {}
-
-    Point& operator[](int index);
-};
-
 class Trigger;
 
 class Cockroach
 {
 private:
-    Road road;
+    std::vector<Point> road;
     Point direction;
     std::size_t point_on_road = 0;
     bool is_in_trig = false;
@@ -96,11 +86,12 @@ public:
     double health;
     Point pos;
     double speed;
+    bool is_death = false;
 
     Cockroach() = delete;
-    Cockroach(const Road& road, double speed = 0, double health = 100.);
+    Cockroach(const std::vector<Point>& road, double speed = 0, double health = 100.);
 
-    void Move(double time);
+    bool Move(double time);
     void CheckTrigger(const std::vector<Trigger*>& triggers);
 };
 

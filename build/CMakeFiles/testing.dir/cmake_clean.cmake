@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/testing.dir/Cpp/Heads.cpp.o"
   "CMakeFiles/testing.dir/Cpp/Heads.cpp.o.d"
+  "CMakeFiles/testing.dir/Main/Waves.cpp.o"
+  "CMakeFiles/testing.dir/Main/Waves.cpp.o.d"
   "CMakeFiles/testing.dir/main.cpp.o"
   "CMakeFiles/testing.dir/main.cpp.o.d"
   "testing"

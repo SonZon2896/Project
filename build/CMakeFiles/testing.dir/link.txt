@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/testing.dir/main.cpp.o CMakeFiles/testing.dir/Cpp/Heads.cpp.o -o testing 
+/usr/bin/g++ -g CMakeFiles/testing.dir/main.cpp.o CMakeFiles/testing.dir/Cpp/Heads.cpp.o CMakeFiles/testing.dir/Main/Waves.cpp.o -o testing 

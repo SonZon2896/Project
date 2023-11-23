@@ -25,12 +25,7 @@ double Point::Dist()
     return std::sqrt(std::pow(x, 2) + std::pow(y, 2));
 }
 
-Point& Road::operator[](int index)
-{
-    return points[index];
-}
-
-Cockroach::Cockroach(const Road& road, double speed, double health)
+Cockroach::Cockroach(const std::vector<Point>& road, double speed, double health)
     : road{road}, pos{this->road[0]}, speed{speed}, health{health}
 {
     UpdateDir();
@@ -43,7 +38,7 @@ void Cockroach::UpdateDir()
     direction = {(this->road[point_on_road] - this->road[point_on_road-1]) / distance};
 }
 
-void Cockroach::Move(double time)
+bool Cockroach::Move(double time)
 {
     pos += direction * speed * time;
     // Проверяем не пробежал ли таракан точку поворота
@@ -53,6 +48,8 @@ void Cockroach::Move(double time)
         UpdateDir();
         pos = road[point_on_road-1] + direction * extra_dist;
     }
+    if (point_on_road >= road.size())
+        return true;
 }
 
 void Cockroach::CheckTrigger(const std::vector<Trigger*>& triggers)

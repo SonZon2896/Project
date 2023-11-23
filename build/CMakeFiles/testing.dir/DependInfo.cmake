@@ -8,8 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/mnt/547AF2557AF232FA/lessons/projects/Project/Cpp/Heads.cpp" "CMakeFiles/testing.dir/Cpp/Heads.cpp.o" "gcc" "CMakeFiles/testing.dir/Cpp/Heads.cpp.o.d"
-  "/mnt/547AF2557AF232FA/lessons/projects/Project/main.cpp" "CMakeFiles/testing.dir/main.cpp.o" "gcc" "CMakeFiles/testing.dir/main.cpp.o.d"
+  "/media/vanek/D/lessons/projects/Project/Cpp/Heads.cpp" "CMakeFiles/testing.dir/Cpp/Heads.cpp.o" "gcc" "CMakeFiles/testing.dir/Cpp/Heads.cpp.o.d"
+  "/media/vanek/D/lessons/projects/Project/Main/Waves.cpp" "CMakeFiles/testing.dir/Main/Waves.cpp.o" "gcc" "CMakeFiles/testing.dir/Main/Waves.cpp.o.d"
+  "/media/vanek/D/lessons/projects/Project/main.cpp" "CMakeFiles/testing.dir/main.cpp.o" "gcc" "CMakeFiles/testing.dir/main.cpp.o.d"
   )
 
 # Targets to which this target links.
