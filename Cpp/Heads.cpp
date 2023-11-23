@@ -50,6 +50,7 @@ bool Cockroach::Move(double time)
     }
     if (point_on_road >= road.size())
         return true;
+    return false;
 }
 
 void Cockroach::CheckTrigger(const std::vector<Trigger*>& triggers)

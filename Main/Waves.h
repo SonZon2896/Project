@@ -5,8 +5,8 @@
 class Wave
 {
 private:
-    std::vector<std::vector<Point>*> roads;
-    std::vector<Cockroach*> cockroaches;
+    const std::vector<std::vector<Point>>& roads;
+    std::vector<Cockroach> cockroaches;
     double time_from_start;
     size_t active_cockr = 0;
     size_t survived;
@@ -14,9 +14,10 @@ private:
     double speed;
     double health;
     double interval;
+    size_t num;
 
 public:
-    Wave(std::vector<std::vector<Point>*> roads, size_t num_cockr_on_road, double speed, double cockr_health, double interval);
+    Wave(const std::vector<std::vector<Point>>& roads, size_t num_cockr_on_road, double speed, double cockr_health, double interval);
 
     void StartWave();
     void MoveWave(double time);
