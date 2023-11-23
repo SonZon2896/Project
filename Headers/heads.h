@@ -82,7 +82,7 @@ public:
 
 class Trigger;
 
-class Cocroach
+class Cockroach
 {
 private:
     Road road;
@@ -97,8 +97,8 @@ public:
     Point pos;
     double speed;
 
-    Cocroach() = delete;
-    Cocroach(const Road& road, double speed = 0, double health = 100.);
+    Cockroach() = delete;
+    Cockroach(const Road& road, double speed = 0, double health = 100.);
 
     void Move(double time);
     void CheckTrigger(const std::vector<Trigger*>& triggers);
@@ -109,12 +109,12 @@ class Trigger
 public:
     Point ld;
     Point ru;
-    std::vector<Cocroach*> cocroaches;
+    std::vector<Cockroach*> cockroaches;
 
     Trigger() = delete;
     Trigger(const Point& left, const Point& right)
         : ld(left), ru(right) {}
 
-    void CheckCocroaches();
+    void CheckCockroaches();
     bool In(const Point& pos);
 };

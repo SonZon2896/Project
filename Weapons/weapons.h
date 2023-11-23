@@ -14,9 +14,9 @@ public:
     Weapon() = delete;
 
 
-    std::vector<Cocroach*> cocr = trigger.cocroaches;
+    std::vector<Cockroach*> cocr = trigger.cockroaches;
 
-    void DamageForCocroaches()
+    void DamageForCockroaches()
     {
         for(auto taracan: cocr)
             taracan->health -= damage;

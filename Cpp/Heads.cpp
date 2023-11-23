@@ -30,20 +30,20 @@ Point& Road::operator[](int index)
     return points[index];
 }
 
-Cocroach::Cocroach(const Road& road, double speed, double health)
+Cockroach::Cockroach(const Road& road, double speed, double health)
     : road{road}, pos{this->road[0]}, speed{speed}, health{health}
 {
     UpdateDir();
 }
 
-void Cocroach::UpdateDir()
+void Cockroach::UpdateDir()
 {
     ++point_on_road;
     double distance = (road[point_on_road] - road[point_on_road-1]).Dist();
     direction = {(this->road[point_on_road] - this->road[point_on_road-1]) / distance};
 }
 
-void Cocroach::Move(double time)
+void Cockroach::Move(double time)
 {
     pos += direction * speed * time;
     // Проверяем не пробежал ли таракан точку поворота
@@ -55,7 +55,7 @@ void Cocroach::Move(double time)
     }
 }
 
-void Cocroach::CheckTrigger(const std::vector<Trigger*>& triggers)
+void Cockroach::CheckTrigger(const std::vector<Trigger*>& triggers)
 {
     if (is_in_trig)
         return;
@@ -64,20 +64,20 @@ void Cocroach::CheckTrigger(const std::vector<Trigger*>& triggers)
         if (trigger->In(pos))
         {
             is_in_trig = true;
-            trigger->cocroaches.push_back(this);
+            trigger->cockroaches.push_back(this);
             return;
         }
     }
 }
 
-void Trigger::CheckCocroaches()
+void Trigger::CheckCockroaches()
 {
-    for (size_t i = 0; i < cocroaches.size(); ++i)
+    for (size_t i = 0; i < cockroaches.size(); ++i)
     {
-        if (!In(cocroaches[i]->pos))
+        if (!In(cockroaches[i]->pos))
         {
-            cocroaches[i]->is_in_trig = false;
-            cocroaches.erase(cocroaches.begin() + i--);
+            cockroaches[i]->is_in_trig = false;
+            cockroaches.erase(cockroaches.begin() + i--);
         }
     }
 }
