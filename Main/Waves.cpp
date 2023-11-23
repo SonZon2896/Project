@@ -17,7 +17,7 @@ void Wave::StartWave()
 void Wave::MoveWave(double time)
 {
     time_from_start += time;
-    active_cockr = time / interval + 1;
+    active_cockr = time_from_start / interval;
     if (active_cockr > cockroaches.size())
         active_cockr = cockroaches.size();
     for (size_t i = 0; i < active_cockr; ++i)
@@ -30,6 +30,11 @@ void Wave::MoveWave(double time)
             --survived;
             continue;
         }
-        cockroaches[i].Move(time);
+        if (cockroaches[i].Move(time))
+        {
+            cockroaches[i].pos = {-1., -1};
+            cockroaches[i].is_death = true;
+            --survived;
+        }
     }
 }

@@ -20,6 +20,7 @@ public:
     Wave(const std::vector<std::vector<Point>>& roads, size_t num_cockr_on_road, double speed, double cockr_health, double interval);
 
     void StartWave();
+    // доделать изменение хп у холодоса
     void MoveWave(double time);
     size_t GetSurvived() {return survived;}
 };
