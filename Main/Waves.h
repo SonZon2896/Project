@@ -11,13 +11,14 @@ private:
     size_t active_cockr = 0;
     size_t survived;
 
+    double& fridge_health;
     double speed;
     double health;
     double interval;
     size_t num;
 
 public:
-    Wave(const std::vector<std::vector<Point>>& roads, size_t num_cockr_on_road, double speed, double cockr_health, double interval);
+    Wave(const std::vector<std::vector<Point>>& roads, double fridge_health, size_t num_cockr_on_road, double speed, double cockr_health, double interval);
 
     void StartWave();
     // доделать изменение хп у холодоса

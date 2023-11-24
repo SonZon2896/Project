@@ -25,9 +25,12 @@ double Point::Dist()
     return std::sqrt(std::pow(x, 2) + std::pow(y, 2));
 }
 
+//Cockroaches
+
 Cockroach::Cockroach(const std::vector<Point>& road, double speed, double health)
     : road{road}, pos{this->road[0]}, speed{speed}, health{health}
 {
+    all_cockr.push_back(this);
     UpdateDir();
 }
 
@@ -53,11 +56,12 @@ bool Cockroach::Move(double time)
     return false;
 }
 
-void Cockroach::CheckTrigger(const std::vector<Trigger*>& triggers)
+void Cockroach::CheckTrigger()
 {
+    
     if (is_in_trig)
         return;
-    for (auto& trigger : triggers)
+    for (auto& trigger : Trigger::GetAll())
     {
         if (trigger->In(pos))
         {
@@ -66,6 +70,24 @@ void Cockroach::CheckTrigger(const std::vector<Trigger*>& triggers)
             return;
         }
     }
+}
+
+Cockroach::~Cockroach()
+{
+    for (size_t i = 0; i < all_cockr.size(); ++i)
+        if (all_cockr[i] == this)
+            {
+                all_cockr.erase(all_cockr.begin() + i);
+                break;    
+            }
+}
+
+//Triggers
+
+Trigger::Trigger(const Point& left, const Point& right)
+    :ld{left}, ru{right}
+{
+    all_trig.push_back(this);
 }
 
 void Trigger::CheckCockroaches()
@@ -86,4 +108,14 @@ bool Trigger::In(const Point& pos)
         ld.y <= pos.y && pos.y <= ru.y)
         return true;
     return false;
+}
+
+Trigger::~Trigger()
+{
+    for (size_t i = 0; i < all_trig.size(); ++i)
+        if (all_trig[i] == this)
+            {
+                all_trig.erase(all_trig.begin() + i);
+                break;    
+            }
 }

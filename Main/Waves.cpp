@@ -1,7 +1,7 @@
 #include "Waves.h"
 
-Wave::Wave(const std::vector<std::vector<Point>>& roads, size_t num, double speed, double health, double interval)
-    : roads{roads}, num{num}, speed{speed}, health{health}, interval{interval}
+Wave::Wave(const std::vector<std::vector<Point>>& roads, double fridge_health, size_t num, double speed, double health, double interval)
+    : roads{roads},  fridge_health{fridge_health}, num{num}, speed{speed}, health{health}, interval{interval}
 {
     cockroaches.reserve(roads.size() * num);
 }
@@ -10,7 +10,7 @@ void Wave::StartWave()
 {
     for (size_t i = 0; i < num; ++i)
         for (size_t i = 0; i < roads.size(); ++i)
-            cockroaches.push_back(Cockroach(roads[i], speed, health));
+            cockroaches.emplace_back(roads[i], speed, health);
     survived = cockroaches.size();
 }
 
