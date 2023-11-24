@@ -47,6 +47,19 @@ public:
         return *this;
     }
 
+    bool operator==(const Point& second)
+    {
+        if (this->x == second.x &&
+            this->y == second.y)
+            return true;
+        return false;
+    }
+
+    bool operator!=(const Point& second)
+    {
+        return !(*this == second);
+    }
+
     double Dist();
 };
 
@@ -64,21 +77,29 @@ public:
     Student_money(double money)
         :money{money} {}
 
-    void update(double time)
+    void Update(double time)
     {
         money += (time * speed);
     }
 };
 
-class Trigger;
+class Fridge
+{
+public:
+    static inline Point pos{10., 10.,};
+    static inline double health{100.};
+};
 
+#define Road std::vector<Point>
+
+class Trigger;
 class Cockroach
 {
 protected:
 static inline std::vector<Cockroach*> all_cockr{};
 
 private:
-    std::vector<Point> road;
+    Road road;
     Point direction;
     std::size_t point_on_road = 0;
     bool is_in_trig = false;
@@ -90,10 +111,11 @@ public:
     double health;
     Point pos;
     double speed;
+    double damage;
     bool is_death = false;
 
     Cockroach() = delete;
-    Cockroach(const std::vector<Point>& road, double speed = 0, double health = 100.);
+    Cockroach(const Road& road, double speed = 0, double health = 100., double damage = 5.);
 
     bool Move(double time);
     void CheckTrigger();

@@ -27,9 +27,11 @@ double Point::Dist()
 
 //Cockroaches
 
-Cockroach::Cockroach(const std::vector<Point>& road, double speed, double health)
-    : road{road}, pos{this->road[0]}, speed{speed}, health{health}
+Cockroach::Cockroach(const Road& road, double speed, double health, double damage)
+    : road{road}, pos{this->road[0]}, speed{speed}, health{health}, damage{damage}
 {
+    if (this->road[this->road.size()-1] != Fridge::pos)
+        this->road.push_back(Fridge::pos);
     all_cockr.push_back(this);
     UpdateDir();
 }
