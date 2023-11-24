@@ -115,7 +115,7 @@ public:
     bool is_death = false;
 
     Cockroach() = delete;
-    Cockroach(const Road& road, double speed = 0, double health = 100., double damage = 5.);
+    Cockroach(const Road& road, double speed = 1, double health = 100., double damage = 5.);
 
     bool Move(double time);
     void CheckTrigger();
