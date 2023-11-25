@@ -41,27 +41,25 @@ void GameManager::StartGame()
     num_of_wave = 0;
 
     MakeWave();
-    fix_thr = std::thread(FixedUpdate);
-    upd_thr = std::thread(Update);
-    std::thread(StartFixedUpdate).detach();
-    std::thread(StartUpdate).detach();
+    fix_thr = std::thread(StartFixedUpdate);
+    upd_thr = std::thread(StartUpdate);
 }
 
 void GameManager::StartFixedUpdate()
 {
-    for (; true; )
+    for (; is_started; )
     {
-        fix_thr.detach();
+        std::thread(FixedUpdate).detach();
         std::this_thread::sleep_for(std::chrono::milliseconds(int(Time::fixed * 100)));
     }
 }
 
 void GameManager::StartUpdate()
 {
-    for (; true; )
+    for (; is_started; )
     {
         Time::Update();
-        upd_thr.join();
+        std::thread(Update).join();
     }
 }
 
@@ -81,7 +79,7 @@ void GameManager::FixedUpdate()
 
 void GameManager::Update()
 {
-    std::cout << "Update" << std::endl;
+    std::cout << "Update " << Time::DeltaTime() << std::endl;
     //FRONTEND
 
     //all interface
@@ -96,8 +94,11 @@ void GameManager::EndGame()
     if (!is_started)
         throw std::runtime_error("End Game, which not started");
 
+    is_started = false;
+
+    fix_thr.join();
+    upd_thr.join();
     fix_thr.~thread();
     upd_thr.~thread();
 
-    is_started = false;
 }

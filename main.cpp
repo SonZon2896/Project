@@ -48,5 +48,10 @@ int main()
 
     GameManager::StartGame();
 
-    std::this_thread::sleep_for(std::chrono::seconds(5));
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+
+    GameManager::EndGame();
+    std::cout << "EndGame" << std::endl;
+
+    std::this_thread::sleep_for(std::chrono::seconds(2));
 }
