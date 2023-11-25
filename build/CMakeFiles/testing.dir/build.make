@@ -111,19 +111,19 @@ CMakeFiles/testing.dir/Main/Waves.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testing.dir/Main/Waves.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/vanek/D/lessons/projects/Project/Main/Waves.cpp -o CMakeFiles/testing.dir/Main/Waves.cpp.s
 
-CMakeFiles/testing.dir/Main/Updates.cpp.o: CMakeFiles/testing.dir/flags.make
-CMakeFiles/testing.dir/Main/Updates.cpp.o: ../Main/Updates.cpp
-CMakeFiles/testing.dir/Main/Updates.cpp.o: CMakeFiles/testing.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/vanek/D/lessons/projects/Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/testing.dir/Main/Updates.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/testing.dir/Main/Updates.cpp.o -MF CMakeFiles/testing.dir/Main/Updates.cpp.o.d -o CMakeFiles/testing.dir/Main/Updates.cpp.o -c /media/vanek/D/lessons/projects/Project/Main/Updates.cpp
+CMakeFiles/testing.dir/Main/GameManager.cpp.o: CMakeFiles/testing.dir/flags.make
+CMakeFiles/testing.dir/Main/GameManager.cpp.o: ../Main/GameManager.cpp
+CMakeFiles/testing.dir/Main/GameManager.cpp.o: CMakeFiles/testing.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/vanek/D/lessons/projects/Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/testing.dir/Main/GameManager.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/testing.dir/Main/GameManager.cpp.o -MF CMakeFiles/testing.dir/Main/GameManager.cpp.o.d -o CMakeFiles/testing.dir/Main/GameManager.cpp.o -c /media/vanek/D/lessons/projects/Project/Main/GameManager.cpp
 
-CMakeFiles/testing.dir/Main/Updates.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/testing.dir/Main/Updates.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/vanek/D/lessons/projects/Project/Main/Updates.cpp > CMakeFiles/testing.dir/Main/Updates.cpp.i
+CMakeFiles/testing.dir/Main/GameManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/testing.dir/Main/GameManager.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/vanek/D/lessons/projects/Project/Main/GameManager.cpp > CMakeFiles/testing.dir/Main/GameManager.cpp.i
 
-CMakeFiles/testing.dir/Main/Updates.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testing.dir/Main/Updates.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/vanek/D/lessons/projects/Project/Main/Updates.cpp -o CMakeFiles/testing.dir/Main/Updates.cpp.s
+CMakeFiles/testing.dir/Main/GameManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testing.dir/Main/GameManager.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/vanek/D/lessons/projects/Project/Main/GameManager.cpp -o CMakeFiles/testing.dir/Main/GameManager.cpp.s
 
 CMakeFiles/testing.dir/Main/Logic.cpp.o: CMakeFiles/testing.dir/flags.make
 CMakeFiles/testing.dir/Main/Logic.cpp.o: ../Main/Logic.cpp
@@ -144,7 +144,7 @@ testing_OBJECTS = \
 "CMakeFiles/testing.dir/main.cpp.o" \
 "CMakeFiles/testing.dir/Cpp/Heads.cpp.o" \
 "CMakeFiles/testing.dir/Main/Waves.cpp.o" \
-"CMakeFiles/testing.dir/Main/Updates.cpp.o" \
+"CMakeFiles/testing.dir/Main/GameManager.cpp.o" \
 "CMakeFiles/testing.dir/Main/Logic.cpp.o"
 
 # External object files for target testing
@@ -153,7 +153,7 @@ testing_EXTERNAL_OBJECTS =
 testing: CMakeFiles/testing.dir/main.cpp.o
 testing: CMakeFiles/testing.dir/Cpp/Heads.cpp.o
 testing: CMakeFiles/testing.dir/Main/Waves.cpp.o
-testing: CMakeFiles/testing.dir/Main/Updates.cpp.o
+testing: CMakeFiles/testing.dir/Main/GameManager.cpp.o
 testing: CMakeFiles/testing.dir/Main/Logic.cpp.o
 testing: CMakeFiles/testing.dir/build.make
 testing: CMakeFiles/testing.dir/link.txt

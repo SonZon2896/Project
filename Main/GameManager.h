@@ -22,12 +22,7 @@ public:
 class GameManager
 {
 private:
-    static inline Wave wave;
-    static inline size_t num_of_wave = 0;
-
-    static inline std::vector<Road> roads;
-    static void MakeWave();
-
+    static void Start();
     static void FixedUpdate();
     static void Update();
 

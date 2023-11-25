@@ -1,7 +1,8 @@
-CMakeFiles/testing.dir/main.cpp.o: \
- /media/vanek/D/lessons/projects/Project/main.cpp \
+CMakeFiles/testing.dir/Main/GameManager.cpp.o: \
+ /media/vanek/D/lessons/projects/Project/Main/GameManager.cpp \
  /usr/include/stdc-predef.h \
- /media/vanek/D/lessons/projects/Project/Headers/heads.h \
+ /media/vanek/D/lessons/projects/Project/Main/GameManager.h \
+ /media/vanek/D/lessons/projects/Project/Main/../Headers/heads.h \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -103,7 +104,6 @@ CMakeFiles/testing.dir/main.cpp.o: \
  /usr/include/c++/11/tr1/poly_laguerre.tcc \
  /usr/include/c++/11/tr1/riemann_zeta.tcc \
  /media/vanek/D/lessons/projects/Project/Main/Waves.h \
- /media/vanek/D/lessons/projects/Project/Main/GameManager.h \
  /media/vanek/D/lessons/projects/Project/Main/../Weapons/weapons.h \
  /usr/include/c++/11/chrono /usr/include/c++/11/ratio \
  /usr/include/c++/11/cstdint \

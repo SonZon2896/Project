@@ -16,8 +16,8 @@
 },
 {
   "directory": "/media/vanek/D/lessons/projects/Project/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/testing.dir/Main/Updates.cpp.o -c /media/vanek/D/lessons/projects/Project/Main/Updates.cpp",
-  "file": "/media/vanek/D/lessons/projects/Project/Main/Updates.cpp"
+  "command": "/usr/bin/g++   -g -o CMakeFiles/testing.dir/Main/GameManager.cpp.o -c /media/vanek/D/lessons/projects/Project/Main/GameManager.cpp",
+  "file": "/media/vanek/D/lessons/projects/Project/Main/GameManager.cpp"
 },
 {
   "directory": "/media/vanek/D/lessons/projects/Project/build",

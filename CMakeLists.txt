@@ -4,6 +4,6 @@ project(testing VERSION 0.1.0 LANGUAGES CXX)
 add_executable(testing main.cpp
                     Cpp/Heads.cpp
                     Main/Waves.cpp
-                    Main/Updates.cpp
+                    Main/GameManager.cpp
                     Main/Logic.cpp)
 

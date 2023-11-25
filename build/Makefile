@@ -153,6 +153,30 @@ Cpp/Heads.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Cpp/Heads.cpp.s
 .PHONY : Cpp/Heads.cpp.s
 
+Main/GameManager.o: Main/GameManager.cpp.o
+.PHONY : Main/GameManager.o
+
+# target to build an object file
+Main/GameManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Main/GameManager.cpp.o
+.PHONY : Main/GameManager.cpp.o
+
+Main/GameManager.i: Main/GameManager.cpp.i
+.PHONY : Main/GameManager.i
+
+# target to preprocess a source file
+Main/GameManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Main/GameManager.cpp.i
+.PHONY : Main/GameManager.cpp.i
+
+Main/GameManager.s: Main/GameManager.cpp.s
+.PHONY : Main/GameManager.s
+
+# target to generate assembly for a file
+Main/GameManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Main/GameManager.cpp.s
+.PHONY : Main/GameManager.cpp.s
+
 Main/Logic.o: Main/Logic.cpp.o
 .PHONY : Main/Logic.o
 
@@ -176,30 +200,6 @@ Main/Logic.s: Main/Logic.cpp.s
 Main/Logic.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Main/Logic.cpp.s
 .PHONY : Main/Logic.cpp.s
-
-Main/Updates.o: Main/Updates.cpp.o
-.PHONY : Main/Updates.o
-
-# target to build an object file
-Main/Updates.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Main/Updates.cpp.o
-.PHONY : Main/Updates.cpp.o
-
-Main/Updates.i: Main/Updates.cpp.i
-.PHONY : Main/Updates.i
-
-# target to preprocess a source file
-Main/Updates.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Main/Updates.cpp.i
-.PHONY : Main/Updates.cpp.i
-
-Main/Updates.s: Main/Updates.cpp.s
-.PHONY : Main/Updates.s
-
-# target to generate assembly for a file
-Main/Updates.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Main/Updates.cpp.s
-.PHONY : Main/Updates.cpp.s
 
 Main/Waves.o: Main/Waves.cpp.o
 .PHONY : Main/Waves.o
@@ -261,12 +261,12 @@ help:
 	@echo "... Cpp/Heads.o"
 	@echo "... Cpp/Heads.i"
 	@echo "... Cpp/Heads.s"
+	@echo "... Main/GameManager.o"
+	@echo "... Main/GameManager.i"
+	@echo "... Main/GameManager.s"
 	@echo "... Main/Logic.o"
 	@echo "... Main/Logic.i"
 	@echo "... Main/Logic.s"
-	@echo "... Main/Updates.o"
-	@echo "... Main/Updates.i"
-	@echo "... Main/Updates.s"
 	@echo "... Main/Waves.o"
 	@echo "... Main/Waves.i"
 	@echo "... Main/Waves.s"

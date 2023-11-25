@@ -1,9 +1,4 @@
-#include "Updates.h"
-
-std::vector<Road> settings_roads{{{0., 0.}, {0., 5.}, {5., 5.,}},
-                        {{5., 0.}, {5., 5.}, {10., 5.,}},
-                        {{10., 0.}, {10., 5.}, {15., 5.,}}};
-
+#include "GameManager.h"
 
 double Time::DeltaTime()
 {
@@ -17,30 +12,14 @@ void Time::Update()
     now = std::chrono::system_clock::now();
 }
 
-void GameManager::MakeWave()
-{
-    if (wave.Is_Started())
-        throw std::runtime_error("Making wave, when it started");
-
-    ++num_of_wave;
-
-    wave.num = 3.;
-    wave.health = 100.;
-    wave.speed = 1.;
-    wave.interval = 1.;
-}
-
 void GameManager::StartGame()
 {
     if (is_started)
         throw std::runtime_error("Start Game, which stared");
 
     is_started = true;
-    roads = settings_roads;
-    wave = Wave(roads);
-    num_of_wave = 0;
+    Start();
 
-    MakeWave();
     fix_thr = std::thread(StartFixedUpdate);
     upd_thr = std::thread(StartUpdate);
 }

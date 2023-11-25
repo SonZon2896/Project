@@ -1,6 +1,6 @@
 #include "Headers/heads.h"
 #include "Main/Waves.h"
-#include "Main/Updates.h"
+#include "Main/GameManager.h"
 #include <iostream>
 
 void PrintPosCockr()
