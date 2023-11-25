@@ -18,5 +18,10 @@
   "directory": "/media/vanek/D/lessons/projects/Project/build",
   "command": "/usr/bin/g++   -g -o CMakeFiles/testing.dir/Main/Updates.cpp.o -c /media/vanek/D/lessons/projects/Project/Main/Updates.cpp",
   "file": "/media/vanek/D/lessons/projects/Project/Main/Updates.cpp"
+},
+{
+  "directory": "/media/vanek/D/lessons/projects/Project/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/testing.dir/Main/Logic.cpp.o -c /media/vanek/D/lessons/projects/Project/Main/Logic.cpp",
+  "file": "/media/vanek/D/lessons/projects/Project/Main/Logic.cpp"
 }
 ]

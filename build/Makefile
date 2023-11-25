@@ -153,6 +153,30 @@ Cpp/Heads.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Cpp/Heads.cpp.s
 .PHONY : Cpp/Heads.cpp.s
 
+Main/Logic.o: Main/Logic.cpp.o
+.PHONY : Main/Logic.o
+
+# target to build an object file
+Main/Logic.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Main/Logic.cpp.o
+.PHONY : Main/Logic.cpp.o
+
+Main/Logic.i: Main/Logic.cpp.i
+.PHONY : Main/Logic.i
+
+# target to preprocess a source file
+Main/Logic.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Main/Logic.cpp.i
+.PHONY : Main/Logic.cpp.i
+
+Main/Logic.s: Main/Logic.cpp.s
+.PHONY : Main/Logic.s
+
+# target to generate assembly for a file
+Main/Logic.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Main/Logic.cpp.s
+.PHONY : Main/Logic.cpp.s
+
 Main/Updates.o: Main/Updates.cpp.o
 .PHONY : Main/Updates.o
 
@@ -237,6 +261,9 @@ help:
 	@echo "... Cpp/Heads.o"
 	@echo "... Cpp/Heads.i"
 	@echo "... Cpp/Heads.s"
+	@echo "... Main/Logic.o"
+	@echo "... Main/Logic.i"
+	@echo "... Main/Logic.s"
 	@echo "... Main/Updates.o"
 	@echo "... Main/Updates.i"
 	@echo "... Main/Updates.s"
