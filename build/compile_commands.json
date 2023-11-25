@@ -13,5 +13,10 @@
   "directory": "/media/vanek/D/lessons/projects/Project/build",
   "command": "/usr/bin/g++   -g -o CMakeFiles/testing.dir/Main/Waves.cpp.o -c /media/vanek/D/lessons/projects/Project/Main/Waves.cpp",
   "file": "/media/vanek/D/lessons/projects/Project/Main/Waves.cpp"
+},
+{
+  "directory": "/media/vanek/D/lessons/projects/Project/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/testing.dir/Main/Updates.cpp.o -c /media/vanek/D/lessons/projects/Project/Main/Updates.cpp",
+  "file": "/media/vanek/D/lessons/projects/Project/Main/Updates.cpp"
 }
 ]

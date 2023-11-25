@@ -81,12 +81,12 @@ clean: CMakeFiles/testing.dir/clean
 CMakeFiles/testing.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/vanek/D/lessons/projects/Project/build/CMakeFiles --progress-num=1,2,3,4 "Built target testing"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/vanek/D/lessons/projects/Project/build/CMakeFiles --progress-num=1,2,3,4,5 "Built target testing"
 .PHONY : CMakeFiles/testing.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/testing.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/vanek/D/lessons/projects/Project/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/vanek/D/lessons/projects/Project/build/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/testing.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/vanek/D/lessons/projects/Project/build/CMakeFiles 0
 .PHONY : CMakeFiles/testing.dir/rule

@@ -153,6 +153,30 @@ Cpp/Heads.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Cpp/Heads.cpp.s
 .PHONY : Cpp/Heads.cpp.s
 
+Main/Updates.o: Main/Updates.cpp.o
+.PHONY : Main/Updates.o
+
+# target to build an object file
+Main/Updates.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Main/Updates.cpp.o
+.PHONY : Main/Updates.cpp.o
+
+Main/Updates.i: Main/Updates.cpp.i
+.PHONY : Main/Updates.i
+
+# target to preprocess a source file
+Main/Updates.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Main/Updates.cpp.i
+.PHONY : Main/Updates.cpp.i
+
+Main/Updates.s: Main/Updates.cpp.s
+.PHONY : Main/Updates.s
+
+# target to generate assembly for a file
+Main/Updates.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Main/Updates.cpp.s
+.PHONY : Main/Updates.cpp.s
+
 Main/Waves.o: Main/Waves.cpp.o
 .PHONY : Main/Waves.o
 
@@ -213,6 +237,9 @@ help:
 	@echo "... Cpp/Heads.o"
 	@echo "... Cpp/Heads.i"
 	@echo "... Cpp/Heads.s"
+	@echo "... Main/Updates.o"
+	@echo "... Main/Updates.i"
+	@echo "... Main/Updates.s"
 	@echo "... Main/Waves.o"
 	@echo "... Main/Waves.i"
 	@echo "... Main/Waves.s"

@@ -13,6 +13,7 @@ void Wave::StartWave()
             cockroaches.emplace_back(roads[i], speed, health);
     survived = cockroaches.size();
     time_from_start = 0.;
+    is_started = true;
 }
 
 void Wave::MoveWave(double time)
@@ -38,6 +39,7 @@ void Wave::MoveWave(double time)
             cockroaches[i].is_death = true;
             --survived;
         }
+        cockroaches[i].CheckTrigger();
     }
 }
 
@@ -45,4 +47,5 @@ void Wave::EndWave()
 {
     cockroaches.clear();
     survived = 0;
+    is_started = false;
 }
