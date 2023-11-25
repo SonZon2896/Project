@@ -18,6 +18,7 @@ public:
     double interval;
     size_t num;
 
+    Wave() = default;
     Wave(const std::vector<Road>& roads, size_t num_cockr_on_road = 3., double interval = 0.5, double speed = 1., double cockr_health = 100.);
 
     void StartWave();

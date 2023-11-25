@@ -15,10 +15,6 @@ void PrintPosCockr()
 
 int main()
 {
-    // Road road1{{0., 0.}, {0., 5.}, {5., 5.,}};
-    // Road road2{{5., 0.}, {5., 5.}, {10., 5.,}};
-    // Road road3{{10., 0.}, {10., 5.}, {15., 5.,}};
-    // std::vector<Road> roads{road1, road2, road3};
     // Wave wave(roads, 1, 0.5, 1., 100.);
     // wave.StartWave();
     // std::cout << Cockroach::GetAll().size() << std::endl;
@@ -48,4 +44,9 @@ int main()
     // std::cout << Time::DeltaTime() << std::endl;
     // Time::Update();
     // std::cout << Time::DeltaTime() << std::endl;
+
+
+    GameManager::StartGame();
+
+    std::this_thread::sleep_for(std::chrono::seconds(5));
 }
