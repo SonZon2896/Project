@@ -228,3 +228,73 @@ Parsed CXX implicit link information from above output:
   implicit fwks: []
 
 
+Determining if the function XOpenDisplay exists in the /usr/lib/x86_64-linux-gnu/libX11.so passed with the following output:
+Change Dir: /media/vanek/D/lessons/projects/Project/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_8ad4d/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_8ad4d.dir/build.make CMakeFiles/cmTC_8ad4d.dir/build
+gmake[1]: Entering directory '/media/vanek/D/lessons/projects/Project/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_8ad4d.dir/CheckFunctionExists.cxx.o
+/usr/bin/g++   -DCHECK_FUNCTION_EXISTS=XOpenDisplay -o CMakeFiles/cmTC_8ad4d.dir/CheckFunctionExists.cxx.o -c /media/vanek/D/lessons/projects/Project/build/CMakeFiles/CheckLibraryExists/CheckFunctionExists.cxx
+Linking CXX executable cmTC_8ad4d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8ad4d.dir/link.txt --verbose=1
+/usr/bin/g++  -DCHECK_FUNCTION_EXISTS=XOpenDisplay CMakeFiles/cmTC_8ad4d.dir/CheckFunctionExists.cxx.o -o cmTC_8ad4d  /usr/lib/x86_64-linux-gnu/libX11.so 
+gmake[1]: Leaving directory '/media/vanek/D/lessons/projects/Project/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function gethostbyname exists passed with the following output:
+Change Dir: /media/vanek/D/lessons/projects/Project/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_6edef/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_6edef.dir/build.make CMakeFiles/cmTC_6edef.dir/build
+gmake[1]: Entering directory '/media/vanek/D/lessons/projects/Project/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_6edef.dir/CheckFunctionExists.cxx.o
+/usr/bin/g++   -DCHECK_FUNCTION_EXISTS=gethostbyname -o CMakeFiles/cmTC_6edef.dir/CheckFunctionExists.cxx.o -c /media/vanek/D/lessons/projects/Project/build/CMakeFiles/CheckFunctionExists/CheckFunctionExists.cxx
+Linking CXX executable cmTC_6edef
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6edef.dir/link.txt --verbose=1
+/usr/bin/g++  -DCHECK_FUNCTION_EXISTS=gethostbyname CMakeFiles/cmTC_6edef.dir/CheckFunctionExists.cxx.o -o cmTC_6edef 
+gmake[1]: Leaving directory '/media/vanek/D/lessons/projects/Project/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function connect exists passed with the following output:
+Change Dir: /media/vanek/D/lessons/projects/Project/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_f3771/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f3771.dir/build.make CMakeFiles/cmTC_f3771.dir/build
+gmake[1]: Entering directory '/media/vanek/D/lessons/projects/Project/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_f3771.dir/CheckFunctionExists.cxx.o
+/usr/bin/g++   -DCHECK_FUNCTION_EXISTS=connect -o CMakeFiles/cmTC_f3771.dir/CheckFunctionExists.cxx.o -c /media/vanek/D/lessons/projects/Project/build/CMakeFiles/CheckFunctionExists/CheckFunctionExists.cxx
+Linking CXX executable cmTC_f3771
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f3771.dir/link.txt --verbose=1
+/usr/bin/g++  -DCHECK_FUNCTION_EXISTS=connect CMakeFiles/cmTC_f3771.dir/CheckFunctionExists.cxx.o -o cmTC_f3771 
+gmake[1]: Leaving directory '/media/vanek/D/lessons/projects/Project/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function remove exists passed with the following output:
+Change Dir: /media/vanek/D/lessons/projects/Project/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_614bd/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_614bd.dir/build.make CMakeFiles/cmTC_614bd.dir/build
+gmake[1]: Entering directory '/media/vanek/D/lessons/projects/Project/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_614bd.dir/CheckFunctionExists.cxx.o
+/usr/bin/g++   -DCHECK_FUNCTION_EXISTS=remove -o CMakeFiles/cmTC_614bd.dir/CheckFunctionExists.cxx.o -c /media/vanek/D/lessons/projects/Project/build/CMakeFiles/CheckFunctionExists/CheckFunctionExists.cxx
+Linking CXX executable cmTC_614bd
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_614bd.dir/link.txt --verbose=1
+/usr/bin/g++  -DCHECK_FUNCTION_EXISTS=remove CMakeFiles/cmTC_614bd.dir/CheckFunctionExists.cxx.o -o cmTC_614bd 
+gmake[1]: Leaving directory '/media/vanek/D/lessons/projects/Project/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function shmat exists passed with the following output:
+Change Dir: /media/vanek/D/lessons/projects/Project/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_71e0c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_71e0c.dir/build.make CMakeFiles/cmTC_71e0c.dir/build
+gmake[1]: Entering directory '/media/vanek/D/lessons/projects/Project/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_71e0c.dir/CheckFunctionExists.cxx.o
+/usr/bin/g++   -DCHECK_FUNCTION_EXISTS=shmat -o CMakeFiles/cmTC_71e0c.dir/CheckFunctionExists.cxx.o -c /media/vanek/D/lessons/projects/Project/build/CMakeFiles/CheckFunctionExists/CheckFunctionExists.cxx
+Linking CXX executable cmTC_71e0c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_71e0c.dir/link.txt --verbose=1
+/usr/bin/g++  -DCHECK_FUNCTION_EXISTS=shmat CMakeFiles/cmTC_71e0c.dir/CheckFunctionExists.cxx.o -o cmTC_71e0c 
+gmake[1]: Leaving directory '/media/vanek/D/lessons/projects/Project/build/CMakeFiles/CMakeTmp'
+
+
+

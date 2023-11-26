@@ -1,1 +1,1 @@
-/usr/bin/g++ -g CMakeFiles/testing.dir/main.cpp.o CMakeFiles/testing.dir/Cpp/Heads.cpp.o CMakeFiles/testing.dir/Main/Waves.cpp.o CMakeFiles/testing.dir/Main/GameManager.cpp.o CMakeFiles/testing.dir/Main/Logic.cpp.o -o testing 
+/usr/bin/g++ -g CMakeFiles/testing.dir/main.cpp.o CMakeFiles/testing.dir/Cpp/Heads.cpp.o CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.o CMakeFiles/testing.dir/Main/Waves.cpp.o CMakeFiles/testing.dir/Main/GameManager.cpp.o CMakeFiles/testing.dir/Main/Logic.cpp.o -o testing  /usr/lib/x86_64-linux-gnu/libfltk.so /usr/lib/x86_64-linux-gnu/libX11.so -lm 

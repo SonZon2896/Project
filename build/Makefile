@@ -153,6 +153,30 @@ Cpp/Heads.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Cpp/Heads.cpp.s
 .PHONY : Cpp/Heads.cpp.s
 
+Graphic/FLTKgraphic.o: Graphic/FLTKgraphic.cpp.o
+.PHONY : Graphic/FLTKgraphic.o
+
+# target to build an object file
+Graphic/FLTKgraphic.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.o
+.PHONY : Graphic/FLTKgraphic.cpp.o
+
+Graphic/FLTKgraphic.i: Graphic/FLTKgraphic.cpp.i
+.PHONY : Graphic/FLTKgraphic.i
+
+# target to preprocess a source file
+Graphic/FLTKgraphic.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.i
+.PHONY : Graphic/FLTKgraphic.cpp.i
+
+Graphic/FLTKgraphic.s: Graphic/FLTKgraphic.cpp.s
+.PHONY : Graphic/FLTKgraphic.s
+
+# target to generate assembly for a file
+Graphic/FLTKgraphic.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing.dir/build.make CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.s
+.PHONY : Graphic/FLTKgraphic.cpp.s
+
 Main/GameManager.o: Main/GameManager.cpp.o
 .PHONY : Main/GameManager.o
 
@@ -261,6 +285,9 @@ help:
 	@echo "... Cpp/Heads.o"
 	@echo "... Cpp/Heads.i"
 	@echo "... Cpp/Heads.s"
+	@echo "... Graphic/FLTKgraphic.o"
+	@echo "... Graphic/FLTKgraphic.i"
+	@echo "... Graphic/FLTKgraphic.s"
 	@echo "... Main/GameManager.o"
 	@echo "... Main/GameManager.i"
 	@echo "... Main/GameManager.s"

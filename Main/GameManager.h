@@ -1,11 +1,12 @@
 #include "../Headers/heads.h"
-#include "Waves.h"
 #include "../Weapons/weapons.h"
+#include "../Graphic/FLTKgraphic.h"
+#include "Waves.h"
 #include <chrono>
 #include <iostream>
 #include <thread>
 
-class Time
+class time
 {
 private:
     static inline auto prev{std::chrono::system_clock::now()};
@@ -14,7 +15,7 @@ private:
 public:
     static inline double fixed{0.2};
 
-    Time() = delete;
+    time() = delete;
     static double DeltaTime();
     static void Update();
 };

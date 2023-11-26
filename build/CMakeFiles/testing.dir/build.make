@@ -97,10 +97,24 @@ CMakeFiles/testing.dir/Cpp/Heads.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testing.dir/Cpp/Heads.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/vanek/D/lessons/projects/Project/Cpp/Heads.cpp -o CMakeFiles/testing.dir/Cpp/Heads.cpp.s
 
+CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.o: CMakeFiles/testing.dir/flags.make
+CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.o: ../Graphic/FLTKgraphic.cpp
+CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.o: CMakeFiles/testing.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/vanek/D/lessons/projects/Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.o -MF CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.o.d -o CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.o -c /media/vanek/D/lessons/projects/Project/Graphic/FLTKgraphic.cpp
+
+CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/vanek/D/lessons/projects/Project/Graphic/FLTKgraphic.cpp > CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.i
+
+CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/vanek/D/lessons/projects/Project/Graphic/FLTKgraphic.cpp -o CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.s
+
 CMakeFiles/testing.dir/Main/Waves.cpp.o: CMakeFiles/testing.dir/flags.make
 CMakeFiles/testing.dir/Main/Waves.cpp.o: ../Main/Waves.cpp
 CMakeFiles/testing.dir/Main/Waves.cpp.o: CMakeFiles/testing.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/vanek/D/lessons/projects/Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/testing.dir/Main/Waves.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/vanek/D/lessons/projects/Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/testing.dir/Main/Waves.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/testing.dir/Main/Waves.cpp.o -MF CMakeFiles/testing.dir/Main/Waves.cpp.o.d -o CMakeFiles/testing.dir/Main/Waves.cpp.o -c /media/vanek/D/lessons/projects/Project/Main/Waves.cpp
 
 CMakeFiles/testing.dir/Main/Waves.cpp.i: cmake_force
@@ -114,7 +128,7 @@ CMakeFiles/testing.dir/Main/Waves.cpp.s: cmake_force
 CMakeFiles/testing.dir/Main/GameManager.cpp.o: CMakeFiles/testing.dir/flags.make
 CMakeFiles/testing.dir/Main/GameManager.cpp.o: ../Main/GameManager.cpp
 CMakeFiles/testing.dir/Main/GameManager.cpp.o: CMakeFiles/testing.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/vanek/D/lessons/projects/Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/testing.dir/Main/GameManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/vanek/D/lessons/projects/Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/testing.dir/Main/GameManager.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/testing.dir/Main/GameManager.cpp.o -MF CMakeFiles/testing.dir/Main/GameManager.cpp.o.d -o CMakeFiles/testing.dir/Main/GameManager.cpp.o -c /media/vanek/D/lessons/projects/Project/Main/GameManager.cpp
 
 CMakeFiles/testing.dir/Main/GameManager.cpp.i: cmake_force
@@ -128,7 +142,7 @@ CMakeFiles/testing.dir/Main/GameManager.cpp.s: cmake_force
 CMakeFiles/testing.dir/Main/Logic.cpp.o: CMakeFiles/testing.dir/flags.make
 CMakeFiles/testing.dir/Main/Logic.cpp.o: ../Main/Logic.cpp
 CMakeFiles/testing.dir/Main/Logic.cpp.o: CMakeFiles/testing.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/vanek/D/lessons/projects/Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/testing.dir/Main/Logic.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/vanek/D/lessons/projects/Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/testing.dir/Main/Logic.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/testing.dir/Main/Logic.cpp.o -MF CMakeFiles/testing.dir/Main/Logic.cpp.o.d -o CMakeFiles/testing.dir/Main/Logic.cpp.o -c /media/vanek/D/lessons/projects/Project/Main/Logic.cpp
 
 CMakeFiles/testing.dir/Main/Logic.cpp.i: cmake_force
@@ -143,6 +157,7 @@ CMakeFiles/testing.dir/Main/Logic.cpp.s: cmake_force
 testing_OBJECTS = \
 "CMakeFiles/testing.dir/main.cpp.o" \
 "CMakeFiles/testing.dir/Cpp/Heads.cpp.o" \
+"CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.o" \
 "CMakeFiles/testing.dir/Main/Waves.cpp.o" \
 "CMakeFiles/testing.dir/Main/GameManager.cpp.o" \
 "CMakeFiles/testing.dir/Main/Logic.cpp.o"
@@ -152,12 +167,16 @@ testing_EXTERNAL_OBJECTS =
 
 testing: CMakeFiles/testing.dir/main.cpp.o
 testing: CMakeFiles/testing.dir/Cpp/Heads.cpp.o
+testing: CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.o
 testing: CMakeFiles/testing.dir/Main/Waves.cpp.o
 testing: CMakeFiles/testing.dir/Main/GameManager.cpp.o
 testing: CMakeFiles/testing.dir/Main/Logic.cpp.o
 testing: CMakeFiles/testing.dir/build.make
+testing: /usr/lib/x86_64-linux-gnu/libfltk.so
+testing: /usr/lib/x86_64-linux-gnu/libX11.so
+testing: /usr/lib/x86_64-linux-gnu/libm.so
 testing: CMakeFiles/testing.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/media/vanek/D/lessons/projects/Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable testing"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/media/vanek/D/lessons/projects/Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable testing"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/testing.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

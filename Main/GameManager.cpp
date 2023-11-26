@@ -1,12 +1,12 @@
 #include "GameManager.h"
 
-double Time::DeltaTime()
+double time::DeltaTime()
 {
     std::chrono::duration<double> delta = now - prev;
     return delta.count();
 }
 
-void Time::Update()
+void time::Update()
 {
     prev = now;
     now = std::chrono::system_clock::now();
@@ -29,7 +29,7 @@ void GameManager::StartFixedUpdate()
     for (; is_started; )
     {
         std::thread(FixedUpdate).detach();
-        std::this_thread::sleep_for(std::chrono::milliseconds(int(Time::fixed * 100)));
+        std::this_thread::sleep_for(std::chrono::milliseconds(int(time::fixed * 100)));
     }
 }
 
@@ -37,8 +37,9 @@ void GameManager::StartUpdate()
 {
     for (; is_started; )
     {
-        Time::Update();
+        time::Update();
         std::thread(Update).join();
+        Graphic::RedrawWindow();
     }
 }
 

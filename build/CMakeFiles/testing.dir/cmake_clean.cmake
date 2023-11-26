@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/testing.dir/Cpp/Heads.cpp.o"
   "CMakeFiles/testing.dir/Cpp/Heads.cpp.o.d"
+  "CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.o"
+  "CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.o.d"
   "CMakeFiles/testing.dir/Main/GameManager.cpp.o"
   "CMakeFiles/testing.dir/Main/GameManager.cpp.o.d"
   "CMakeFiles/testing.dir/Main/Logic.cpp.o"

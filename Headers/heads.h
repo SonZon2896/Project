@@ -86,7 +86,7 @@ public:
 class Fridge
 {
 public:
-    static inline Point pos{10., 10.,};
+    static inline Point pos{350., 350.,};
     static inline double health{100.};
 };
 

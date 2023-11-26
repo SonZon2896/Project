@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/media/vanek/D/lessons/projects/Project/Cpp/Heads.cpp" "CMakeFiles/testing.dir/Cpp/Heads.cpp.o" "gcc" "CMakeFiles/testing.dir/Cpp/Heads.cpp.o.d"
+  "/media/vanek/D/lessons/projects/Project/Graphic/FLTKgraphic.cpp" "CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.o" "gcc" "CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.o.d"
   "/media/vanek/D/lessons/projects/Project/Main/GameManager.cpp" "CMakeFiles/testing.dir/Main/GameManager.cpp.o" "gcc" "CMakeFiles/testing.dir/Main/GameManager.cpp.o.d"
   "/media/vanek/D/lessons/projects/Project/Main/Logic.cpp" "CMakeFiles/testing.dir/Main/Logic.cpp.o" "gcc" "CMakeFiles/testing.dir/Main/Logic.cpp.o.d"
   "/media/vanek/D/lessons/projects/Project/Main/Waves.cpp" "CMakeFiles/testing.dir/Main/Waves.cpp.o" "gcc" "CMakeFiles/testing.dir/Main/Waves.cpp.o.d"
