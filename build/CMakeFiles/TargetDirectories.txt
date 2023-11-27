@@ -1,3 +1,0 @@
-/media/vanek/D/lessons/projects/Project/build/CMakeFiles/testing.dir
-/media/vanek/D/lessons/projects/Project/build/CMakeFiles/edit_cache.dir
-/media/vanek/D/lessons/projects/Project/build/CMakeFiles/rebuild_cache.dir
