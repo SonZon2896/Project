@@ -29,7 +29,7 @@ void GameManager::StartFixedUpdate()
     for (; is_started; )
     {
         std::thread(FixedUpdate).detach();
-        std::this_thread::sleep_for(std::chrono::milliseconds(int(time::fixed * 100)));
+        std::this_thread::sleep_for(std::chrono::milliseconds(int(time::fixed * 1000)));
     }
 }
 

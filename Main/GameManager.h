@@ -13,7 +13,7 @@ private:
     static inline auto now{std::chrono::system_clock::now()};
 
 public:
-    static inline double fixed{0.2};
+    static inline double fixed{0.02};
 
     time() = delete;
     static double DeltaTime();

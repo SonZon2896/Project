@@ -3,8 +3,8 @@
 void Line::draw()
 {
     fl_color(24);
-    fl_line(x, y, x1, y1);
     fl_line_style(0, 5);
+    fl_line(x, y, x1, y1);
 }  
 
 Line::Line(int x, int y, int x1, int y1) 
@@ -12,19 +12,14 @@ Line::Line(int x, int y, int x1, int y1)
 
 void GraphicCockr::draw()
 {
-    fl_color(5);
-    position(cockr->pos.x, cockr->pos.y);
+    fl_color(FL_RED);
+    position(cockr->pos.x - width / 2, cockr->pos.y - height / 2);
     Fl_Box::draw();
 }
 
-void GraphicCockr::redraw()
+GraphicCockr::GraphicCockr(Cockroach* cockr) : Fl_Box(0, 0, 0, 0), cockr{cockr} 
 {
-    position(cockr->pos.x, cockr->pos.y);
-    Fl_Box::redraw();
-}
-
-GraphicCockr::GraphicCockr(Cockroach* cockr) : Fl_Box(cockr->pos.x, cockr->pos.y, 25, 25), cockr{cockr} 
-{
+    resize(cockr->pos.x - width / 2, cockr->pos.y - height / 2, width, height);
     box(FL_UP_BOX);
 }
 
@@ -68,4 +63,11 @@ void Graphic::ShowCockroaches()
         cockroaches.push_back(new GraphicCockr(cockr));
         window->add(cockroaches[cockroaches.size() - 1]);
     }
+}
+
+void Graphic::ClearCockroaches()
+{
+    for (auto cockr : cockroaches)
+        cockr->hide();
+    cockroaches.clear();
 }

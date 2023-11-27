@@ -23,8 +23,9 @@ class GraphicCockr : public Fl_Box
 {
 private:
     Cockroach* cockr;
+    int width = 25;
+    int height = 25;
     void draw();
-    void redraw();
 
 public:
     GraphicCockr(Cockroach* cockr);
@@ -43,4 +44,5 @@ public:
 
     static void ShowRoads(const std::vector<Road>& roads);
     static void ShowCockroaches();
+    static void ClearCockroaches();
 };

@@ -7,8 +7,8 @@
 // Variables ==============================================================================
 
 std::vector<Road> roads{{{0., 0.}, {100., 100.}, {200., 100.}, Fridge::pos},
-                        {{50., 0.}, {50., 100.}, {50., 400.}, Fridge::pos},
-                        {{0., 50.}, {300., 50.}, {300., 300.}, Fridge::pos}
+                        {{50., 0.}, {25., 100.}, {50., 400.}, Fridge::pos},
+                        {{0., 50.}, {300., 50.}, {400., 200.}, Fridge::pos}
                         };
 Wave wave;
 size_t num_of_wave;
@@ -23,16 +23,19 @@ void MakeWave()
 
     ++num_of_wave;
 
-    wave.num = 3.;
+    wave.num = num_of_wave;
     wave.health = 100.;
-    wave.speed = 10.;
-    wave.interval = 5.;
+    wave.speed = 100.;
+    wave.interval = 0.5;
 }
 
 void StartWave(Fl_Widget* w)
 {
-    wave.StartWave();
-    Graphic::ShowCockroaches();
+    if (!wave.Is_Started())
+    {
+        wave.StartWave();
+        Graphic::ShowCockroaches();
+    }
 }
 
 // Main ===================================================================================
@@ -58,14 +61,19 @@ void GameManager::FixedUpdate()
         if (wave.GetSurvived() <= 0)
         {
             wave.EndWave();
+            Graphic::ClearCockroaches();
             MakeWave();
         }
+    }
+    if (Fridge::health <= 0)
+    {
+        // Event::EndGame();
     }
 }
 
 void GameManager::Update()
 {
-    std::cout << "Update " << time::DeltaTime() << std::endl;
+    // std::cout << "Update " << time::DeltaTime() << std::endl;
     //FRONTEND
 
     //all interface
