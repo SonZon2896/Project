@@ -2,7 +2,7 @@
 #include "Waves.h"
 #include "../Headers/heads.h"
 #include "../Graphic/FLTKgraphic.h"
-// #include "../Weapons/weapons.h"
+#include "../Weapons/weapons.h"
 
 // Variables ==============================================================================
 
@@ -25,8 +25,8 @@ void MakeWave()
 
     wave.num = num_of_wave;
     wave.health = 100.;
-    wave.speed = 100.;
-    wave.interval = 0.5;
+    wave.speed = 100. + num_of_wave * 10;
+    wave.interval = 0.5 - (0.5 - 0.4 / ((num_of_wave + 10) / 5));
 }
 
 void StartWave(Fl_Widget* w)
@@ -54,7 +54,7 @@ void GameManager::Start()
 
 void GameManager::FixedUpdate()
 {
-    std::cout << "Fixed Update" << std::endl;
+    // std::cout << "Fixed Update" << std::endl;
     if (wave.Is_Started())
     {
         wave.MoveWave(time::fixed);
