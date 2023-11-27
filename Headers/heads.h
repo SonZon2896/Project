@@ -68,21 +68,6 @@ Point operator-(Point first, const Point& second);
 Point operator/(Point first, double second);
 Point operator*(Point first, double second);
 
-class Student_money
-{
-public:
-    double money = 0;
-    double speed;
-
-    Student_money(double money)
-        :money{money} {}
-
-    void Update(double time)
-    {
-        money += (time * speed);
-    }
-};
-
 class Fridge
 {
 public:
