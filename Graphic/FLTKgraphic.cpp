@@ -12,20 +12,17 @@ Line::Line(int x, int y, int x1, int y1)
 
 void GraphicCockr::draw()
 {
-    fl_color(FL_RED);
-    position(cockr->pos.x - width / 2, cockr->pos.y - height / 2);
-    Fl_Box::draw();
+    img->draw(cockr->pos.x - width / 2, cockr->pos.y - height / 2);
 }
 
 GraphicCockr::GraphicCockr(Cockroach* cockr) : Fl_Box(0, 0, 0, 0), cockr{cockr} 
 {
     resize(cockr->pos.x - width / 2, cockr->pos.y - height / 2, width, height);
-    box(FL_UP_BOX);
 }
 
 void Graphic::MakeWindow()
 {
-    window = new Fl_Window(600, 400);
+    window = new Fl_Window(1920, 1080);
     window->show();
     Fl::add_timeout(1. / 60., Timer_CB, (void*)window);
 }

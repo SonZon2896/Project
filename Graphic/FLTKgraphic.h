@@ -5,6 +5,7 @@
 #include <FL/fl_draw.H>
 #include <FL/Fl_Box.H>
 #include <FL/Enumerations.H>
+#include <FL/Fl_PNG_Image.H>
 #include <string>
 
 #include "../Headers/heads.h"
@@ -24,8 +25,9 @@ class GraphicCockr : public Fl_Box
 {
 private:
     Cockroach* cockr;
-    int width = 25;
-    int height = 25;
+    Fl_PNG_Image* img = new Fl_PNG_Image("../PNG/cockroach.png");
+    int width = 50;
+    int height = 50;
     void draw();
 
 public:
