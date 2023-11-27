@@ -54,7 +54,7 @@ void GameManager::Start()
 
 void GameManager::FixedUpdate()
 {
-    std::cout << "Fixed Update" << std::endl;
+    //std::cout << "Fixed Update" << std::endl;
     if (wave.Is_Started())
     {
         wave.MoveWave(time::fixed);
