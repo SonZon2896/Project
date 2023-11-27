@@ -25,6 +25,7 @@ public:
     // доделать изменение хп у холодоса
     void MoveWave(double time);
     size_t GetSurvived() {return survived;}
+    size_t GetRunning() {return active_cockr + survived >= num * roads.size() ? active_cockr + survived - num * roads.size() : 0;}
     bool Is_Started() {return is_started;}
     void EndWave();
 };

@@ -9,7 +9,7 @@ private:
 public:
     static inline double money = 0;
 
-    static std::string Evil_Woman();
+    static std::string Evil_Woman(size_t running);
     static std::string Scholarship();
     static std::string Renovation();
 };

@@ -17,6 +17,7 @@ Wave wave;
 size_t num_of_wave;
 Fl_Button* btn_start_wave;
 Text* output;
+Text* survived;
 
 // Functions ==============================================================================
 
@@ -30,7 +31,7 @@ void MakeWave()
     wave.num = 8 + num_of_wave;
     wave.health = 100.;
     wave.speed = 100. + num_of_wave * 10;
-    wave.interval = 0.5 - (0.5 - 0.4 / ((num_of_wave + 10) / 5));
+    wave.interval = 0.45 / ((num_of_wave + 10) / 4);
 }
 
 void StartWave(Fl_Widget* w)
@@ -53,6 +54,7 @@ void GameManager::Start()
     btn_start_wave = Graphic::MakeButton(200, 0, 100, 50, "start wave");
     btn_start_wave->callback(StartWave);
     output = Graphic::MakeText(400, 0);
+    survived = Graphic::MakeText(500, 0);
 
     MakeWave();
 }
@@ -79,8 +81,9 @@ void GameManager::FixedUpdate()
 void GameManager::Update()
 {
     // std::cout << "Update " << time::DeltaTime() << std::endl;
-    if (wave.Is_Started() && output->str != Event::Evil_Woman())
-        output->str = Event::Evil_Woman();
+    if (wave.Is_Started() && output->str != Event::Evil_Woman(wave.GetRunning()))
+        output->str = Event::Evil_Woman(wave.GetRunning());
+    survived->str = std::to_string(wave.GetSurvived());
     //FRONTEND
 
     //all interface
