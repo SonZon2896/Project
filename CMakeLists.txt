@@ -6,7 +6,11 @@ set(SOURCES main.cpp
             Graphic/FLTKgraphic.cpp
             Main/Waves.cpp
             Main/GameManager.cpp
-            Main/Logic.cpp)
+            Main/Logic.cpp
+            Graph_lib/Graph.cpp
+            Graph_lib/GUI.cpp
+            Graph_lib/Window.cpp
+            )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
