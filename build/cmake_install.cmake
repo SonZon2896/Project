@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/547AF2557AF232FA/lessons/projects/Project
+# Install script for directory: /media/vanek/D/lessons/projects/Project
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/mnt/547AF2557AF232FA/lessons/projects/Project/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/media/vanek/D/lessons/projects/Project/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

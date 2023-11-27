@@ -1,7 +1,7 @@
-CMakeFiles/testing.dir/Cpp/Heads.cpp.o: \
- /media/vanek/D/lessons/projects/Project/Cpp/Heads.cpp \
+CMakeFiles/testing.dir/Main/Waves.cpp.o: \
+ /media/vanek/D/lessons/projects/Project/Main/Waves.cpp \
  /usr/include/stdc-predef.h \
- /media/vanek/D/lessons/projects/Project/Cpp/../Headers/heads.h \
+ /media/vanek/D/lessons/projects/Project/Main/Waves.h \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -43,8 +43,9 @@ CMakeFiles/testing.dir/Cpp/Heads.cpp.o: \
  /usr/include/c++/11/bits/functional_hash.h \
  /usr/include/c++/11/bits/hash_bytes.h \
  /usr/include/c++/11/bits/range_access.h \
- /usr/include/c++/11/bits/vector.tcc /usr/include/c++/11/math.h \
- /usr/include/c++/11/cmath /usr/include/math.h \
+ /usr/include/c++/11/bits/vector.tcc \
+ /media/vanek/D/lessons/projects/Project/Main/../Headers/heads.h \
+ /usr/include/c++/11/math.h /usr/include/c++/11/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/x86_64-linux-gnu/bits/types.h \
  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
