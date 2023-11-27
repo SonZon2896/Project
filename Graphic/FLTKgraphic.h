@@ -5,6 +5,7 @@
 #include <FL/fl_draw.H>
 #include <FL/Fl_Box.H>
 #include <FL/Enumerations.H>
+#include <string>
 
 #include "../Headers/heads.h"
 #include "../Main/Waves.h"
@@ -31,6 +32,17 @@ public:
     GraphicCockr(Cockroach* cockr);
 };
 
+class Text : public Fl_Box
+{
+private:
+    void draw();
+
+public:
+    std::string str = "";
+    
+    Text(int x, int y);
+};
+
 class Graphic
 {
 private:
@@ -40,6 +52,7 @@ public:
     static void MakeWindow();
     static Fl_Button* MakeButton(int x, int y, int w, int h, const char* name = "");
     static GraphicCockr* MakeCockr(Cockroach* cockr);
+    static Text* MakeText(int x, int y);
     static void RedrawWindow();
 
     static void ShowRoads(const std::vector<Road>& roads);

@@ -55,6 +55,24 @@ GraphicCockr* Graphic::MakeCockr(Cockroach* cockr)
     return cockroach;
 }
 
+Text::Text(int x, int y): Fl_Box{x, y, 100, 50}
+{
+    box(FL_UP_BOX);
+}
+
+void Text::draw()
+{
+    label(&str[0]);
+    Fl_Box::draw();
+}
+
+Text* Graphic::MakeText(int x, int y)
+{
+    Text* text = new Text(x, y);
+    window->add(text);
+    return text;
+}
+
 void Graphic::ShowCockroaches()
 {
     cockroaches.reserve(Cockroach::GetAll().size());

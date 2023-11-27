@@ -4,6 +4,7 @@ project(testing VERSION 0.1.0 LANGUAGES CXX)
 set(SOURCES main.cpp
             Cpp/Heads.cpp
             Graphic/FLTKgraphic.cpp
+            events/events.cpp
             Main/Waves.cpp
             Main/GameManager.cpp
             Main/Logic.cpp)
