@@ -8,7 +8,7 @@ private:
     
 public:
     static inline double money = 0.0;
-    static std::string Evil_Woman(double& money_speed);
+    static std::string Evil_Woman();
     static std::string Stipuha();
     static std::string Remont();
 };

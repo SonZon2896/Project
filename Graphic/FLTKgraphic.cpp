@@ -71,3 +71,20 @@ void Graphic::ClearCockroaches()
         cockr->hide();
     cockroaches.clear();
 }
+
+Text::Text(int x, int y) : Fl_Box(x, y, 100, 50)
+{
+    box(FL_UP_BOX);
+};
+void Text::draw(){
+    Fl_Box::label(&str[0]);
+    Fl_Box::draw();
+}
+
+Text* Graphic::MakeText(int x, int y)
+{
+    Text* a = new Text(x, y);
+    window->add(a);
+    return a;
+}
+

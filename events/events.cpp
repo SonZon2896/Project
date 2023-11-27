@@ -1,7 +1,7 @@
 #include "events.h"
 
 
-std::string Event::Evil_Woman(double& money){
+std::string Event::Evil_Woman(){
     int count = 0;
     std::vector<Cockroach*> cock = Cockroach::GetAll();
     for(int i =0; i< cock.size(); i++){

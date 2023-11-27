@@ -22,6 +22,10 @@ public:
         for(auto taracan: cocr)
             taracan->health -= damage;
     }
+
+    ~Weapon(){
+        
+    }
 };
 
 
