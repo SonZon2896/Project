@@ -17,7 +17,9 @@ void GraphicCockr::draw()
 
 GraphicCockr::GraphicCockr(Cockroach* cockr) : Fl_Box(0, 0, 0, 0), cockr{cockr} 
 {
+#ifdef RESOURCES_DIR
     img = new Fl_PNG_Image(RESOURCES_DIR"/PNG/cockroach.png");
+#endif // RESOURCES_DIR
     resize(cockr->pos.x - width / 2, cockr->pos.y - height / 2, width, height);
 }
 
