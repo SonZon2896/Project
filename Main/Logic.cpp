@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "GameManager.h"
 #include "Waves.h"
 #include "../Headers/heads.h"
@@ -77,7 +79,8 @@ void GameManager::FixedUpdate()
 void GameManager::Update()
 {
     // std::cout << "Update " << time::DeltaTime() << std::endl;
-    output->str = Event::Evil_Woman();
+    if (wave.Is_Started() && output->str != Event::Evil_Woman())
+        output->str = Event::Evil_Woman();
     //FRONTEND
 
     //all interface

@@ -39,7 +39,7 @@ private:
 
 public:
     std::string str = "";
-    
+
     Text(int x, int y);
 };
 
@@ -48,12 +48,14 @@ class Graphic
 private:
     static inline Fl_Window* window;
     static inline std::vector<GraphicCockr*> cockroaches;
+
+    static void Timer_CB(void* userdata);
 public:
+
     static void MakeWindow();
     static Fl_Button* MakeButton(int x, int y, int w, int h, const char* name = "");
     static GraphicCockr* MakeCockr(Cockroach* cockr);
     static Text* MakeText(int x, int y);
-    static void RedrawWindow();
 
     static void ShowRoads(const std::vector<Road>& roads);
     static void ShowCockroaches();

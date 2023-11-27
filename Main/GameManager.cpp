@@ -39,7 +39,6 @@ void GameManager::StartUpdate()
     {
         time::Update();
         std::thread(Update).join();
-        Graphic::RedrawWindow();
     }
 }
 

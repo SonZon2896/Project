@@ -27,6 +27,7 @@ void Graphic::MakeWindow()
 {
     window = new Fl_Window(600, 400);
     window->show();
+    Fl::add_timeout(1. / 60., Timer_CB, (void*)window);
 }
 
 Fl_Button* Graphic::MakeButton(int x, int y, int w, int h, const char* name)
@@ -36,9 +37,11 @@ Fl_Button* Graphic::MakeButton(int x, int y, int w, int h, const char* name)
     return btn;
 }
 
-void Graphic::RedrawWindow()
+void Graphic::Timer_CB(void* userdata)
 {
-    window->redraw();
+    Fl_Window *w = (Fl_Window*)userdata;
+    w->redraw();
+    Fl::repeat_timeout(1. / 60., Timer_CB, userdata);
 }
 
 void Graphic::ShowRoads(const std::vector<Road>& roads)
