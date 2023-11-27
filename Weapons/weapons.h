@@ -1,3 +1,4 @@
+#pragma once
 #include "../Headers/heads.h"
 
 class Weapon
