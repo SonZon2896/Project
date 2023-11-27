@@ -1,13 +1,8 @@
 #include <iostream>
-#include <Events.h>
-
-
+#include <string>
 int main()
 {
     std::string s = "mama, i love cocks";
-    Event ev(s);
-    ev.print();
-
 
     return 0;
 }

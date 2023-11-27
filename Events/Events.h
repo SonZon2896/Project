@@ -7,9 +7,7 @@
 
 class Event{
 
-protected:
-    Event(const std::string& str) : s{str} {}
-    Event(const std::string& str, const std::string& str2) : s{str}, s_second{str2} {}
+
 
 public:
     std::string s;
@@ -34,7 +32,7 @@ public:
 
 };
 
-class Comenda : protected Event
+class Comenda : public Event
 {
 public:
     int cocroaches_limit = 0;
@@ -57,7 +55,7 @@ public:
 };
 
 
-class Stipuha : protected Event
+class Stipuha : public Event
 {
 public:
     double stipubl = 0.;
