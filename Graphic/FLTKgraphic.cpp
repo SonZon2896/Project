@@ -12,6 +12,8 @@ Line::Line(int x, int y, int x1, int y1)
 
 void GraphicCockr::draw()
 {
+    fl_color(5);
+    position(cockr->pos.x, cockr->pos.y);
     Fl_Box::draw();
 }
 
@@ -21,7 +23,7 @@ void GraphicCockr::redraw()
     Fl_Box::redraw();
 }
 
-GraphicCockr::GraphicCockr(Cockroach* cockr) : Fl_Box(cockr->pos.x, cockr->pos.y, 25, 25) 
+GraphicCockr::GraphicCockr(Cockroach* cockr) : Fl_Box(cockr->pos.x, cockr->pos.y, 25, 25), cockr{cockr} 
 {
     box(FL_UP_BOX);
 }
