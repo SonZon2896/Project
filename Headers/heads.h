@@ -71,8 +71,8 @@ Point operator*(Point first, double second);
 class Fridge
 {
 public:
-    static inline Point pos{350., 350.,};
-    static inline double health{100.};
+    static Point pos;
+    static double health;
 };
 
 #define Road std::vector<Point>

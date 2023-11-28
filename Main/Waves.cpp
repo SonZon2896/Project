@@ -36,7 +36,7 @@ void Wave::MoveWave(double time)
         if (cockroaches[i].Move(time))
         {
             Fridge::health -= cockroaches[i].damage;
-            cockroaches[i].pos = {-1., -1};
+            cockroaches[i].pos = {-1000., -1000};
             cockroaches[i].is_death = true;
             --survived;
         }

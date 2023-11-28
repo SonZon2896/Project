@@ -6,6 +6,7 @@
 #include <FL/Fl_Box.H>
 #include <FL/Enumerations.H>
 #include <FL/Fl_PNG_Image.H>
+#include <FL/Fl_JPEG_Image.H>
 #include <string>
 #include <filesystem>
 #include <iostream>
@@ -21,6 +22,16 @@ private:
  
 public:
     Line(int x, int y, int x1, int y1);
+};
+
+class Background : public Fl_Box
+{
+private:
+    Fl_JPEG_Image* img;
+    void draw();
+
+public:
+    Background();
 };
 
 class GraphicCockr : public Fl_Box

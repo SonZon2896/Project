@@ -10,6 +10,18 @@ void Line::draw()
 Line::Line(int x, int y, int x1, int y1) 
     :Fl_Box(x, y, x1, y1), x{x}, y{y}, x1{x1}, y1{y1} {}
 
+Background::Background() : Fl_Box(0, 0, 1920, 1080)
+{
+#ifdef RESOURCES_DIR
+    img = new Fl_JPEG_Image(RESOURCES_DIR"/PNG/apartment.jpg");
+#endif
+}
+
+void Background::draw()
+{
+    img->draw(0, 0);
+}
+
 void GraphicCockr::draw()
 {
     img->draw(cockr->pos.x - width / 2, cockr->pos.y - height / 2);
@@ -25,8 +37,10 @@ GraphicCockr::GraphicCockr(Cockroach* cockr) : Fl_Box(0, 0, 0, 0), cockr{cockr}
 
 void Graphic::MakeWindow()
 {
-    window = new Fl_Window(1920, 1080);
+    window = new Fl_Window(800, 800);
     window->show();
+    Background* bg = new Background();
+    window->add(bg);
     Fl::add_timeout(1. / 60., Timer_CB, (void*)window);
 }
 
