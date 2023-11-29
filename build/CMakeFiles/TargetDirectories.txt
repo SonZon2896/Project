@@ -1,3 +1,0 @@
-/home/arkadiy/Рабочий стол/progs/Project/build/CMakeFiles/testing.dir
-/home/arkadiy/Рабочий стол/progs/Project/build/CMakeFiles/edit_cache.dir
-/home/arkadiy/Рабочий стол/progs/Project/build/CMakeFiles/rebuild_cache.dir
