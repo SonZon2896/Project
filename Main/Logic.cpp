@@ -12,7 +12,7 @@
 Point Fridge::pos{250, 210};
 double Fridge::health{1000.};
 std::vector<Road> roads{{{100., 365.}, {250., 350.}, Fridge::pos},
-                        {{100., 630.}, {260., 600.}, Fridge::pos},
+                        {{100., 630.}, {260., 600.}, {250., 350.}, Fridge::pos},
                         {{670., 545.}, {550., 525.}, {550., 350.}, {250., 350.}, Fridge::pos}
                         };
 Wave wave;
@@ -31,10 +31,10 @@ void MakeWave()
 
     ++num_of_wave;
 
-    wave.num = 8 + num_of_wave;
+    wave.num = 100;
     wave.health = 100.;
-    wave.speed = 100. + num_of_wave * 10;
-    wave.interval = 0.45 / ((num_of_wave + 10) / 4);
+    wave.speed = 25.;
+    wave.interval = 0.1;
 }
 
 void StartWave(Fl_Widget* w)

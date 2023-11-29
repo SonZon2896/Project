@@ -115,15 +115,16 @@ protected:
     static inline std::vector<Trigger*> all_trig{};
 
 public:
-    Point ld;
-    Point ru;
+    Point pos;
+    Point size;
+    double angle;
     std::vector<Cockroach*> cockroaches;
 
     Trigger() = delete;
-    Trigger(const Point& left, const Point& right);
+    Trigger(Point pos, Point size, double angle_grad);
 
     void CheckCockroaches();
-    bool In(const Point& pos);
+    bool In(Point pos);
 
     static auto GetAll() {return all_trig;}
 
