@@ -31,10 +31,10 @@ void MakeWave()
 
     ++num_of_wave;
 
-    wave.num = 100;
+    wave.num = 3;
     wave.health = 100.;
     wave.speed = 25.;
-    wave.interval = 0.1;
+    wave.interval = 0.5;
 }
 
 void StartWave(Fl_Widget* w)

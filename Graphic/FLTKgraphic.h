@@ -27,7 +27,7 @@ public:
 class Background : public Fl_Box
 {
 private:
-    Fl_JPEG_Image* img;
+    Fl_PNG_Image* img;
     void draw();
 
 public:

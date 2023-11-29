@@ -10,10 +10,10 @@ void Line::draw()
 Line::Line(int x, int y, int x1, int y1) 
     :Fl_Box(x, y, x1, y1), x{x}, y{y}, x1{x1}, y1{y1} {}
 
-Background::Background() : Fl_Box(0, 0, 1920, 1080)
+Background::Background() : Fl_Box(0, 0, 1280, 720)
 {
 #ifdef RESOURCES_DIR
-    img = new Fl_JPEG_Image(RESOURCES_DIR"/PNG/apartment.jpg");
+    img = new Fl_PNG_Image(RESOURCES_DIR"/PNG/game_field.png");
 #endif
 }
 
@@ -30,14 +30,14 @@ void GraphicCockr::draw()
 GraphicCockr::GraphicCockr(Cockroach* cockr) : Fl_Box(0, 0, 0, 0), cockr{cockr} 
 {
 #ifdef RESOURCES_DIR
-    img = new Fl_PNG_Image(RESOURCES_DIR"/PNG/cockroach.png");
+    img = new Fl_PNG_Image(RESOURCES_DIR"/PNG/cockroach_px.png");
 #endif // RESOURCES_DIR
     resize(cockr->pos.x - width / 2, cockr->pos.y - height / 2, width, height);
 }
 
 void Graphic::MakeWindow()
 {
-    window = new Fl_Window(800, 800);
+    window = new Fl_Window(1280, 720);
     window->show();
     Background* bg = new Background();
     window->add(bg);

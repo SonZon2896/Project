@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5.0)
 project(testing VERSION 0.1.0 LANGUAGES CXX)
 
 set(SOURCES main.cpp
-            Cpp/Heads.cpp
+            Headers/Heads.cpp
             Graphic/FLTKgraphic.cpp
             events/events.cpp
             Main/Waves.cpp

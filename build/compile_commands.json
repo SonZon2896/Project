@@ -1,0 +1,44 @@
+[
+{
+  "directory": "/home/arkadiy/Рабочий стол/progs/Project/build",
+  "command": "/usr/bin/g++ -DRESOURCES_DIR=\"\\\"/home/arkadiy/Рабочий стол/progs/Project\\\"\" -I/usr/lib/fltk -g -o CMakeFiles/testing.dir/main.cpp.o -c \"/home/arkadiy/Рабочий стол/progs/Project/main.cpp\"",
+  "file": "/home/arkadiy/Рабочий стол/progs/Project/main.cpp",
+  "output": "CMakeFiles/testing.dir/main.cpp.o"
+},
+{
+  "directory": "/home/arkadiy/Рабочий стол/progs/Project/build",
+  "command": "/usr/bin/g++ -DRESOURCES_DIR=\"\\\"/home/arkadiy/Рабочий стол/progs/Project\\\"\" -I/usr/lib/fltk -g -o CMakeFiles/testing.dir/Headers/Heads.cpp.o -c \"/home/arkadiy/Рабочий стол/progs/Project/Headers/Heads.cpp\"",
+  "file": "/home/arkadiy/Рабочий стол/progs/Project/Headers/Heads.cpp",
+  "output": "CMakeFiles/testing.dir/Headers/Heads.cpp.o"
+},
+{
+  "directory": "/home/arkadiy/Рабочий стол/progs/Project/build",
+  "command": "/usr/bin/g++ -DRESOURCES_DIR=\"\\\"/home/arkadiy/Рабочий стол/progs/Project\\\"\" -I/usr/lib/fltk -g -o CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.o -c \"/home/arkadiy/Рабочий стол/progs/Project/Graphic/FLTKgraphic.cpp\"",
+  "file": "/home/arkadiy/Рабочий стол/progs/Project/Graphic/FLTKgraphic.cpp",
+  "output": "CMakeFiles/testing.dir/Graphic/FLTKgraphic.cpp.o"
+},
+{
+  "directory": "/home/arkadiy/Рабочий стол/progs/Project/build",
+  "command": "/usr/bin/g++ -DRESOURCES_DIR=\"\\\"/home/arkadiy/Рабочий стол/progs/Project\\\"\" -I/usr/lib/fltk -g -o CMakeFiles/testing.dir/events/events.cpp.o -c \"/home/arkadiy/Рабочий стол/progs/Project/events/events.cpp\"",
+  "file": "/home/arkadiy/Рабочий стол/progs/Project/events/events.cpp",
+  "output": "CMakeFiles/testing.dir/events/events.cpp.o"
+},
+{
+  "directory": "/home/arkadiy/Рабочий стол/progs/Project/build",
+  "command": "/usr/bin/g++ -DRESOURCES_DIR=\"\\\"/home/arkadiy/Рабочий стол/progs/Project\\\"\" -I/usr/lib/fltk -g -o CMakeFiles/testing.dir/Main/Waves.cpp.o -c \"/home/arkadiy/Рабочий стол/progs/Project/Main/Waves.cpp\"",
+  "file": "/home/arkadiy/Рабочий стол/progs/Project/Main/Waves.cpp",
+  "output": "CMakeFiles/testing.dir/Main/Waves.cpp.o"
+},
+{
+  "directory": "/home/arkadiy/Рабочий стол/progs/Project/build",
+  "command": "/usr/bin/g++ -DRESOURCES_DIR=\"\\\"/home/arkadiy/Рабочий стол/progs/Project\\\"\" -I/usr/lib/fltk -g -o CMakeFiles/testing.dir/Main/GameManager.cpp.o -c \"/home/arkadiy/Рабочий стол/progs/Project/Main/GameManager.cpp\"",
+  "file": "/home/arkadiy/Рабочий стол/progs/Project/Main/GameManager.cpp",
+  "output": "CMakeFiles/testing.dir/Main/GameManager.cpp.o"
+},
+{
+  "directory": "/home/arkadiy/Рабочий стол/progs/Project/build",
+  "command": "/usr/bin/g++ -DRESOURCES_DIR=\"\\\"/home/arkadiy/Рабочий стол/progs/Project\\\"\" -I/usr/lib/fltk -g -o CMakeFiles/testing.dir/Main/Logic.cpp.o -c \"/home/arkadiy/Рабочий стол/progs/Project/Main/Logic.cpp\"",
+  "file": "/home/arkadiy/Рабочий стол/progs/Project/Main/Logic.cpp",
+  "output": "CMakeFiles/testing.dir/Main/Logic.cpp.o"
+}
+]
