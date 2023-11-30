@@ -2,6 +2,7 @@
 #include <vector>
 #include "../Headers/heads.h"
 
+/// @brief Wave of cockroaches
 class Wave
 {
 private:
@@ -12,6 +13,7 @@ private:
     bool is_started = false;
 
 public:
+    /// @brief variables to make a cockroaches
     std::vector<Road> roads;
     double speed;
     double health;
@@ -21,11 +23,13 @@ public:
     Wave() = default;
     Wave(const std::vector<Road>& roads, size_t num_cockr_on_road = 3., double interval = 0.5, double speed = 1., double cockr_health = 100.);
 
+    /// @brief main functions, which control logic of wave
     void StartWave();
-    // доделать изменение хп у холодоса
     void MoveWave(double time);
+    void EndWave();
+
+    /// @brief Get functions
     size_t GetSurvived() {return survived;}
     size_t GetRunning() {return active_cockr + survived >= num * roads.size() ? active_cockr + survived - num * roads.size() : 0;}
     bool Is_Started() {return is_started;}
-    void EndWave();
 };

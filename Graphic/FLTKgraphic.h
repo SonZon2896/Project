@@ -58,15 +58,21 @@ public:
     Text(int x, int y);
 };
 
+/// @brief class to draw on FLTK
 class Graphic
 {
 private:
+    /// @brief main window
     static inline Fl_Window* window;
+    /// @brief all cockroaches to output
     static inline std::vector<GraphicCockr*> cockroaches;
 
+    /// @brief function to redraw window by timer
+    /// @param userdata something
     static void Timer_CB(void* userdata);
 public:
 
+    /// @brief Making classes and add to window
     static void MakeWindow();
     static Fl_Button* MakeButton(int x, int y, int w, int h, const char* name = "");
     static GraphicCockr* MakeCockr(Cockroach* cockr);

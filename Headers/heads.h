@@ -78,9 +78,11 @@ public:
 #define Road std::vector<Point>
 
 class Trigger;
+
 class Cockroach
 {
 protected:
+/// @brief vector of pointers to all cockroaches
 static inline std::vector<Cockroach*> all_cockr{};
 
 private:
@@ -89,6 +91,7 @@ private:
     std::size_t point_on_road = 0;
     bool is_in_trig = false;
 
+    /// @brief update directory, when turn
     void UpdateDir();
 public:
 
@@ -109,9 +112,11 @@ public:
     ~Cockroach();
 };
 
+/// @brief class to check cockroaches
 class Trigger
 {
 protected:
+    /// @brief vector of pointers to all triggers
     static inline std::vector<Trigger*> all_trig{};
 
 public:
@@ -123,7 +128,9 @@ public:
     Trigger() = delete;
     Trigger(Point pos, Point size, double angle_grad);
 
+    /// @brief check cockroach move out from trigger
     void CheckCockroaches();
+    /// @brief check point in trigger or not
     bool In(Point pos);
 
     static auto GetAll() {return all_trig;}
