@@ -39,8 +39,8 @@ class GraphicCockr : public Fl_Box
 private:
     Cockroach* cockr;
     Fl_PNG_Image* img;
-    int width = 50;
-    int height = 50;
+    int width = 64;
+    int height = 64;
     void draw();
 
 public:
