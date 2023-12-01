@@ -5,15 +5,15 @@ void Line::draw()
     fl_color(24);
     fl_line_style(0, 5);
     fl_line(x, y, x1, y1);
-}  
+}
 
-Line::Line(int x, int y, int x1, int y1) 
-    :Fl_Box(x, y, x1, y1), x{x}, y{y}, x1{x1}, y1{y1} {}
+Line::Line(int x, int y, int x1, int y1)
+    : Fl_Box(x, y, x1, y1), x{x}, y{y}, x1{x1}, y1{y1} {}
 
 Background::Background() : Fl_Box(0, 0, 1280, 720)
 {
 #ifdef RESOURCES_DIR
-    img = new Fl_PNG_Image(RESOURCES_DIR"/PNG/game_field.png");
+    img = new Fl_PNG_Image(RESOURCES_DIR "/PNG/game_field.png");
 #endif
 }
 
@@ -27,65 +27,65 @@ void GraphicCockr::draw()
     img->draw(cockr->pos.x - width / 2, cockr->pos.y - height / 2);
 }
 
-GraphicCockr::GraphicCockr(Cockroach* cockr) : Fl_Box(0, 0, 0, 0), cockr{cockr} 
+GraphicCockr::GraphicCockr(Cockroach *cockr) : Fl_Box(0, 0, 0, 0), cockr{cockr}
 {
 #ifdef RESOURCES_DIR
-    img = new Fl_PNG_Image(RESOURCES_DIR"/PNG/cockroach_px.png");
+    img = new Fl_PNG_Image(RESOURCES_DIR "/PNG/cockroach_px.png");
 #endif // RESOURCES_DIR
     resize(cockr->pos.x - width / 2, cockr->pos.y - height / 2, width, height);
 }
 
-void Graphic::MakeWindow()
+void Graphic::MakeWindow(int w, int h)
 {
-    window = new Fl_Window(1280, 720);
+    window = new Fl_Window(w, h);
     window->show();
-    Background* bg = new Background();
+    Background *bg = new Background();
     window->add(bg);
-    Fl::add_timeout(1. / 60., Timer_CB, (void*)window);
+    Fl::add_timeout(1. / 60., Timer_CB, (void *)window);
 }
 
-Fl_Button* Graphic::MakeButton(int x, int y, int w, int h, const char* name)
+Fl_Button *Graphic::MakeButton(int x, int y, int w, int h, const char *name)
 {
-    Fl_Button* btn = new Fl_Button(x, y, w, h, name);
+    Fl_Button *btn = new Fl_Button(x, y, w, h, name);
     window->add(btn);
     return btn;
 }
 
-void Graphic::Timer_CB(void* userdata)
+void Graphic::Timer_CB(void *userdata)
 {
-    Fl_Window *w = (Fl_Window*)userdata;
+    Fl_Window *w = (Fl_Window *)userdata;
     w->redraw();
     Fl::repeat_timeout(1. / 60., Timer_CB, userdata);
 }
 
-void Graphic::ShowRoads(const std::vector<Road>& roads)
+void Graphic::ShowRoads(const std::vector<Road> &roads)
 {
-    for (auto road: roads)
+    for (auto road : roads)
         for (size_t i = 1; i < road.size(); ++i)
-            window->add(new Line(road[i-1].x, road[i-1].y, road[i].x, road[i].y));
+            window->add(new Line(road[i - 1].x, road[i - 1].y, road[i].x, road[i].y));
 }
 
-GraphicCockr* Graphic::MakeCockr(Cockroach* cockr)
+GraphicCockr *Graphic::MakeCockr(Cockroach *cockr)
 {
     auto cockroach = new GraphicCockr(cockr);
     window->add(cockroach);
     return cockroach;
 }
 
-Text::Text(int x, int y): Fl_Box{x, y, 100, 50}
+Text::Text(int x, int y, std::string name) : Fl_Box{x, y, 100, 50}, name{name}
 {
     box(FL_UP_BOX);
 }
 
 void Text::draw()
 {
-    label(&str[0]);
+    label(&(name + '\n' + output)[0]);
     Fl_Box::draw();
 }
 
-Text* Graphic::MakeText(int x, int y)
+Text *Graphic::MakeText(int x, int y, std::string name)
 {
-    Text* text = new Text(x, y);
+    Text *text = new Text(x, y, name);
     window->add(text);
     return text;
 }
@@ -93,7 +93,7 @@ Text* Graphic::MakeText(int x, int y)
 void Graphic::ShowCockroaches()
 {
     cockroaches.reserve(Cockroach::GetAll().size());
-    for (auto cockr: Cockroach::GetAll())
+    for (auto cockr : Cockroach::GetAll())
     {
         cockroaches.push_back(new GraphicCockr(cockr));
         window->add(cockroaches[cockroaches.size() - 1]);

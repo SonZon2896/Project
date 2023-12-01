@@ -21,7 +21,7 @@ public:
     size_t num;
 
     Wave() = default;
-    Wave(const std::vector<Road>& roads, size_t num_cockr_on_road = 3., double interval = 0.5, double speed = 1., double cockr_health = 100.);
+    Wave(const std::vector<Road> &roads, size_t num_cockr_on_road = 3., double interval = 0.5, double speed = 1., double cockr_health = 100.);
 
     /// @brief main functions, which control logic of wave
     void StartWave();
@@ -29,7 +29,7 @@ public:
     void EndWave();
 
     /// @brief Get functions
-    size_t GetSurvived() {return survived;}
-    size_t GetRunning() {return active_cockr + survived >= num * roads.size() ? active_cockr + survived - num * roads.size() : 0;}
-    bool Is_Started() {return is_started;}
+    size_t GetSurvived() { return survived; }
+    size_t GetRunning() { return active_cockr + survived >= num * roads.size() ? active_cockr + survived - num * roads.size() : 0; }
+    bool Is_Started() { return is_started; }
 };

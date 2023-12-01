@@ -18,8 +18,8 @@ class Line : public Fl_Box
 {
 private:
     int x, y, x1, y1;
-    void draw(); 
- 
+    void draw();
+
 public:
     Line(int x, int y, int x1, int y1);
 };
@@ -27,7 +27,7 @@ public:
 class Background : public Fl_Box
 {
 private:
-    Fl_PNG_Image* img;
+    Fl_PNG_Image *img;
     void draw();
 
 public:
@@ -37,14 +37,14 @@ public:
 class GraphicCockr : public Fl_Box
 {
 private:
-    Cockroach* cockr;
-    Fl_PNG_Image* img;
-    int width = 50;
-    int height = 50;
+    Cockroach *cockr;
+    Fl_PNG_Image *img;
+    int width = 64;
+    int height = 64;
     void draw();
 
 public:
-    GraphicCockr(Cockroach* cockr);
+    GraphicCockr(Cockroach *cockr);
 };
 
 class Text : public Fl_Box
@@ -53,9 +53,10 @@ private:
     void draw();
 
 public:
-    std::string str = "";
+    std::string name;
+    std::string output = "";
 
-    Text(int x, int y);
+    Text(int x, int y, std::string name = "");
 };
 
 /// @brief class to draw on FLTK
@@ -63,22 +64,22 @@ class Graphic
 {
 private:
     /// @brief main window
-    static inline Fl_Window* window;
+    static inline Fl_Window *window;
     /// @brief all cockroaches to output
-    static inline std::vector<GraphicCockr*> cockroaches;
+    static inline std::vector<GraphicCockr *> cockroaches;
 
     /// @brief function to redraw window by timer
     /// @param userdata something
-    static void Timer_CB(void* userdata);
+    static void Timer_CB(void *userdata);
+
 public:
-
     /// @brief Making classes and add to window
-    static void MakeWindow();
-    static Fl_Button* MakeButton(int x, int y, int w, int h, const char* name = "");
-    static GraphicCockr* MakeCockr(Cockroach* cockr);
-    static Text* MakeText(int x, int y);
+    static void MakeWindow(int w, int h);
+    static Fl_Button *MakeButton(int x, int y, int w, int h, const char *name = "");
+    static GraphicCockr *MakeCockr(Cockroach *cockr);
+    static Text *MakeText(int x, int y, std::string name = "");
 
-    static void ShowRoads(const std::vector<Road>& roads);
+    static void ShowRoads(const std::vector<Road> &roads);
     static void ShowCockroaches();
     static void ClearCockroaches();
 };

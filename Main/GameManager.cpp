@@ -15,7 +15,7 @@ void time::Update()
 void GameManager::StartGame()
 {
     if (is_started)
-        throw std::runtime_error("Start Game, which stared");
+        return;
 
     is_started = true;
     Start();
@@ -26,7 +26,7 @@ void GameManager::StartGame()
 
 void GameManager::StartFixedUpdate()
 {
-    for (; is_started; )
+    for (; is_started;)
     {
         std::thread(FixedUpdate).detach();
         std::this_thread::sleep_for(std::chrono::milliseconds(int(time::fixed * 1000)));
@@ -35,7 +35,7 @@ void GameManager::StartFixedUpdate()
 
 void GameManager::StartUpdate()
 {
-    for (; is_started; )
+    for (; is_started;)
     {
         time::Update();
         std::thread(Update).join();
@@ -45,7 +45,7 @@ void GameManager::StartUpdate()
 void GameManager::EndGame()
 {
     if (!is_started)
-        throw std::runtime_error("End Game, which not started");
+        return;
 
     is_started = false;
 
@@ -53,5 +53,4 @@ void GameManager::EndGame()
     upd_thr.join();
     fix_thr.~thread();
     upd_thr.~thread();
-
 }

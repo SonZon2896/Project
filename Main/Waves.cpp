@@ -1,9 +1,8 @@
 #include "Waves.h"
 
-Wave::Wave(const std::vector<Road>& roads, size_t num, double interval, double speed, double health)
+Wave::Wave(const std::vector<Road> &roads, size_t num, double interval, double speed, double health)
     : roads{roads}, num{num}, interval{interval}, speed{speed}, health{health}
 {
-
 }
 
 void Wave::StartWave()

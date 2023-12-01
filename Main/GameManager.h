@@ -18,7 +18,7 @@ public:
 
     time() = delete;
     /// @brief function to GameManager::Update()
-    /// @return time past last update 
+    /// @return time past last update
     static double DeltaTime();
     /// @brief update time for DeltaTime()
     static void Update();

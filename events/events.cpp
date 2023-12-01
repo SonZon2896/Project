@@ -1,12 +1,16 @@
 #include "events.h"
 
-std::string Event::Evil_Woman(size_t running){
-    if(running < 30){
+std::string Event::Evil_Woman(size_t running)
+{
+    if (running < 30)
+    {
         std::string good = "Good boys, i will even not kill you))";
         return good;
-    } else{
+    }
+    else
+    {
         money -= 1000.;
-        if(money < 0.)
+        if (money < 0.)
             money = 0.;
         std::string bad = "Bad boys, you should be ready to my attack";
         return bad;

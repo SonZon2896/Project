@@ -4,8 +4,9 @@
 class Weapon
 {
 protected:
-    Weapon(const Point& coordinate, const Trigger& trigger_, double time_sleep, double damage_)
-    : coord{coordinate}, trigger{trigger_}, time{time_sleep}, damage{damage_} {}
+    Weapon(const Point &coordinate, const Trigger &trigger_, double time_sleep, double damage_)
+        : coord{coordinate}, trigger{trigger_}, time{time_sleep}, damage{damage_} {}
+
 public:
     double damage;
     double time;
@@ -14,37 +15,32 @@ public:
 
     Weapon() = delete;
 
-
-    std::vector<Cockroach*> cocr = trigger.cockroaches;
+    std::vector<Cockroach *> cocr = trigger.cockroaches;
 
     void DamageForCockroaches()
     {
-        for(auto taracan: cocr)
+        for (auto taracan : cocr)
             taracan->health -= damage;
     }
 };
-
 
 class Tapok : protected Weapon
 {
 public:
     Tapok() = delete;
-    Tapok(const Point& start_pos) : Weapon(start_pos, {start_pos, {2., 2.}, 0}, 2.0, 25.0) {};
-
+    Tapok(const Point &start_pos) : Weapon(start_pos, {start_pos, {2., 2.}, 0}, 2.0, 25.0){};
 };
 
 class Dihlofoz : protected Weapon
 {
 public:
     Dihlofoz() = delete;
-    Dihlofoz(const Point& start_pos) : Weapon(start_pos, {start_pos, {2., 2.}, 0}, 2.0, 50.0) {};
-
+    Dihlofoz(const Point &start_pos) : Weapon(start_pos, {start_pos, {2., 2.}, 0}, 2.0, 50.0){};
 };
 
 class Catch : protected Weapon
 {
 public:
     Catch() = delete;
-    Catch(const Point& start_pos) : Weapon(start_pos, {start_pos, {2., 2.}, 0}, 2.0, 100.0) {};
-
+    Catch(const Point &start_pos) : Weapon(start_pos, {start_pos, {2., 2.}, 0}, 2.0, 100.0){};
 };

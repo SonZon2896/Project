@@ -3,21 +3,22 @@
 #include "../Headers/heads.h"
 
 /// @brief Game events
-class Event{
+class Event
+{
 private:
     /// @brief scholarship
-    static inline double money_speed = 100;
+    static double money_speed;
 
 public:
     /// @brief stipubles
-    static inline double money = 0;
+    static double money;
 
     /// @brief check running cockroaches and do something with scholarship
     /// @param running running cockroaches
     /// @return string to output
     static std::string Evil_Woman(size_t running);
 
-    /// @brief add money 
+    /// @brief add money
     /// @return string to output
     static std::string Scholarship();
 
@@ -25,4 +26,3 @@ public:
     /// @return string to output
     static std::string Renovation();
 };
-

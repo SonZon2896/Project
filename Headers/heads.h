@@ -10,16 +10,16 @@ public:
 
     Point() = default;
     Point(double x, double y)
-        :x{x}, y{y} {}
+        : x{x}, y{y} {}
 
-    Point operator+=(const Point& point)
+    Point operator+=(const Point &point)
     {
         x += point.x;
         y += point.y;
         return *this;
     }
 
-    Point operator-=(const Point& point)
+    Point operator-=(const Point &point)
     {
         x -= point.x;
         y -= point.y;
@@ -40,14 +40,14 @@ public:
         return *this;
     }
 
-    Point operator=(const Point& second)
+    Point operator=(const Point &second)
     {
         this->x = second.x;
         this->y = second.y;
         return *this;
     }
 
-    bool operator==(const Point& second)
+    bool operator==(const Point &second)
     {
         if (this->x == second.x &&
             this->y == second.y)
@@ -55,7 +55,7 @@ public:
         return false;
     }
 
-    bool operator!=(const Point& second)
+    bool operator!=(const Point &second)
     {
         return !(*this == second);
     }
@@ -63,8 +63,8 @@ public:
     double Dist();
 };
 
-Point operator+(Point first, const Point& second);
-Point operator-(Point first, const Point& second);
+Point operator+(Point first, const Point &second);
+Point operator-(Point first, const Point &second);
 Point operator/(Point first, double second);
 Point operator*(Point first, double second);
 
@@ -82,8 +82,8 @@ class Trigger;
 class Cockroach
 {
 protected:
-/// @brief vector of pointers to all cockroaches
-static inline std::vector<Cockroach*> all_cockr{};
+    /// @brief vector of pointers to all cockroaches
+    static inline std::vector<Cockroach *> all_cockr{};
 
 private:
     Road road;
@@ -93,8 +93,8 @@ private:
 
     /// @brief update directory, when turn
     void UpdateDir();
-public:
 
+public:
     friend Trigger;
     double health;
     Point pos;
@@ -103,11 +103,11 @@ public:
     bool is_death = false;
 
     Cockroach() = delete;
-    Cockroach(const Road& road, double speed = 1, double health = 100., double damage = 5.);
+    Cockroach(const Road &road, double speed = 1, double health = 100., double damage = 5.);
 
     bool Move(double time);
     void CheckTrigger();
-    static auto GetAll() {return all_cockr;}
+    static auto GetAll() { return all_cockr; }
 
     ~Cockroach();
 };
@@ -117,13 +117,13 @@ class Trigger
 {
 protected:
     /// @brief vector of pointers to all triggers
-    static inline std::vector<Trigger*> all_trig{};
+    static inline std::vector<Trigger *> all_trig{};
 
 public:
     Point pos;
     Point size;
     double angle;
-    std::vector<Cockroach*> cockroaches;
+    std::vector<Cockroach *> cockroaches;
 
     Trigger() = delete;
     Trigger(Point pos, Point size, double angle_grad);
@@ -133,7 +133,7 @@ public:
     /// @brief check point in trigger or not
     bool In(Point pos);
 
-    static auto GetAll() {return all_trig;}
+    static auto GetAll() { return all_trig; }
 
     ~Trigger();
 };
