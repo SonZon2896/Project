@@ -13,6 +13,7 @@
 
 #include "../Headers/heads.h"
 #include "../Main/Waves.h"
+#include "../Weapons/weapons.h"
 
 class Line : public Fl_Box
 {
@@ -50,13 +51,49 @@ public:
 class Text : public Fl_Box
 {
 private:
+    std::string name;
     void draw();
 
 public:
-    std::string name;
     std::string output = "";
 
     Text(int x, int y, std::string name = "");
+};
+
+class ProgressBar : public Fl_Box
+{
+private:
+    Point pos;
+    Point size;
+    void draw();
+
+public:
+    Fl_Box *progress_box;
+    double progress;
+
+    ProgressBar(const Point &pos);
+};
+
+class GraphicTrigger : public Fl_Box
+{
+private:
+    const Trigger *trig;
+    void draw();
+
+public:
+    GraphicTrigger(const Trigger *trig);
+};
+
+class GraphicSlapper : public Fl_Box
+{
+private:
+    const Slapper *slapper;
+    ProgressBar *pb;
+    GraphicTrigger *gtrig;
+    void draw();
+
+public:
+    GraphicSlapper(const Slapper *slapper);
 };
 
 /// @brief class to draw on FLTK
@@ -78,6 +115,9 @@ public:
     static Fl_Button *MakeButton(int x, int y, int w, int h, const char *name = "");
     static GraphicCockr *MakeCockr(Cockroach *cockr);
     static Text *MakeText(int x, int y, std::string name = "");
+    static ProgressBar *MakeProgressBar(const Point &pos);
+    static GraphicTrigger *MakeTrigger(const Trigger *trig);
+    static GraphicSlapper *MakeSlapper(const Slapper *slapper);
 
     static void ShowRoads(const std::vector<Road> &roads);
     static void ShowCockroaches();

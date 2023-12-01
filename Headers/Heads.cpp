@@ -86,8 +86,8 @@ Cockroach::~Cockroach()
 
 // Triggers
 
-Trigger::Trigger(Point pos, Point size, double angle)
-    : pos{pos}, size{size}, angle{(angle / 180) * M_PI}
+Trigger::Trigger(Point pos, Point size)
+    : pos{pos}, size{size}
 {
     all_trig.push_back(this);
 }
@@ -107,10 +107,8 @@ void Trigger::CheckCockroaches()
 bool Trigger::In(Point pos)
 {
     pos -= this->pos;
-    Point rotated{pos.x * cos(angle) + pos.y * sin(angle),
-                  pos.y * cos(angle) - pos.x * sin(angle)};
-    if (rotated.x <= this->size.x &&
-        rotated.y <= this->size.y)
+    if (pos.x <= this->size.x &&
+        pos.y <= this->size.y)
         return true;
     return false;
 }

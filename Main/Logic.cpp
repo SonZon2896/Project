@@ -26,6 +26,9 @@ Text *fridge_hp;
 Text *stipubles;
 Text *timer_text;
 
+Slapper slapper({200, 250});
+GraphicSlapper *gslapper;
+
 double timer = 0.;
 double timer_to_start_wave = 10.;
 
@@ -70,6 +73,8 @@ void GameManager::Start()
     timer_text = Graphic::MakeText(300, 720, "timer");
     fridge_hp = Graphic::MakeText(125, 50);
 
+    gslapper = Graphic::MakeSlapper(&slapper);
+
     MakeWave();
 }
 
@@ -91,6 +96,7 @@ void GameManager::FixedUpdate()
         Graphic::MakeText(590, 335, "WASTED");
         EndGame();
     }
+    slapper.Action(time::fixed);
 }
 
 void GameManager::Update()

@@ -4,43 +4,63 @@
 class Weapon
 {
 protected:
-    Weapon(const Point &coordinate, const Trigger &trigger_, double time_sleep, double damage_)
-        : coord{coordinate}, trigger{trigger_}, time{time_sleep}, damage{damage_} {}
+    Weapon(const Point &pos, Trigger *trigger, double interval, double damage);
+
+private:
+    double time_last;
+    static inline std::vector<Weapon*> all_weapons;
+
+    void Attack();
 
 public:
     double damage;
-    double time;
-    Point coord;
-    Trigger trigger;
+    double interval;
+    Point pos;
+    Trigger *trigger;
 
     Weapon() = delete;
+    ~Weapon();
 
-    std::vector<Cockroach *> cocr = trigger.cockroaches;
+    void Action(double time);
 
-    void DamageForCockroaches()
-    {
-        for (auto taracan : cocr)
-            taracan->health -= damage;
-    }
+    static auto GetAll() {return all_weapons;}
+    const auto GetTrigger() const {return trigger;}
+    auto GetProgress() const {return time_last > interval ? 1 : time_last / interval;}
+    auto GetPos() const {return pos;}
 };
 
-class Tapok : protected Weapon
+class Slapper : public Weapon
 {
+private:
+    int level = 1;
+    Trigger trig;
+
 public:
-    Tapok() = delete;
-    Tapok(const Point &start_pos) : Weapon(start_pos, {start_pos, {2., 2.}, 0}, 2.0, 25.0){};
+    Slapper(const Point &pos);
+
+    void Upgrade();
 };
 
-class Dihlofoz : protected Weapon
+class Dichlorvos : public Weapon
 {
+private:
+    int level = 1;
+    Trigger trig;
+
 public:
-    Dihlofoz() = delete;
-    Dihlofoz(const Point &start_pos) : Weapon(start_pos, {start_pos, {2., 2.}, 0}, 2.0, 50.0){};
+    Dichlorvos(const Point &pos);
+
+    void Upgrade();
 };
 
-class Catch : protected Weapon
+class Catch : public Weapon
 {
+private:
+    int level = 1;
+    Trigger trig;
+
 public:
-    Catch() = delete;
-    Catch(const Point &start_pos) : Weapon(start_pos, {start_pos, {2., 2.}, 0}, 2.0, 100.0){};
+    Catch(const Point &pos);
+
+    void Upgrade();
 };

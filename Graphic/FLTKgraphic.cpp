@@ -1,5 +1,7 @@
 #include "FLTKgraphic.h"
 
+// Line
+
 void Line::draw()
 {
     fl_color(24);
@@ -10,17 +12,19 @@ void Line::draw()
 Line::Line(int x, int y, int x1, int y1)
     : Fl_Box(x, y, x1, y1), x{x}, y{y}, x1{x1}, y1{y1} {}
 
+// Background
+
 Background::Background() : Fl_Box(0, 0, 1280, 720)
 {
-#ifdef RESOURCES_DIR
-    img = new Fl_PNG_Image(RESOURCES_DIR "/PNG/game_field.png");
-#endif
+    img = new Fl_PNG_Image("../PNG/game_field.png");
 }
 
 void Background::draw()
 {
     img->draw(0, 0);
 }
+
+// GraphicCockr
 
 void GraphicCockr::draw()
 {
@@ -29,11 +33,71 @@ void GraphicCockr::draw()
 
 GraphicCockr::GraphicCockr(Cockroach *cockr) : Fl_Box(0, 0, 0, 0), cockr{cockr}
 {
-#ifdef RESOURCES_DIR
-    img = new Fl_PNG_Image(RESOURCES_DIR "/PNG/cockroach_px.png");
-#endif // RESOURCES_DIR
+    img = new Fl_PNG_Image("../PNG/cockroach_px.png");
     resize(cockr->pos.x - width / 2, cockr->pos.y - height / 2, width, height);
 }
+
+// Text
+
+Text::Text(int x, int y, std::string name) : Fl_Box{x, y, 100, 50}, name{name}
+{
+    box(FL_UP_BOX);
+}
+
+void Text::draw()
+{
+    std::string temp = name + '\n' + output;
+    label(&temp[0]);
+    Fl_Box::draw();
+}
+
+// ProgressBar
+
+void ProgressBar::draw()
+{
+    Fl_Box::draw();
+    progress_box->resize(pos.x, pos.y, size.x * progress, size.y);
+}
+
+ProgressBar::ProgressBar(const Point &pos)
+    : pos{pos}, size{100, 25}, Fl_Box(pos.x, pos.y, size.x, size.y), progress_box(new Fl_Box(pos.x, pos.y, size.x, 0))
+{
+    progress_box->color(FL_GREEN);
+    Fl_Box::box(FL_UP_BOX);
+    progress_box->box(FL_UP_BOX);
+}
+
+// GraphicTrigger
+
+void GraphicTrigger::draw()
+{
+    Fl_Box::draw();
+}
+
+GraphicTrigger::GraphicTrigger(const Trigger *trig)
+    : trig{trig}, Fl_Box(trig->pos.x, trig->pos.y, trig->size.x, trig->size.y)
+{
+    box(FL_UP_BOX);
+}
+
+// GraphicSlapper
+
+void GraphicSlapper::draw()
+{
+    pb->progress = slapper->GetProgress();
+    Fl_Box::draw();
+}
+
+GraphicSlapper::GraphicSlapper(const Slapper *slapper)
+    : slapper{slapper}, 
+      Fl_Box(slapper->GetPos().x, slapper->GetPos().y, 25, 25, "Slapper"),
+      pb(Graphic::MakeProgressBar(slapper->GetPos() + Point{-50, -45})),
+      gtrig{Graphic::MakeTrigger(slapper->GetTrigger())}
+{
+    box(FL_UP_BOX);
+}
+
+// Graphic
 
 void Graphic::MakeWindow(int w, int h)
 {
@@ -72,22 +136,33 @@ GraphicCockr *Graphic::MakeCockr(Cockroach *cockr)
     return cockroach;
 }
 
-Text::Text(int x, int y, std::string name) : Fl_Box{x, y, 100, 50}, name{name}
-{
-    box(FL_UP_BOX);
-}
-
-void Text::draw()
-{
-    label(&(name + '\n' + output)[0]);
-    Fl_Box::draw();
-}
-
 Text *Graphic::MakeText(int x, int y, std::string name)
 {
     Text *text = new Text(x, y, name);
     window->add(text);
     return text;
+}
+
+ProgressBar *Graphic::MakeProgressBar(const Point &pos)
+{
+    auto pb = new ProgressBar(pos);
+    window->add(pb);
+    window->add(pb->progress_box);
+    return pb;
+}
+
+GraphicTrigger *Graphic::MakeTrigger(const Trigger *trig)
+{
+    auto gtrig = new GraphicTrigger(trig);
+    window->add(gtrig);
+    return gtrig;
+}
+
+GraphicSlapper *Graphic::MakeSlapper(const Slapper *slapper)
+{
+    auto slap = new GraphicSlapper(slapper);
+    window->add(slap);
+    return slap;
 }
 
 void Graphic::ShowCockroaches()

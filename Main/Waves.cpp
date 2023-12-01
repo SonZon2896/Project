@@ -46,6 +46,9 @@ void Wave::MoveWave(double time)
 void Wave::EndWave()
 {
     cockroaches.clear();
+    auto triggers = Trigger::GetAll();
+    for (auto trig : triggers)
+        trig->cockroaches.clear();
     survived = 0;
     is_started = false;
 }

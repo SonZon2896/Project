@@ -122,11 +122,10 @@ protected:
 public:
     Point pos;
     Point size;
-    double angle;
     std::vector<Cockroach *> cockroaches;
 
     Trigger() = delete;
-    Trigger(Point pos, Point size, double angle_grad);
+    Trigger(Point pos, Point size);
 
     /// @brief check cockroach move out from trigger
     void CheckCockroaches();

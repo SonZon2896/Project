@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "../Headers/heads.h"
+#include "../Weapons/weapons.h"
 
 /// @brief Wave of cockroaches
 class Wave
