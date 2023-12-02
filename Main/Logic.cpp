@@ -14,7 +14,7 @@ double Fridge::health{100.};
 double Event::money{100.};
 double Event::money_speed{100.};
 const bool Mark_Lox = true; // 1 december
-const bool Artem_Lox = true; // 2
+const bool Artem_Lox = true; // 2 december
 std::vector<Road> roads {
     {{700., 250.}, {700., 350.}, {250., 350.}, Fridge::pos},
     {{100., 630.}, {250., 630.}, {250., 350.}, Fridge::pos},
@@ -52,10 +52,10 @@ void MakeWave()
     ++num_of_wave;
 
 
-    wave.num = 3;
-    wave.health = 100.;
-    wave.speed = 150.;
-    wave.interval = 0.1;
+    wave.num = 3 + 2 * (num_of_wave / 2);
+    wave.health = 100. + num_of_wave * 20;
+    wave.speed = 75. + num_of_wave * 2;
+    wave.interval = 0.2 * (1 - num_of_wave / (num_of_wave + 10));
 }
 
 void StartWave(Fl_Widget *w)
