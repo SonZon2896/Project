@@ -14,6 +14,9 @@ set(SOURCES main.cpp
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
+file(CREATE_LINK "${PROJECT_SOURCE_DIR}/PNG"
+        "${CMAKE_CURRENT_BINARY_DIR}/PNG" SYMBOLIC)
+
 set(FLTK_SKIP_FLUID true)
 find_package(FLTK REQUIRED)
 include_directories(${FLTK_INCLUDE_DIR})

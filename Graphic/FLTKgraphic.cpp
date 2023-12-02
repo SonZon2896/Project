@@ -16,7 +16,7 @@ Line::Line(int x, int y, int x1, int y1)
 
 Background::Background() : Fl_Box(0, 0, 1280, 720)
 {
-    img = new Fl_PNG_Image("../PNG/game_field.png");
+    img = new Fl_PNG_Image("./PNG/game_field.png");
 }
 
 void Background::draw()
@@ -33,7 +33,7 @@ void GraphicCockr::draw()
 
 GraphicCockr::GraphicCockr(Cockroach *cockr) : Fl_Box(0, 0, 0, 0), cockr{cockr}
 {
-    img = new Fl_PNG_Image("../PNG/cockroach_px.png");
+    img = new Fl_PNG_Image("./PNG/cockroach_px.png");
     resize(cockr->pos.x - width / 2, cockr->pos.y - height / 2, width, height);
 }
 
@@ -59,7 +59,6 @@ void Text::draw()
 
 void ProgressBar::draw()
 {
-Fl_Box::draw();
     progress_box->resize(pos.x, pos.y, size.x * progress, size.y);
     Fl_Box::draw();
 }
