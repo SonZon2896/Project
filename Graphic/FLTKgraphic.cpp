@@ -33,7 +33,7 @@ void Background::draw()
 void GraphicCockr::draw()
 {
     Point cur_direction = cockr->GetDirection();
-    if (prev_direction != cur_direction){
+    if (prev_direction != cur_direction || (cockr->is_death && !is_death_img)){
         UpdateImage();
         prev_direction = cur_direction;
     }
@@ -49,8 +49,14 @@ GraphicCockr::GraphicCockr(Cockroach *cockr) : Fl_Box(0, 0, 0, 0), cockr{cockr}
 }
 
 void GraphicCockr::UpdateImage(){
+    delete img;
+    if (cockr->is_death)
+    {
+        img = new Fl_PNG_Image("./PNG/cockroach_px_death.png");
+        is_death_img = true;
+        return;
+    }
     img = new Fl_PNG_Image(&GetPathToImageCockr(*cockr)[0]);
-    
 }
 
 // Text
@@ -115,13 +121,10 @@ void GraphicSlapper::draw()
     Fl_Button::draw();
 }
 
-#define slapper_size_x 20
-#define slapper_size_y 20
-
 GraphicSlapper::GraphicSlapper(Slapper *slapper)
     : slapper{slapper},
       Fl_Button(slapper->GetPos().x - slapper_size_x / 2, slapper->GetPos().y - slapper_size_y / 2, slapper_size_x, slapper_size_y),
-      pb(Graphic::MakeProgressBar(slapper->GetPos() + Point{-25., -25.})),
+      pb(Graphic::MakeProgressBar(slapper->GetPos() + Point{-25., -slapper_size_y / 2 - 10})),
       gtrig{Graphic::MakeTrigger(slapper->GetTrigger())}
 {
     name = std::to_string(slapper->GetLvl()) + "lvl\nSlapper\n" + std::to_string((int)slapper->GetCost());
@@ -148,26 +151,41 @@ void GraphicDichlorvos::draw()
 {
     label(&name[0]);
     pb->progress = dichlorvos->GetProgress();
+    img->draw(dichlorvos->GetPos().x - dichlorvos_size_x / 2, dichlorvos->GetPos().y - dichlorvos_size_y / 2);
     Fl_Button::draw();
 }
 
-#define dich_size_x 20
-#define dich_size_y 20
-
 GraphicDichlorvos::GraphicDichlorvos(Dichlorvos *dichlorvos)
     : dichlorvos{dichlorvos},
-      Fl_Button(dichlorvos->GetPos().x - dich_size_x / 2, dichlorvos->GetPos().y - dich_size_y / 2, dich_size_x, dich_size_y),
-      pb(Graphic::MakeProgressBar(dichlorvos->GetPos() + Point{-25, -25})),
+      Fl_Button(dichlorvos->GetPos().x - dichlorvos_size_x / 2, dichlorvos->GetPos().y - dichlorvos_size_y / 2, dichlorvos_size_x, dichlorvos_size_y),
+      pb(Graphic::MakeProgressBar(dichlorvos->GetPos() + Point{-25, -dichlorvos_size_y / 2})),
       gtrig{Graphic::MakeTrigger(dichlorvos->GetTrigger())}
 {
-    name = std::to_string(dichlorvos->GetLvl()) + "lvl\nDichlorvos\n" + std::to_string((int)dichlorvos->GetCost());
+    name = std::to_string(dichlorvos->GetLvl()) + "lvl\n" + std::to_string((int)dichlorvos->GetCost());
     label(&name[0]);
-    box(FL_UP_BOX);
+    switch (dichlorvos->GetDir())
+    {
+    case UP:
+        img = new Fl_PNG_Image("./PNG/dichlorvos_up.png");
+        break;
+    case DOWN:
+        img = new Fl_PNG_Image("./PNG/dichlorvos_down.png");
+        break;
+    case LEFT:
+        img = new Fl_PNG_Image("./PNG/dichlorvos_left.png");
+        break;
+    case RIGHT:
+        img = new Fl_PNG_Image("./PNG/dichlorvos_right.png");
+        break;
+    default:
+        img = new Fl_PNG_Image("./PNG/dichlorvos_up.png");
+    }
+    box(FL_NO_BOX);
     callback(DichlorvosUpgrade, dichlorvos);
 }
 
-#undef dich_size_x
-#undef dich_size_y
+#undef dichlorvos_size_x
+#undef dichlorvos_size_y
 
 void DichlorvosUpgrade(Fl_Widget* w, void *dichlorvos)
 {
@@ -176,10 +194,10 @@ void DichlorvosUpgrade(Fl_Widget* w, void *dichlorvos)
         return;
     Event::money -= dichl->GetCost();
     dichl->Upgrade();
-    ((GraphicDichlorvos *)w)->name = std::to_string(dichl->GetLvl()) + "lvl\nDichlorvos\n" + std::to_string((int)dichl->GetCost());
+    ((GraphicDichlorvos *)w)->name = std::to_string(dichl->GetLvl()) + "lvl\n" + std::to_string((int)dichl->GetCost());
 }
 
-// GraphicCatch
+// GraphicTrap
 
 void GraphicTrap::draw()
 {
@@ -188,13 +206,10 @@ void GraphicTrap::draw()
     Fl_Button::draw();
 }
 
-#define trap_size_x 20
-#define trap_size_y 20
-
 GraphicTrap::GraphicTrap(Trap *trap)
     : trap{trap},
       Fl_Button(trap->GetPos().x - trap_size_x / 2, trap->GetPos().y - trap_size_y / 2, trap_size_x, trap_size_y),
-      pb(Graphic::MakeProgressBar(trap->GetPos() + Point{-25, -25})),
+      pb(Graphic::MakeProgressBar(trap->GetPos() + Point{-25, -trap_size_y / 2 - 10})),
       gtrig{Graphic::MakeTrigger(trap->GetTrigger())}
 {
     name = std::to_string(trap->GetLvl()) + "lvl\nTrap\n" + std::to_string((int)trap->GetCost());

@@ -30,51 +30,68 @@ public:
     auto GetPos() const { return pos; }
 };
 
+#define slapper_size_x 64
+#define slapper_size_y 64
+#define slapper_trig_size_x 100
+#define slapper_trig_size_y 100
+
 class Slapper : public Weapon
 {
 private:
     int level = 1;
     Trigger trig;
-    Point trig_size{100, 100};
+    Direction direction;
     double upgrade_cost = 200;
 
 public:
-    Slapper(const Point &pos);
+    Slapper(const Point &pos, Direction direction);
 
     void Upgrade();
     auto GetCost() const { return upgrade_cost; }
-    auto GetLvl() const {return level;}
+    auto GetLvl() const { return level; }
+    auto GetDir() const { return direction; }
 };
+
+#define dichlorvos_size_x 64
+#define dichlorvos_size_y 64
+#define dichlorvos_trig_size_x 40
+#define dichlorvos_trig_size_y 200
 
 class Dichlorvos : public Weapon
 {
 private:
     int level = 1;
     Trigger trig;
-    Point trig_size{30, 200};
-    bool is_right;
+    Direction direction;
     double upgrade_cost = 500;
 
 public:
-    Dichlorvos(const Point &pos, bool is_right = false);
+    Dichlorvos(const Point &pos, Direction direction);
 
     void Upgrade();
     auto GetCost() const { return upgrade_cost; }
-    auto GetLvl() const {return level;}
+    auto GetLvl() const { return level; }
+    auto GetDir() const { return direction; }
 };
+
+#define trap_size_x 64
+#define trap_size_y 64
+#define trap_trig_size_x 30
+#define trap_trig_size_y 30
 
 class Trap : public Weapon
 {
 private:
     int level = 1;
     Trigger trig;
-    Point trig_size{25, 25};
+    Direction direction;
     double upgrade_cost = 250;
 
 public:
-    Trap(const Point &pos);
+    Trap(const Point &pos, Direction direction);
 
     void Upgrade();
     auto GetCost() const { return upgrade_cost; }
-    auto GetLvl() const {return level;}
+    auto GetLvl() const { return level; }
+    auto GetDir() const { return direction; }
 };

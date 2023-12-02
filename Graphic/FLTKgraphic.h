@@ -42,6 +42,7 @@ class GraphicCockr : public Fl_Box
 private:
     Cockroach *cockr;
     Fl_PNG_Image *img;
+    bool is_death_img = false;
     int width = 64;
     int height = 64;
     Point prev_direction;
@@ -91,6 +92,7 @@ public:
 class GraphicSlapper : public Fl_Button
 {
 private:
+    Fl_PNG_Image *img;
     Slapper *slapper;
     ProgressBar *pb;
     GraphicTrigger *gtrig;
@@ -106,6 +108,7 @@ void SlapUpgrade(Fl_Widget *w, void *slapper);
 class GraphicDichlorvos : public Fl_Button
 {
 private:
+    Fl_PNG_Image *img;
     Dichlorvos *dichlorvos;
     ProgressBar *pb;
     GraphicTrigger *gtrig;
@@ -121,6 +124,7 @@ void DichlorvosUpgrade(Fl_Widget *w, void *dichlorvos);
 class GraphicTrap : public Fl_Button
 {
 private:
+    Fl_PNG_Image *img;
     Trap *trap;
     ProgressBar *pb;
     GraphicTrigger *gtrig;

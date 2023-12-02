@@ -46,12 +46,28 @@ void Weapon::Action(double time)
 
 // Slapper
 
-#define size_x 100
-#define size_y 100
-
-Slapper::Slapper(const Point &pos)
-    : trig({pos.x - size_x / 2, pos.y + 10}, {size_x, size_y}), Weapon(pos, &this->trig, 0.4, 150)
+Slapper::Slapper(const Point &pos, Direction direction)
+    : trig({0., 0.}, {0., 0.}), Weapon(pos, &this->trig, 0.4, 150), direction{direction}
 {
+    switch (direction)
+    {
+    case UP:
+        trig.pos = {pos.x - slapper_trig_size_x / 2, pos.y - slapper_size_y / 2 - slapper_trig_size_y};
+        trig.size = {slapper_trig_size_x, slapper_trig_size_y};
+        break;
+    case DOWN:
+        trig.pos = {pos.x - slapper_trig_size_x / 2, pos.y + slapper_size_y / 2};
+        trig.size = {slapper_trig_size_x, slapper_trig_size_y};
+        break;
+    case LEFT:
+        trig.pos = {pos.x - slapper_size_x / 2 - slapper_trig_size_y, pos.y - slapper_trig_size_x / 2};
+        trig.size = {slapper_trig_size_y, slapper_trig_size_x};
+        break;
+    case RIGHT:
+        trig.pos = {pos.x + slapper_size_x / 2, pos.y - slapper_trig_size_x / 2};
+        trig.size = {slapper_trig_size_y, slapper_trig_size_x};
+        break;
+    }
 }
 
 void Slapper::Upgrade()
@@ -62,17 +78,37 @@ void Slapper::Upgrade()
     interval -= interval / 100.;
 }
 
+#undef slapper_trig_size_x
+#undef slapper_trig_size_y
+
 // Dichlorvos
 
-#define size_x 40
-#define size_y 200
-
-Dichlorvos::Dichlorvos(const Point &pos, bool is_right)
-    : trig((is_right ? Point{pos.x + 10, pos.y - size_x / 2} : Point{pos.x - size_x / 2, pos.y + 10}),
-           (is_right ? Point{size_y, size_x} : Point{size_x, size_y})),
-      Weapon(pos, &this->trig, 0.1, 15)
+Dichlorvos::Dichlorvos(const Point &pos, Direction direction)
+    : trig({0., 0.}, {0., 0.}), Weapon(pos, &this->trig, 0.1, 15), direction{direction}
 {
+    switch (direction)
+    {
+    case UP:
+        trig.pos = {pos.x - dichlorvos_trig_size_x / 2, pos.y - dichlorvos_size_y / 2 - dichlorvos_trig_size_y};
+        trig.size = {dichlorvos_trig_size_x, dichlorvos_trig_size_y};
+        break;
+    case DOWN:
+        trig.pos = {pos.x - dichlorvos_trig_size_x / 2, pos.y + dichlorvos_size_y / 2};
+        trig.size = {dichlorvos_trig_size_x, dichlorvos_trig_size_y};
+        break;
+    case LEFT:
+        trig.pos = {pos.x - dichlorvos_size_x / 2 - dichlorvos_trig_size_y, pos.y - dichlorvos_trig_size_x / 2};
+        trig.size = {dichlorvos_trig_size_y, dichlorvos_trig_size_x};
+        break;
+    case RIGHT:
+        trig.pos = {pos.x + dichlorvos_size_x / 2, pos.y - dichlorvos_trig_size_x / 2};
+        trig.size = {dichlorvos_trig_size_y, dichlorvos_trig_size_x};
+        break;
+    }
 }
+
+#undef dichlorvos_trig_size_x
+#undef dichlorvos_trig_size_y
 
 void Dichlorvos::Upgrade()
 {
@@ -84,13 +120,32 @@ void Dichlorvos::Upgrade()
 
 // Catch
 
-#define size_x 30
-#define size_y 30
-
-Trap::Trap(const Point &pos)
-    : trig({pos.x - size_x / 2, pos.y + 10}, {size_x, size_y}), Weapon(pos, &this->trig, 3., 200)
+Trap::Trap(const Point &pos, Direction direction)
+    : trig({0., 0.}, {0., 0.}), Weapon(pos, &this->trig, 3., 200), direction{direction}
 {
+    switch (direction)
+    {
+    case UP:
+        trig.pos = {pos.x - trap_trig_size_x / 2, pos.y - trap_size_y / 2 - trap_trig_size_y};
+        trig.size = {trap_trig_size_x, trap_trig_size_y};
+        break;
+    case DOWN:
+        trig.pos = {pos.x - trap_trig_size_x / 2, pos.y + trap_size_y / 2};
+        trig.size = {trap_trig_size_x, trap_trig_size_y};
+        break;
+    case LEFT:
+        trig.pos = {pos.x - trap_size_x / 2 - trap_trig_size_y, pos.y - trap_trig_size_x / 2};
+        trig.size = {trap_trig_size_y, trap_trig_size_x};
+        break;
+    case RIGHT:
+        trig.pos = {pos.x + trap_size_x / 2, pos.y - trap_trig_size_x / 2};
+        trig.size = {trap_trig_size_y, trap_trig_size_x};
+        break;
+    }
 }
+
+#undef trap_trig_size_x
+#undef trap_trig_size_y
 
 void Trap::Upgrade()
 {
@@ -99,6 +154,3 @@ void Trap::Upgrade()
     damage += 100;
     interval -= interval / 100.;
 }
-
-#undef size_x
-#undef size_y

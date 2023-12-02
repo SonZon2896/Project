@@ -4,7 +4,7 @@
 #define EPS 1e-8
 
 
-std::map<Directions, std::string> cockroach_directions = {
+std::map<Direction, std::string> cockroach_direction = {
     {UP, "./PNG/cockroach_px_up.png"},
     {RIGHT, "./PNG/cockroach_px_right.png"},
     {DOWN, "./PNG/cockroach_px_down.png"},
@@ -43,7 +43,7 @@ double Point::Dist()
 }
 
 std::string GetPathToImageCockr(Cockroach &cockr){
-    return cockroach_directions[cockr.GetOrientation()];
+    return cockroach_direction[cockr.GetOrientation()];
 }
 
 // Cockroaches
@@ -61,7 +61,7 @@ Point Cockroach::GetDirection(){
     return direction;
 }
 
-Directions Cockroach::GetOrientation(){
+Direction Cockroach::GetOrientation(){
     if (is_equal(direction.x, 0) && is_equal(direction.y, 1))
         return DOWN;
     if (is_equal(direction.x, 1) && is_equal(direction.y, 0))

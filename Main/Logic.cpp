@@ -67,48 +67,52 @@ void StartWave(Fl_Widget *w)
     }
 }
 
-void MakeSlapper(Fl_Widget *w, void *p)
+enum EnumWeapon
 {
-    if (Event::money < 100)
-        return;
-    Event::money -= 100;
-    w->hide();
-    Point pos = *(Point *)p;
-    auto slapper = new Slapper(pos);
-    slappers.push_back(Graphic::MakeSlapper(slapper));
-    delete p;
-}
-
-struct DichlInp
-{
-    Point pos;
-    bool is_right = false;
-    DichlInp(Point pos, bool is_right = false)
-        : pos{pos}, is_right{is_right} {}
+    slapper = 0,
+    dichlorvos,
+    trap
 };
 
-void MakeDichlorvos(Fl_Widget *w, void *p)
+struct PackWeapon
 {
-    if (Event::money < 400)
-        return;
-    Event::money -= 400;
-    w->hide();
-    auto data = (DichlInp *)p;
-    auto dichlorvos = new Dichlorvos(data->pos, data->is_right);
-    dichlorvoses.push_back(Graphic::MakeDichlorvos(dichlorvos));
-    delete data;
-}
+    Point pos;
+    Direction direction;
+    EnumWeapon type;
+    PackWeapon(Point pos, Direction direction, EnumWeapon type) : pos{pos}, direction{direction}, type{type} {}
+};
 
-void MakeTrap(Fl_Widget *w, void *p)
+void MakeWeapon(Fl_Widget *w, void *p)
 {
-    if (Event::money < 150)
-        return;
-    Event::money -= 150;
-    w->hide();
-    Point pos = *(Point *)p;
-    auto trap = new Trap(pos);
-    traps.push_back(Graphic::MakeTrap(trap));
-    delete p;
+    auto unpack = (PackWeapon *)p;
+    if (unpack->type == EnumWeapon::slapper)
+    {
+        if (Event::money < 100)
+            return;
+        Event::money -= 100;
+        w->hide();
+        auto slapper = new Slapper(unpack->pos, unpack->direction);
+        slappers.push_back(Graphic::MakeSlapper(slapper));
+    }
+    else if (unpack->type == EnumWeapon::dichlorvos)
+    {
+        if (Event::money < 400)
+            return;
+        Event::money -= 400;
+        w->hide();
+        auto dichlorvos = new Dichlorvos(unpack->pos, unpack->direction);
+        dichlorvoses.push_back(Graphic::MakeDichlorvos(dichlorvos));
+    }
+    else if (unpack->type == EnumWeapon::trap)
+    {
+        if (Event::money < 150)
+            return;
+        Event::money -= 150;
+        w->hide();
+        auto trap = new Trap(unpack->pos, unpack->direction);
+        traps.push_back(Graphic::MakeTrap(trap));
+    }
+    delete unpack;
 }
 
 // Main ===================================================================================
@@ -125,23 +129,23 @@ void GameManager::Start()
 
     btns_make_slapper.reserve(3);
     btns_make_slapper.push_back(Graphic::MakeButton(200, 500, 100, 50, "make slapper \n 100 sb"));
-    btns_make_slapper[btns_make_slapper.size() - 1]->callback(MakeSlapper, (void *)(new Point{200 + 50, 500 + (-30)}));
+    btns_make_slapper[btns_make_slapper.size() - 1]->callback(MakeWeapon, (void *)(new PackWeapon{{200 + 50, 500 + (-30)}, DOWN, EnumWeapon::slapper}));
     btns_make_slapper.push_back(Graphic::MakeButton(700, 500, 100, 50, "make slapper \n 100 sb"));
-    btns_make_slapper[btns_make_slapper.size() - 1]->callback(MakeSlapper, (void *)(new Point{700 + 50, 500 + (-30)}));
+    btns_make_slapper[btns_make_slapper.size() - 1]->callback(MakeWeapon, (void *)(new PackWeapon{{700 + 50, 500 + (-30)}, LEFT, EnumWeapon::slapper}));
     btns_make_slapper.push_back(Graphic::MakeButton(500, 400, 100, 50, "make slapper \n 100 sb"));
-    btns_make_slapper[btns_make_slapper.size() - 1]->callback(MakeSlapper, (void *)(new Point{500 + 50, 400 + (-30)}));
+    btns_make_slapper[btns_make_slapper.size() - 1]->callback(MakeWeapon, (void *)(new PackWeapon{{500 + 50, 400 + (-30)}, RIGHT, EnumWeapon::slapper}));
 
     btns_make_dichlorvos.reserve(2);
     btns_make_dichlorvos.push_back(Graphic::MakeButton(150, 300, 100, 50, "make dichlorvos \n 400 sb"));
-    btns_make_dichlorvos[btns_make_dichlorvos.size() - 1]->callback(MakeDichlorvos, (void *)(new DichlInp({150 + 50, 300 + 50}, true)));
+    btns_make_dichlorvos[btns_make_dichlorvos.size() - 1]->callback(MakeWeapon, (void *)(new PackWeapon({150 + 50, 300 + 50}, RIGHT, EnumWeapon::dichlorvos)));
     btns_make_dichlorvos.push_back(Graphic::MakeButton(350, 300, 100, 50, "make dichlorvos \n 400 sb"));
-    btns_make_dichlorvos[btns_make_dichlorvos.size() - 1]->callback(MakeDichlorvos, (void *)(new DichlInp(Point{350 + 50, 300 + 20})));
+    btns_make_dichlorvos[btns_make_dichlorvos.size() - 1]->callback(MakeWeapon, (void *)(new PackWeapon({350 + 50, 300 + 20}, DOWN, EnumWeapon::dichlorvos)));
 
     btns_make_trap.reserve(2);
     btns_make_trap.push_back(Graphic::MakeButton(900, 500, 100, 50, "make trap \n 150 sb"));
-    btns_make_trap[btns_make_trap.size() - 1]->callback(MakeTrap, (void *)(new Point{900 + 50, 500 + 0}));
+    btns_make_trap[btns_make_trap.size() - 1]->callback(MakeWeapon, (void *)(new PackWeapon({900 + 50, 500 + 0}, DOWN, EnumWeapon::trap)));
     btns_make_trap.push_back(Graphic::MakeButton(200, 350, 100, 50, "make trap \n 150 sb"));
-    btns_make_trap[btns_make_trap.size() - 1]->callback(MakeTrap, (void *)(new Point{200 + 50, 350 + 50}));
+    btns_make_trap[btns_make_trap.size() - 1]->callback(MakeWeapon, (void *)(new PackWeapon({200 + 50, 350 + 50}, DOWN, EnumWeapon::trap)));
 
     events = Graphic::MakeText(1000, 720, "output");
     num_wave_text = Graphic::MakeText(100, 720, "wave");

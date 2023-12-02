@@ -5,15 +5,13 @@
 #include <map>
 #include <string>
 
-
-enum Directions{
+enum Direction
+{
     UP,
     RIGHT,
     DOWN,
     LEFT
 };
-
-
 
 class Point
 {
@@ -121,7 +119,7 @@ public:
     bool Move(double time);
     void CheckTrigger();
     static auto GetAll() { return all_cockr; }
-    Directions GetOrientation();
+    Direction GetOrientation();
     Point GetDirection();
 
     ~Cockroach();
@@ -153,4 +151,3 @@ public:
 };
 
 std::string GetPathToImageCockr(Cockroach &);
-
