@@ -86,7 +86,8 @@ void ProgressBar::draw()
 }
 
 ProgressBar::ProgressBar(const Point &pos)
-    : pos{pos}, size{50, 10}, Fl_Box{pos.x, pos.y, size.x, size.y}, progress_box(new Fl_Box(pos.x, pos.y, 0, size.y))
+    : pos{pos}, size{50, 10}, Fl_Box{(int)pos.x, (int)pos.y, (int)size.x, (int)size.y},
+      progress_box(new Fl_Box((int)pos.x, (int)pos.y, 0, (int)size.y))
 {
     box(FL_UP_BOX);
     progress_box->color(FL_GREEN);
