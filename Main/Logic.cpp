@@ -74,7 +74,7 @@ void GameManager::Start()
     btn_start_wave = Graphic::MakeButton(0, 720, 100, 50, "start wave");
     btn_start_wave->callback(StartWave);
     events = Graphic::MakeText(1000, 720, "output");
-    survived = Graphic::MakeText(100, 720, "survived");
+    survived = Graphic::MakeText(100, 720, "SURVIVED");
     stipubles = Graphic::MakeText(200, 720, "stipubles");
     timer_text = Graphic::MakeText(300, 720, "timer");
     fridge_hp = Graphic::MakeText(125, 50);

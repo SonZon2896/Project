@@ -48,6 +48,10 @@ void Text::draw()
 {
     std::string temp = name + '\n' + output;
     label(&temp[0]);
+//Fl_Widget::label_type(FL_ALIGN_BOTTOM);
+    Fl_Box::color(FL_DARK1);
+    Fl_Box::labelfont(FL_BOLD+FL_ITALIC+FL_SHADOW_LABEL);
+    Fl_Box::labelcolor(FL_BLACK);
     Fl_Box::draw();
 }
 
@@ -55,6 +59,7 @@ void Text::draw()
 
 void ProgressBar::draw()
 {
+Fl_Box::draw();
     progress_box->resize(pos.x, pos.y, size.x * progress, size.y);
     Fl_Box::draw();
 }
