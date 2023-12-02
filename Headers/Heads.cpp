@@ -107,8 +107,8 @@ void Trigger::CheckCockroaches()
 bool Trigger::In(Point pos)
 {
     pos -= this->pos;
-    if (pos.x <= this->size.x &&
-        pos.y <= this->size.y)
+    if (0 <= pos.x && pos.x <= this->size.x &&
+        0 <= pos.y && pos.y <= this->size.y)
         return true;
     return false;
 }

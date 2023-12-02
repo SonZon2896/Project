@@ -29,6 +29,9 @@ Text *timer_text;
 Slapper slapper({200, 250});
 GraphicSlapper *gslapper;
 
+Dichlorvos dichlorvos({400, 240});
+GraphicDichlorvos *gdichlorvos;
+
 double timer = 0.;
 double timer_to_start_wave = 10.;
 
@@ -74,6 +77,7 @@ void GameManager::Start()
     fridge_hp = Graphic::MakeText(125, 50);
 
     gslapper = Graphic::MakeSlapper(&slapper);
+    gdichlorvos = Graphic::MakeDichlorvos(&dichlorvos);
 
     MakeWave();
 }
@@ -97,6 +101,7 @@ void GameManager::FixedUpdate()
         EndGame();
     }
     slapper.Action(time::fixed);
+    dichlorvos.Action(time::fixed);
 }
 
 void GameManager::Update()

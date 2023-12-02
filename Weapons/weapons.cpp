@@ -13,7 +13,7 @@ void Weapon::Attack()
     for (auto cockr : trigger->cockroaches)
     {
         cockr->health -= damage;
-        if (cockr->health <= 0);
+        if (cockr->health <= 0)
             for (size_t i = 0; i < trigger->cockroaches.size(); ++i)
                 if (trigger->cockroaches[i] == cockr)
                 {
@@ -36,15 +36,18 @@ Weapon::~Weapon()
 void Weapon::Action(double time)
 {
     time_last += time;
-    if (trigger->cockroaches.size() != 0)
-        for (; time_last >= interval; time_last -= interval)
-            Attack();
+    trigger->CheckCockroaches();
+    if (trigger->cockroaches.size() != 0 && time_last >= interval)
+    {
+        Attack();
+        time_last = 0;
+    }
 }
 
 // Slapper
 
 Slapper::Slapper(const Point &pos)
-    : trig({pos.x - 50, pos.y + 25}, {100, 100}), Weapon(pos, &this->trig, 1, 1000)
+    : trig({pos.x - 50, pos.y + 25}, {100, 100}), Weapon(pos, &this->trig, 0.5, 50)
 {
 }
 
@@ -57,7 +60,7 @@ Dichlorvos::Dichlorvos(const Point &pos)
 
 // Catch
 
-Catch::Catch(const Point &pos)
+Trap::Trap(const Point &pos)
     : trig({pos.x - 50, pos.y + 25}, {100, 100}), Weapon(pos, &this->trig, 1., 50)
 {
 }

@@ -53,14 +53,14 @@ public:
     void Upgrade();
 };
 
-class Catch : public Weapon
+class Trap : public Weapon
 {
 private:
     int level = 1;
     Trigger trig;
 
 public:
-    Catch(const Point &pos);
+    Trap(const Point &pos);
 
     void Upgrade();
 };

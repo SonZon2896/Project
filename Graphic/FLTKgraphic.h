@@ -96,6 +96,30 @@ public:
     GraphicSlapper(const Slapper *slapper);
 };
 
+class GraphicDichlorvos : public Fl_Box
+{
+private:
+    const Dichlorvos *dichlorvos;
+    ProgressBar *pb;
+    GraphicTrigger *gtrig;
+    void draw();
+
+public:
+    GraphicDichlorvos(const Dichlorvos *dichlorvos);
+};
+
+class GraphicTrap : public Fl_Box
+{
+private:
+    const Trap *trap;
+    ProgressBar *pb;
+    GraphicTrigger *gtrig;
+    void draw();
+
+public:
+    GraphicTrap(const Trap *trap);
+};
+
 /// @brief class to draw on FLTK
 class Graphic
 {
@@ -118,6 +142,8 @@ public:
     static ProgressBar *MakeProgressBar(const Point &pos);
     static GraphicTrigger *MakeTrigger(const Trigger *trig);
     static GraphicSlapper *MakeSlapper(const Slapper *slapper);
+    static GraphicDichlorvos *MakeDichlorvos(const Dichlorvos *dichlorvos);
+    static GraphicTrap *MakeTrap(const Trap *trap);
 
     static void ShowRoads(const std::vector<Road> &roads);
     static void ShowCockroaches();
