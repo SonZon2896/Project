@@ -64,7 +64,7 @@ void ProgressBar::draw()
 }
 
 ProgressBar::ProgressBar(const Point &pos)
-    : pos{pos}, size{100, 25}, Fl_Box{pos.x, pos.y, size.x, size.y}, progress_box(new Fl_Box(pos.x, pos.y, 0, size.y))
+    : pos{pos}, size{50, 10}, Fl_Box{pos.x, pos.y, size.x, size.y}, progress_box(new Fl_Box(pos.x, pos.y, 0, size.y))
 {
     box(FL_UP_BOX);
     progress_box->color(FL_GREEN);
@@ -94,64 +94,111 @@ GraphicTrigger::GraphicTrigger(const Trigger *trig)
 
 void GraphicSlapper::draw()
 {
+    label(&name[0]);
     pb->progress = slapper->GetProgress();
-    Fl_Box::draw();
+    Fl_Button::draw();
 }
 
-#define size_x 20
-#define size_y 20
+#define slapper_size_x 20
+#define slapper_size_y 20
 
-GraphicSlapper::GraphicSlapper(const Slapper *slapper)
+GraphicSlapper::GraphicSlapper(Slapper *slapper)
     : slapper{slapper},
-      Fl_Box(slapper->GetPos().x - size_x / 2, slapper->GetPos().y - size_y / 2, size_x, size_y, "Slapper"),
-      pb(Graphic::MakeProgressBar(slapper->GetPos() + Point{-50, -45})),
+      Fl_Button(slapper->GetPos().x - slapper_size_x / 2, slapper->GetPos().y - slapper_size_y / 2, slapper_size_x, slapper_size_y),
+      pb(Graphic::MakeProgressBar(slapper->GetPos() + Point{-25., -25.})),
       gtrig{Graphic::MakeTrigger(slapper->GetTrigger())}
 {
+    name = std::to_string(slapper->GetLvl()) + "lvl\nSlapper\n" + std::to_string((int)slapper->GetCost());
+    label(&name[0]);
     box(FL_UP_BOX);
+}
+
+#undef slapper_size_x
+#undef slapper_size_y
+
+void SlapUpgrade(Fl_Widget* w, void *slapper)
+{
+    auto slap = (Slapper *)slapper;
+    if (Event::money < slap->GetCost())
+        return;
+    Event::money -= slap->GetCost();
+    slap->Upgrade();
+    ((GraphicSlapper *)w)->name = std::to_string(slap->GetLvl()) + "lvl\nSlapper\n" + std::to_string((int)slap->GetCost());
 }
 
 // GraphicDichlorvos
 
 void GraphicDichlorvos::draw()
 {
+    label(&name[0]);
     pb->progress = dichlorvos->GetProgress();
-    Fl_Box::draw();
+    Fl_Button::draw();
 }
 
-#define size_x 20
-#define size_y 20
+#define dich_size_x 20
+#define dich_size_y 20
 
-GraphicDichlorvos::GraphicDichlorvos(const Dichlorvos *dichlorvos)
+GraphicDichlorvos::GraphicDichlorvos(Dichlorvos *dichlorvos)
     : dichlorvos{dichlorvos},
-      Fl_Box(dichlorvos->GetPos().x - size_x / 2, dichlorvos->GetPos().y - size_y / 2, size_x, size_y, "Dichlorvos"),
-      pb(Graphic::MakeProgressBar(dichlorvos->GetPos() + Point{-50, -45})),
+      Fl_Button(dichlorvos->GetPos().x - dich_size_x / 2, dichlorvos->GetPos().y - dich_size_y / 2, dich_size_x, dich_size_y),
+      pb(Graphic::MakeProgressBar(dichlorvos->GetPos() + Point{-25, -25})),
       gtrig{Graphic::MakeTrigger(dichlorvos->GetTrigger())}
 {
+    name = std::to_string(dichlorvos->GetLvl()) + "lvl\nDichlorvos\n" + std::to_string((int)dichlorvos->GetCost());
+    label(&name[0]);
     box(FL_UP_BOX);
+    callback(DichlorvosUpgrade, dichlorvos);
+}
+
+#undef dich_size_x
+#undef dich_size_y
+
+void DichlorvosUpgrade(Fl_Widget* w, void *dichlorvos)
+{
+    auto dichl = (Dichlorvos *)dichlorvos;
+    if (Event::money < dichl->GetCost())
+        return;
+    Event::money -= dichl->GetCost();
+    dichl->Upgrade();
+    ((GraphicDichlorvos *)w)->name = std::to_string(dichl->GetLvl()) + "lvl\nDichlorvos\n" + std::to_string((int)dichl->GetCost());
 }
 
 // GraphicCatch
 
 void GraphicTrap::draw()
 {
+    label(&name[0]);
     pb->progress = trap->GetProgress();
-    Fl_Box::draw();
+    Fl_Button::draw();
 }
 
-#define size_x 20
-#define size_y 20
+#define trap_size_x 20
+#define trap_size_y 20
 
-GraphicTrap::GraphicTrap(const Trap *trap)
+GraphicTrap::GraphicTrap(Trap *trap)
     : trap{trap},
-      Fl_Box(trap->GetPos().x - size_x / 2, trap->GetPos().y - size_y / 2, size_x, size_y, "Trap"),
-      pb(Graphic::MakeProgressBar(trap->GetPos() + Point{-50, -45})),
+      Fl_Button(trap->GetPos().x - trap_size_x / 2, trap->GetPos().y - trap_size_y / 2, trap_size_x, trap_size_y),
+      pb(Graphic::MakeProgressBar(trap->GetPos() + Point{-25, -25})),
       gtrig{Graphic::MakeTrigger(trap->GetTrigger())}
 {
+    name = std::to_string(trap->GetLvl()) + "lvl\nTrap\n" + std::to_string((int)trap->GetCost());
+    label(&name[0]);
     box(FL_UP_BOX);
+    callback(TrapUpgrade, trap);
 }
 
-#undef size_x
-#undef size_y
+#undef trap_size_x
+#undef trap_size_y
+
+void TrapUpgrade(Fl_Widget* w, void *trap)
+{
+    auto tr = (Trap *)trap;
+    if (Event::money < tr->GetCost())
+        return;
+    Event::money -= tr->GetCost();
+    tr->Upgrade();
+    ((GraphicTrap *)w)->name = std::to_string(tr->GetLvl()) + "lvl\nTrap\n" + std::to_string((int)tr->GetCost());
+}
 
 // Graphic
 
@@ -216,21 +263,22 @@ GraphicTrigger *Graphic::MakeTrigger(const Trigger *trig)
     return temp;
 }
 
-GraphicSlapper *Graphic::MakeSlapper(const Slapper *slapper)
+GraphicSlapper *Graphic::MakeSlapper(Slapper *slapper)
 {
     auto temp = new GraphicSlapper(slapper);
+    temp->callback(SlapUpgrade, slapper);
     window->add(temp);
     return temp;
 }
 
-GraphicDichlorvos *Graphic::MakeDichlorvos(const Dichlorvos *dichlorvos)
+GraphicDichlorvos *Graphic::MakeDichlorvos(Dichlorvos *dichlorvos)
 {
     auto temp = new GraphicDichlorvos(dichlorvos);
     window->add(temp);
     return temp;
 }
 
-GraphicTrap *Graphic::MakeTrap(const Trap *trap)
+GraphicTrap *Graphic::MakeTrap(Trap *trap)
 {
     auto temp = new GraphicTrap(trap);
     window->add(temp);

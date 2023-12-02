@@ -54,14 +54,32 @@ Slapper::Slapper(const Point &pos)
 {
 }
 
+void Slapper::Upgrade()
+{
+    upgrade_cost += 100;
+    ++level;
+    damage += 20;
+    interval -= interval / 100.;
+}
+
 // Dichlorvos
 
 #define size_x 40
 #define size_y 200
 
-Dichlorvos::Dichlorvos(const Point &pos)
-    : trig({pos.x - size_x / 2, pos.y + 10}, {size_x, size_y}), Weapon(pos, &this->trig, 0.1, 15)
+Dichlorvos::Dichlorvos(const Point &pos, bool is_right)
+    : trig((is_right ? Point{pos.x + 10, pos.y - size_x / 2} : Point{pos.x - size_x / 2, pos.y + 10}),
+           (is_right ? Point{size_y, size_x} : Point{size_x, size_y})),
+      Weapon(pos, &this->trig, 0.1, 15)
 {
+}
+
+void Dichlorvos::Upgrade()
+{
+    upgrade_cost += 100;
+    ++level;
+    damage += 10;
+    interval -= interval / 50.;
 }
 
 // Catch
@@ -72,6 +90,14 @@ Dichlorvos::Dichlorvos(const Point &pos)
 Trap::Trap(const Point &pos)
     : trig({pos.x - size_x / 2, pos.y + 10}, {size_x, size_y}), Weapon(pos, &this->trig, 3., 200)
 {
+}
+
+void Trap::Upgrade()
+{
+    upgrade_cost += 100;
+    ++level;
+    damage += 100;
+    interval -= interval / 100.;
 }
 
 #undef size_x

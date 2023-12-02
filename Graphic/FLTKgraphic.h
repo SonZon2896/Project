@@ -12,8 +12,8 @@
 #include <filesystem>
 #include <iostream>
 
-
 #include "../Headers/heads.h"
+#include "../events/events.h"
 #include "../Main/Waves.h"
 #include "../Weapons/weapons.h"
 
@@ -86,41 +86,52 @@ public:
     GraphicTrigger(const Trigger *trig);
 };
 
-class GraphicSlapper : public Fl_Box
+class GraphicSlapper : public Fl_Button
 {
 private:
-    const Slapper *slapper;
+    Slapper *slapper;
     ProgressBar *pb;
     GraphicTrigger *gtrig;
     void draw();
 
 public:
-    GraphicSlapper(const Slapper *slapper);
+    std::string name;
+    GraphicSlapper(Slapper *slapper);
 };
 
-class GraphicDichlorvos : public Fl_Box
+void SlapUpgrade(Fl_Widget *w, void *slapper);
+
+class GraphicDichlorvos : public Fl_Button
 {
 private:
-    const Dichlorvos *dichlorvos;
+    Dichlorvos *dichlorvos;
     ProgressBar *pb;
     GraphicTrigger *gtrig;
     void draw();
 
 public:
-    GraphicDichlorvos(const Dichlorvos *dichlorvos);
+    std::string name;
+    GraphicDichlorvos(Dichlorvos *dichlorvos);
 };
 
-class GraphicTrap : public Fl_Box
+void DichlorvosUpgrade(Fl_Widget *w, void *dichlorvos);
+
+class GraphicTrap : public Fl_Button
 {
 private:
-    const Trap *trap;
+    Trap *trap;
     ProgressBar *pb;
     GraphicTrigger *gtrig;
     void draw();
 
+    void Upgrade(Fl_Widget *w);
+
 public:
-    GraphicTrap(const Trap *trap);
+    std::string name;
+    GraphicTrap(Trap *trap);
 };
+
+void TrapUpgrade(Fl_Widget *w, void *trap);
 
 /// @brief class to draw on FLTK
 class Graphic
@@ -143,9 +154,9 @@ public:
     static Text *MakeText(int x, int y, std::string name = "");
     static ProgressBar *MakeProgressBar(const Point &pos);
     static GraphicTrigger *MakeTrigger(const Trigger *trig);
-    static GraphicSlapper *MakeSlapper(const Slapper *slapper);
-    static GraphicDichlorvos *MakeDichlorvos(const Dichlorvos *dichlorvos);
-    static GraphicTrap *MakeTrap(const Trap *trap);
+    static GraphicSlapper *MakeSlapper(Slapper *slapper);
+    static GraphicDichlorvos *MakeDichlorvos(Dichlorvos *dichlorvos);
+    static GraphicTrap *MakeTrap(Trap *trap);
 
     static void ShowRoads(const std::vector<Road> &roads);
     static void ShowCockroaches();
