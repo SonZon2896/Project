@@ -1,6 +1,19 @@
 #pragma once
 #include <vector>
+#include <iostream>
 #include <math.h>
+#include <map>
+#include <string>
+
+
+enum Directions{
+    UP,
+    RIGHT,
+    DOWN,
+    LEFT
+};
+
+
 
 class Point
 {
@@ -108,6 +121,8 @@ public:
     bool Move(double time);
     void CheckTrigger();
     static auto GetAll() { return all_cockr; }
+    Directions GetOrientation();
+    Point GetDirection();
 
     ~Cockroach();
 };
@@ -136,3 +151,6 @@ public:
 
     ~Trigger();
 };
+
+std::string GetPathToImageCockr(Cockroach &);
+

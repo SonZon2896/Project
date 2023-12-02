@@ -1,5 +1,9 @@
 #include "FLTKgraphic.h"
 
+
+
+
+
 // Line
 
 void Line::draw()
@@ -28,6 +32,12 @@ void Background::draw()
 
 void GraphicCockr::draw()
 {
+    Point cur_direction = cockr->GetDirection();
+    if (prev_direction != cur_direction){
+        UpdateImage();
+        prev_direction = cur_direction;
+    }
+
     img->draw(cockr->pos.x - width / 2, cockr->pos.y - height / 2);
 }
 
@@ -35,6 +45,12 @@ GraphicCockr::GraphicCockr(Cockroach *cockr) : Fl_Box(0, 0, 0, 0), cockr{cockr}
 {
     img = new Fl_PNG_Image("./PNG/cockroach_px.png");
     resize(cockr->pos.x - width / 2, cockr->pos.y - height / 2, width, height);
+    prev_direction = Point{0, 0};
+}
+
+void GraphicCockr::UpdateImage(){
+    img = new Fl_PNG_Image(&GetPathToImageCockr(*cockr)[0]);
+    
 }
 
 // Text

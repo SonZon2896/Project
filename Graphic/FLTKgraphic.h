@@ -44,10 +44,12 @@ private:
     Fl_PNG_Image *img;
     int width = 64;
     int height = 64;
+    Point prev_direction;
     void draw();
 
 public:
     GraphicCockr(Cockroach *cockr);
+    void UpdateImage();
 };
 
 class Text : public Fl_Box
