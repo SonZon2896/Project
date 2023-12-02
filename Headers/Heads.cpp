@@ -1,4 +1,21 @@
 #include "../Headers/heads.h"
+#include <cmath>
+
+#define EPS 1e-8
+
+
+std::map<Directions, std::string> cockroach_directions = {
+    {UP, "./PNG/cockroach_px_up.png"},
+    {RIGHT, "./PNG/cockroach_px_right.png"},
+    {DOWN, "./PNG/cockroach_px_down.png"},
+    {LEFT, "./PNG/cockroach_px_left.png"}
+};
+
+bool is_equal(double a, double b){
+    long double eps = EPS;
+    return abs(a - b) <= eps;
+}
+
 
 Point operator+(Point first, const Point &second)
 {
@@ -25,6 +42,10 @@ double Point::Dist()
     return std::sqrt(std::pow(x, 2) + std::pow(y, 2));
 }
 
+std::string GetPathToImageCockr(Cockroach &cockr){
+    return cockroach_directions[cockr.GetOrientation()];
+}
+
 // Cockroaches
 
 Cockroach::Cockroach(const Road &road, double speed, double health, double damage)
@@ -36,10 +57,28 @@ Cockroach::Cockroach(const Road &road, double speed, double health, double damag
     UpdateDir();
 }
 
+Point Cockroach::GetDirection(){
+    return direction;
+}
+
+Directions Cockroach::GetOrientation(){
+    if (is_equal(direction.x, 0) && is_equal(direction.y, 1))
+        return DOWN;
+    if (is_equal(direction.x, 1) && is_equal(direction.y, 0))
+        return RIGHT;
+    if (is_equal(direction.x, 0) && is_equal(direction.y, -1))
+        return UP;
+    if (is_equal(direction.x, -1) && is_equal(direction.y, 0))
+        return LEFT;   
+
+    return UP;
+}   
+
 void Cockroach::UpdateDir()
 {
+
     ++point_on_road;
-    double distance = (road[point_on_road] - road[point_on_road - 1]).Dist();
+    double distance = (road[point_on_road] - road[point_on_road - 1]).Dist() * !is_death;
     direction = {(this->road[point_on_road] - this->road[point_on_road - 1]) / distance};
 }
 
