@@ -94,9 +94,12 @@ void GraphicSlapper::draw()
     Fl_Box::draw();
 }
 
+#define size_x 20
+#define size_y 20
+
 GraphicSlapper::GraphicSlapper(const Slapper *slapper)
-    : slapper{slapper}, 
-      Fl_Box(slapper->GetPos().x, slapper->GetPos().y, 25, 25, "Slapper"),
+    : slapper{slapper},
+      Fl_Box(slapper->GetPos().x - size_x / 2, slapper->GetPos().y - size_y / 2, size_x, size_y, "Slapper"),
       pb(Graphic::MakeProgressBar(slapper->GetPos() + Point{-50, -45})),
       gtrig{Graphic::MakeTrigger(slapper->GetTrigger())}
 {
@@ -111,9 +114,12 @@ void GraphicDichlorvos::draw()
     Fl_Box::draw();
 }
 
+#define size_x 20
+#define size_y 20
+
 GraphicDichlorvos::GraphicDichlorvos(const Dichlorvos *dichlorvos)
-    : dichlorvos{dichlorvos}, 
-      Fl_Box(dichlorvos->GetPos().x, dichlorvos->GetPos().y, 25, 25, "Dichlorvos"),
+    : dichlorvos{dichlorvos},
+      Fl_Box(dichlorvos->GetPos().x - size_x / 2, dichlorvos->GetPos().y - size_y / 2, size_x, size_y, "Dichlorvos"),
       pb(Graphic::MakeProgressBar(dichlorvos->GetPos() + Point{-50, -45})),
       gtrig{Graphic::MakeTrigger(dichlorvos->GetTrigger())}
 {
@@ -128,14 +134,20 @@ void GraphicTrap::draw()
     Fl_Box::draw();
 }
 
+#define size_x 20
+#define size_y 20
+
 GraphicTrap::GraphicTrap(const Trap *trap)
-    : trap{trap}, 
-      Fl_Box(trap->GetPos().x, trap->GetPos().y, 25, 25, "Trap"),
+    : trap{trap},
+      Fl_Box(trap->GetPos().x - size_x / 2, trap->GetPos().y - size_y / 2, size_x, size_y, "Trap"),
       pb(Graphic::MakeProgressBar(trap->GetPos() + Point{-50, -45})),
       gtrig{Graphic::MakeTrigger(trap->GetTrigger())}
 {
     box(FL_UP_BOX);
 }
+
+#undef size_x
+#undef size_y
 
 // Graphic
 

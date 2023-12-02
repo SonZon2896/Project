@@ -34,6 +34,7 @@ class Slapper : public Weapon
 private:
     int level = 1;
     Trigger trig;
+    Point trig_size{100, 100};
 
 public:
     Slapper(const Point &pos);
@@ -46,6 +47,7 @@ class Dichlorvos : public Weapon
 private:
     int level = 1;
     Trigger trig;
+    Point trig_size{30, 200};
 
 public:
     Dichlorvos(const Point &pos);
@@ -58,6 +60,7 @@ class Trap : public Weapon
 private:
     int level = 1;
     Trigger trig;
+    Point trig_size{25, 25};
 
 public:
     Trap(const Point &pos);

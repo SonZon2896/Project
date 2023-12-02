@@ -46,21 +46,33 @@ void Weapon::Action(double time)
 
 // Slapper
 
+#define size_x 100
+#define size_y 100
+
 Slapper::Slapper(const Point &pos)
-    : trig({pos.x - 50, pos.y + 25}, {100, 100}), Weapon(pos, &this->trig, 0.5, 50)
+    : trig({pos.x - size_x / 2, pos.y + 10}, {size_x, size_y}), Weapon(pos, &this->trig, 0.4, 150)
 {
 }
 
 // Dichlorvos
 
+#define size_x 40
+#define size_y 200
+
 Dichlorvos::Dichlorvos(const Point &pos)
-    : trig({pos.x - 50, pos.y + 25}, {100, 100}), Weapon(pos, &this->trig, 1., 50)
+    : trig({pos.x - size_x / 2, pos.y + 10}, {size_x, size_y}), Weapon(pos, &this->trig, 0.1, 15)
 {
 }
 
 // Catch
 
+#define size_x 30
+#define size_y 30
+
 Trap::Trap(const Point &pos)
-    : trig({pos.x - 50, pos.y + 25}, {100, 100}), Weapon(pos, &this->trig, 1., 50)
+    : trig({pos.x - size_x / 2, pos.y + 10}, {size_x, size_y}), Weapon(pos, &this->trig, 3., 200)
 {
 }
+
+#undef size_x
+#undef size_y

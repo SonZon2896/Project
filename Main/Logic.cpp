@@ -26,11 +26,14 @@ Text *fridge_hp;
 Text *stipubles;
 Text *timer_text;
 
-Slapper slapper({200, 250});
+Slapper slapper({230, 250});
 GraphicSlapper *gslapper;
 
-Dichlorvos dichlorvos({400, 240});
+Dichlorvos dichlorvos({260, 350});
 GraphicDichlorvos *gdichlorvos;
+
+Trap trap({400, 320});
+GraphicTrap *gtrap;
 
 double timer = 0.;
 double timer_to_start_wave = 10.;
@@ -44,7 +47,7 @@ void MakeWave()
 
     ++num_of_wave;
 
-    wave.num = 3;
+    wave.num = 300;
     wave.health = 100.;
     wave.speed = 150.;
     wave.interval = 0.1;
@@ -78,6 +81,7 @@ void GameManager::Start()
 
     gslapper = Graphic::MakeSlapper(&slapper);
     gdichlorvos = Graphic::MakeDichlorvos(&dichlorvos);
+    gtrap = Graphic::MakeTrap(&trap);
 
     MakeWave();
 }
@@ -102,6 +106,7 @@ void GameManager::FixedUpdate()
     }
     slapper.Action(time::fixed);
     dichlorvos.Action(time::fixed);
+    trap.Action(time::fixed);
 }
 
 void GameManager::Update()
