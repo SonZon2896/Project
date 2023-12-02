@@ -62,6 +62,7 @@ void StartWave(Fl_Widget *w)
     if (!wave.Is_Started())
     {
         wave.StartWave();
+        Graphic::ClearCockroaches();
         Graphic::ShowCockroaches();
         timer = 0.;
     }
@@ -165,7 +166,7 @@ void GameManager::FixedUpdate()
         if (wave.GetSurvived() <= 0)
         {
             wave.EndWave();
-            Graphic::ClearCockroaches();
+            // Graphic::ClearCockroaches();
             Event::Scholarship();
             MakeWave();
         }
