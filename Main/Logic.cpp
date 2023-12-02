@@ -14,9 +14,12 @@ double Fridge::health{100.};
 double Event::money{100.};
 double Event::money_speed{100.};
 const bool Mark_Lox = true; // 1 december
-std::vector<Road> roads{{{100., 365.}, {250., 350.}, Fridge::pos},
-                        {{100., 630.}, {260., 600.}, {250., 350.}, Fridge::pos},
-                        {{670., 545.}, {550., 525.}, {550., 350.}, {250., 350.}, Fridge::pos}};
+std::vector<Road> roads{
+    {{700., 250.}, {700., 350.}, {250., 350.}, Fridge::pos},
+    {{100., 630.}, {250., 630.}, {250., 350.}, Fridge::pos},
+    {{1050., 525.}, {550., 525.}, {550., 350.}, {250., 350.}, Fridge::pos},
+    {{500., 700.}, {600., 700.}, {600., 600.}, {400., 600.}, {400., 350.}, {250., 350.}, Fridge::pos}
+};
 Wave wave;
 size_t num_of_wave;
 
@@ -103,24 +106,24 @@ void GameManager::Start()
     btn_start_wave->callback(StartWave);
 
     btns_make_slapper.reserve(3);
-    btns_make_slapper.push_back(Graphic::MakeButton(240, 240, 100, 50, "make slapper"));
-    btns_make_slapper[btns_make_slapper.size() - 1]->callback(MakeSlapper, (void *)(new Point{240 + 50, 240 + 50}));
-    btns_make_slapper.push_back(Graphic::MakeButton(240, 240, 100, 50, "make slapper"));
-    btns_make_slapper[btns_make_slapper.size() - 1]->callback(MakeSlapper, (void *)(new Point{240 + 50, 240 + 50}));
-    btns_make_slapper.push_back(Graphic::MakeButton(240, 240, 100, 50, "make slapper"));
-    btns_make_slapper[btns_make_slapper.size() - 1]->callback(MakeSlapper, (void *)(new Point{240 + 50, 240 + 50}));
+    btns_make_slapper.push_back(Graphic::MakeButton(200, 500, 100, 50, "make slapper"));
+    btns_make_slapper[btns_make_slapper.size() - 1]->callback(MakeSlapper, (void *)(new Point{200 + 50, 500 + (-30)}));
+    btns_make_slapper.push_back(Graphic::MakeButton(700, 500, 100, 50, "make slapper"));
+    btns_make_slapper[btns_make_slapper.size() - 1]->callback(MakeSlapper, (void *)(new Point{700 + 50, 500 + (-30)}));
+    btns_make_slapper.push_back(Graphic::MakeButton(500, 400, 100, 50, "make slapper"));
+    btns_make_slapper[btns_make_slapper.size() - 1]->callback(MakeSlapper, (void *)(new Point{500 + 50, 400 + (-30)}));
 
     btns_make_dichlorvos.reserve(2);
-    btns_make_dichlorvos.push_back(Graphic::MakeButton(240, 240, 100, 50, "make dichlorvos"));
-    btns_make_dichlorvos[btns_make_dichlorvos.size() - 1]->callback(MakeDichlorvos, (void *)(new Point{240 + 50, 240 + 50}));
-    btns_make_dichlorvos.push_back(Graphic::MakeButton(240, 240, 100, 50, "make dichlorvos"));
-    btns_make_dichlorvos[btns_make_dichlorvos.size() - 1]->callback(MakeDichlorvos, (void *)(new Point{240 + 50, 240 + 50}));
+    btns_make_dichlorvos.push_back(Graphic::MakeButton(580, 280, 100, 50, "make dichlorvos"));
+    btns_make_dichlorvos[btns_make_dichlorvos.size() - 1]->callback(MakeDichlorvos, (void *)(new Point{580 + 50, 280 + 50}));
+    btns_make_dichlorvos.push_back(Graphic::MakeButton(350, 300, 100, 50, "make dichlorvos"));
+    btns_make_dichlorvos[btns_make_dichlorvos.size() - 1]->callback(MakeDichlorvos, (void *)(new Point{350 + 50, 300 + 20}));
 
     btns_make_trap.reserve(2);
-    btns_make_trap.push_back(Graphic::MakeButton(240, 240, 100, 50, "make trap"));
-    btns_make_trap[btns_make_trap.size() - 1]->callback(MakeTrap, (void *)(new Point{240 + 50, 240 + 50}));
-    btns_make_trap.push_back(Graphic::MakeButton(240, 240, 100, 50, "make trap"));
-    btns_make_trap[btns_make_trap.size() - 1]->callback(MakeTrap, (void *)(new Point{240 + 50, 240 + 50}));
+    btns_make_trap.push_back(Graphic::MakeButton(900, 500, 100, 50, "make trap"));
+    btns_make_trap[btns_make_trap.size() - 1]->callback(MakeTrap, (void *)(new Point{900 + 50, 500 + 0}));
+    btns_make_trap.push_back(Graphic::MakeButton(200, 350, 100, 50, "make trap"));
+    btns_make_trap[btns_make_trap.size() - 1]->callback(MakeTrap, (void *)(new Point{200 + 50, 350 + 50}));
 
     events = Graphic::MakeText(1000, 720, "output");
     survived = Graphic::MakeText(100, 720, "survived");
