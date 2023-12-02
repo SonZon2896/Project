@@ -15,7 +15,7 @@ double Event::money{100.};
 double Event::money_speed{100.};
 const bool Mark_Lox = true; // 1 december
 const bool Artem_Lox = true; // 2 december
-std::vector<Road> roads {
+std::vector<Road> roads{
     {{700., 250.}, {700., 350.}, {250., 350.}, Fridge::pos},
     {{100., 630.}, {250., 630.}, {250., 350.}, Fridge::pos},
     {{1050., 525.}, {550., 525.}, {550., 350.}, {250., 350.}, Fridge::pos},
@@ -50,7 +50,6 @@ void MakeWave()
         throw std::runtime_error("Making wave, when it started");
 
     ++num_of_wave;
-
 
     wave.num = 3 + 2 * (num_of_wave / 2);
     wave.health = 100. + num_of_wave * 20;
