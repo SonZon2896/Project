@@ -5,15 +5,19 @@
 #define weapon_size_x 64
 #define weapon_size_y 64
 
+/// @brief Absolute class to make weapons
 class Weapon
 {
 protected:
     Weapon(const Point &pos, Trigger *trigger, double interval, double damage);
 
 private:
+    /// @brief time from last attack
     double time_last;
+    /// @brief pointers to all weapons
     static inline std::vector<Weapon *> all_weapons;
 
+    /// @brief kick cockroaches in trigger
     void Attack();
 
 public:
@@ -25,6 +29,8 @@ public:
     Weapon() = delete;
     ~Weapon();
 
+    /// @brief check what weapon need to do
+    /// @param time 
     void Action(double time);
 
     static auto GetAll() { return all_weapons; }
@@ -32,9 +38,6 @@ public:
     auto GetProgress() const { return time_last > interval ? 1 : time_last / interval; }
     auto GetPos() const { return pos; }
 };
-
-#define slapper_trig_size_x 100
-#define slapper_trig_size_y 100
 
 class Slapper : public Weapon
 {
@@ -47,14 +50,12 @@ private:
 public:
     Slapper(const Point &pos, Direction direction);
 
+    /// @brief go to next level, this function don't check is it possible
     void Upgrade();
     auto GetCost() const { return upgrade_cost; }
     auto GetLvl() const { return level; }
     auto GetDir() const { return direction; }
 };
-
-#define dichlorvos_trig_size_x 40
-#define dichlorvos_trig_size_y 200
 
 class Dichlorvos : public Weapon
 {
@@ -67,14 +68,12 @@ private:
 public:
     Dichlorvos(const Point &pos, Direction direction);
 
+    /// @brief go to next level, this function don't check is it possible
     void Upgrade();
     auto GetCost() const { return upgrade_cost; }
     auto GetLvl() const { return level; }
     auto GetDir() const { return direction; }
 };
-
-#define trap_trig_size_x 30
-#define trap_trig_size_y 30
 
 class Trap : public Weapon
 {
@@ -87,6 +86,7 @@ private:
 public:
     Trap(const Point &pos, Direction direction);
 
+    /// @brief go to next level, this function don't check is it possible
     void Upgrade();
     auto GetCost() const { return upgrade_cost; }
     auto GetLvl() const { return level; }

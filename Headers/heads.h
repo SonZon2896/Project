@@ -13,6 +13,7 @@ enum Direction
     LEFT
 };
 
+/// @brief enum for Pack Structures
 enum EnumWeapon
 {
     slapper = 0,
@@ -97,6 +98,7 @@ public:
 
 class Trigger;
 
+/// @brief Main enemy class
 class Cockroach
 {
 protected:

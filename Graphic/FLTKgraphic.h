@@ -17,6 +17,7 @@
 #include "../Main/Waves.h"
 #include "../Weapons/weapons.h"
 
+/// @brief class to draw a road
 class Line : public Fl_Box
 {
 private:
@@ -27,6 +28,7 @@ public:
     Line(int x, int y, int x1, int y1);
 };
 
+/// @brief class to draw a background
 class Background : public Fl_Box
 {
 private:
@@ -37,6 +39,7 @@ public:
     Background();
 };
 
+/// @brief class to draw a cockroach
 class GraphicCockr : public Fl_Box
 {
 private:
@@ -53,6 +56,7 @@ public:
     void UpdateImage();
 };
 
+/// @brief class to output anyone text
 class Text : public Fl_Box
 {
 private:
@@ -65,6 +69,7 @@ public:
     Text(int x, int y, std::string name = "");
 };
 
+/// @brief class to draw readiness of weapon
 class ProgressBar : public Fl_Box
 {
 private:
@@ -79,6 +84,7 @@ public:
     ProgressBar(const Point &pos);
 };
 
+/// @brief class to draw triggers
 class GraphicTrigger : public Fl_Box
 {
 private:
@@ -89,6 +95,7 @@ public:
     GraphicTrigger(const Trigger *trig);
 };
 
+/// @brief absolute class for drawing weapons
 class GraphicWeapon : public Fl_Button
 {
 protected:
@@ -104,6 +111,7 @@ public:
     GraphicWeapon() = delete;
 };
 
+/// @brief struct to UpgradeWeapon()
 struct PackUpgrade
 {
     Weapon *weapon;
@@ -111,8 +119,10 @@ struct PackUpgrade
     PackUpgrade(Weapon *weapon, EnumWeapon type) : weapon{weapon}, type{type} {}
 };
 
+/// @brief callback func for weapons
 void UpgradeWeapon(Fl_Widget *w, void *data);
 
+/// @brief class to draw Slapper
 class GraphicSlapper : public GraphicWeapon
 {
 private:
@@ -124,6 +134,7 @@ public:
     GraphicSlapper(Slapper *slapper);
 };
 
+/// @brief class to draw Dichlorvos
 class GraphicDichlorvos : public GraphicWeapon
 {
 private:
@@ -135,6 +146,7 @@ public:
     GraphicDichlorvos(Dichlorvos *dichlorvos);
 };
 
+/// @brief class to draw Trap
 class GraphicTrap : public GraphicWeapon
 {
 private:
