@@ -89,55 +89,63 @@ public:
     GraphicTrigger(const Trigger *trig);
 };
 
-class GraphicSlapper : public Fl_Button
+#define weapon_size_x 64
+#define weapon_size_y 64
+
+class GraphicWeapon : public Fl_Button
 {
-private:
-    Fl_PNG_Image *img;
-    Slapper *slapper;
+protected:
+    GraphicWeapon(Point pos, const Trigger *trigger);
     ProgressBar *pb;
-    GraphicTrigger *gtrig;
     void draw();
+
+private:
+    GraphicTrigger *gtrig;
 
 public:
     std::string name;
+    GraphicWeapon() = delete;
+};
+
+struct PackUpgrade
+{
+    Weapon *weapon;
+    EnumWeapon type;
+    PackUpgrade(Weapon *weapon, EnumWeapon type) : weapon{weapon}, type{type} {}
+};
+
+void UpgradeWeapon(Fl_Widget *w, void *data);
+
+class GraphicSlapper : public GraphicWeapon
+{
+private:
+    Slapper *slapper;
+    void draw();
+
+public:
     GraphicSlapper(Slapper *slapper);
 };
 
-void SlapUpgrade(Fl_Widget *w, void *slapper);
-
-class GraphicDichlorvos : public Fl_Button
+class GraphicDichlorvos : public GraphicWeapon
 {
 private:
     Fl_PNG_Image *img;
     Dichlorvos *dichlorvos;
-    ProgressBar *pb;
-    GraphicTrigger *gtrig;
     void draw();
 
 public:
-    std::string name;
     GraphicDichlorvos(Dichlorvos *dichlorvos);
 };
 
-void DichlorvosUpgrade(Fl_Widget *w, void *dichlorvos);
-
-class GraphicTrap : public Fl_Button
+class GraphicTrap : public GraphicWeapon
 {
 private:
-    Fl_PNG_Image *img;
     Trap *trap;
-    ProgressBar *pb;
-    GraphicTrigger *gtrig;
     void draw();
 
-    void Upgrade(Fl_Widget *w);
-
 public:
-    std::string name;
     GraphicTrap(Trap *trap);
 };
-
-void TrapUpgrade(Fl_Widget *w, void *trap);
 
 /// @brief class to draw on FLTK
 class Graphic

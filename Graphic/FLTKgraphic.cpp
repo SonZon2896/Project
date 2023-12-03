@@ -1,9 +1,5 @@
 #include "FLTKgraphic.h"
 
-
-
-
-
 // Line
 
 void Line::draw()
@@ -33,7 +29,8 @@ void Background::draw()
 void GraphicCockr::draw()
 {
     Point cur_direction = cockr->GetDirection();
-    if (prev_direction != cur_direction || (cockr->is_death && !is_death_img)){
+    if (prev_direction != cur_direction || (cockr->is_death && !is_death_img))
+    {
         UpdateImage();
         prev_direction = cur_direction;
     }
@@ -48,7 +45,8 @@ GraphicCockr::GraphicCockr(Cockroach *cockr) : Fl_Box(0, 0, 0, 0), cockr{cockr}
     prev_direction = Point{0, 0};
 }
 
-void GraphicCockr::UpdateImage(){
+void GraphicCockr::UpdateImage()
+{
     delete img;
     if (cockr->is_death)
     {
@@ -70,9 +68,9 @@ void Text::draw()
 {
     std::string temp = name + '\n' + output;
     label(&temp[0]);
-//Fl_Widget::label_type(FL_ALIGN_BOTTOM);
+    // Fl_Widget::label_type(FL_ALIGN_BOTTOM);
     Fl_Box::color(FL_DARK1);
-    Fl_Box::labelfont(FL_BOLD+FL_ITALIC+FL_SHADOW_LABEL);
+    Fl_Box::labelfont(FL_BOLD + FL_ITALIC + FL_SHADOW_LABEL);
     Fl_Box::labelcolor(FL_BLACK);
     Fl_Box::draw();
 }
@@ -113,57 +111,85 @@ GraphicTrigger::GraphicTrigger(const Trigger *trig)
     // box(FL_UP_BOX);
 }
 
+// GraphicWeapon
+
+void GraphicWeapon::draw()
+{
+    label(&name[0]);
+    Fl_Button::draw();
+}
+
+GraphicWeapon::GraphicWeapon(Point pos, const Trigger *trigger)
+    : gtrig{Graphic::MakeTrigger(trigger)},
+      pb(Graphic::MakeProgressBar(pos + Point{-25., -weapon_size_y / 2 - 10})),
+      Fl_Button(pos.x - weapon_size_x / 2, pos.y - weapon_size_y / 2, weapon_size_x, weapon_size_y)
+{
+    box(FL_NO_BOX);
+}
+
+void UpgradeWeapon(Fl_Widget *w, void *data)
+{
+    auto unpack = (PackUpgrade *)data;
+    if (unpack->type == EnumWeapon::slapper)
+    {
+        auto slapper = (Slapper *)unpack->weapon;
+        if (Event::money < slapper->GetCost())
+            return;
+        Event::money -= slapper->GetCost();
+        slapper->Upgrade();
+        ((GraphicSlapper *)w)->name = std::to_string(slapper->GetLvl()) + "lvl\nSlapper\n" + std::to_string((int)slapper->GetCost());
+    }
+    else if (unpack->type == EnumWeapon::dichlorvos)
+    {
+        auto dichlorvos = (Dichlorvos *)unpack->weapon;
+        if (Event::money < dichlorvos->GetCost())
+            return;
+        Event::money -= dichlorvos->GetCost();
+        dichlorvos->Upgrade();
+        ((GraphicDichlorvos *)w)->name = std::to_string(dichlorvos->GetLvl()) + "lvl\n" + std::to_string((int)dichlorvos->GetCost());
+    }
+    else if (unpack->type == EnumWeapon::trap)
+    {
+        auto trap = (Trap *)unpack->weapon;
+        if (Event::money < trap->GetCost())
+            return;
+        Event::money -= trap->GetCost();
+        trap->Upgrade();
+        ((GraphicTrap *)w)->name = std::to_string(trap->GetLvl()) + "lvl\nTrap\n" + std::to_string((int)trap->GetCost());
+    }
+}
+
 // GraphicSlapper
 
 void GraphicSlapper::draw()
 {
-    label(&name[0]);
     pb->progress = slapper->GetProgress();
-    Fl_Button::draw();
+    GraphicWeapon::draw();
 }
 
 GraphicSlapper::GraphicSlapper(Slapper *slapper)
     : slapper{slapper},
-      Fl_Button(slapper->GetPos().x - slapper_size_x / 2, slapper->GetPos().y - slapper_size_y / 2, slapper_size_x, slapper_size_y),
-      pb(Graphic::MakeProgressBar(slapper->GetPos() + Point{-25., -slapper_size_y / 2 - 10})),
-      gtrig{Graphic::MakeTrigger(slapper->GetTrigger())}
+      GraphicWeapon(slapper->GetPos(), slapper->trigger)
 {
     name = std::to_string(slapper->GetLvl()) + "lvl\nSlapper\n" + std::to_string((int)slapper->GetCost());
-    label(&name[0]);
     box(FL_UP_BOX);
-}
-
-#undef slapper_size_x
-#undef slapper_size_y
-
-void SlapUpgrade(Fl_Widget* w, void *slapper)
-{
-    auto slap = (Slapper *)slapper;
-    if (Event::money < slap->GetCost())
-        return;
-    Event::money -= slap->GetCost();
-    slap->Upgrade();
-    ((GraphicSlapper *)w)->name = std::to_string(slap->GetLvl()) + "lvl\nSlapper\n" + std::to_string((int)slap->GetCost());
+    callback(UpgradeWeapon, (void *)(new PackUpgrade(slapper, EnumWeapon::slapper)));
 }
 
 // GraphicDichlorvos
 
 void GraphicDichlorvos::draw()
 {
-    label(&name[0]);
     pb->progress = dichlorvos->GetProgress();
     img->draw(dichlorvos->GetPos().x - dichlorvos_size_x / 2, dichlorvos->GetPos().y - dichlorvos_size_y / 2);
-    Fl_Button::draw();
+    GraphicWeapon::draw();
 }
 
 GraphicDichlorvos::GraphicDichlorvos(Dichlorvos *dichlorvos)
     : dichlorvos{dichlorvos},
-      Fl_Button(dichlorvos->GetPos().x - dichlorvos_size_x / 2, dichlorvos->GetPos().y - dichlorvos_size_y / 2, dichlorvos_size_x, dichlorvos_size_y),
-      pb(Graphic::MakeProgressBar(dichlorvos->GetPos() + Point{-25, -dichlorvos_size_y / 2})),
-      gtrig{Graphic::MakeTrigger(dichlorvos->GetTrigger())}
+      GraphicWeapon(dichlorvos->GetPos(), dichlorvos->trigger)
 {
     name = std::to_string(dichlorvos->GetLvl()) + "lvl\n" + std::to_string((int)dichlorvos->GetCost());
-    label(&name[0]);
     switch (dichlorvos->GetDir())
     {
     case UP:
@@ -181,55 +207,24 @@ GraphicDichlorvos::GraphicDichlorvos(Dichlorvos *dichlorvos)
     default:
         img = new Fl_PNG_Image("./PNG/dichlorvos_up.png");
     }
-    box(FL_NO_BOX);
-    callback(DichlorvosUpgrade, dichlorvos);
-}
-
-#undef dichlorvos_size_x
-#undef dichlorvos_size_y
-
-void DichlorvosUpgrade(Fl_Widget* w, void *dichlorvos)
-{
-    auto dichl = (Dichlorvos *)dichlorvos;
-    if (Event::money < dichl->GetCost())
-        return;
-    Event::money -= dichl->GetCost();
-    dichl->Upgrade();
-    ((GraphicDichlorvos *)w)->name = std::to_string(dichl->GetLvl()) + "lvl\n" + std::to_string((int)dichl->GetCost());
+    callback(UpgradeWeapon, (void *)(new PackUpgrade(dichlorvos, EnumWeapon::dichlorvos)));
 }
 
 // GraphicTrap
 
 void GraphicTrap::draw()
 {
-    label(&name[0]);
     pb->progress = trap->GetProgress();
-    Fl_Button::draw();
+    GraphicWeapon::draw();
 }
 
 GraphicTrap::GraphicTrap(Trap *trap)
     : trap{trap},
-      Fl_Button(trap->GetPos().x - trap_size_x / 2, trap->GetPos().y - trap_size_y / 2, trap_size_x, trap_size_y),
-      pb(Graphic::MakeProgressBar(trap->GetPos() + Point{-25, -trap_size_y / 2 - 10})),
-      gtrig{Graphic::MakeTrigger(trap->GetTrigger())}
+      GraphicWeapon(trap->GetPos(), trap->trigger)
 {
     name = std::to_string(trap->GetLvl()) + "lvl\nTrap\n" + std::to_string((int)trap->GetCost());
-    label(&name[0]);
     box(FL_UP_BOX);
-    callback(TrapUpgrade, trap);
-}
-
-#undef trap_size_x
-#undef trap_size_y
-
-void TrapUpgrade(Fl_Widget* w, void *trap)
-{
-    auto tr = (Trap *)trap;
-    if (Event::money < tr->GetCost())
-        return;
-    Event::money -= tr->GetCost();
-    tr->Upgrade();
-    ((GraphicTrap *)w)->name = std::to_string(tr->GetLvl()) + "lvl\nTrap\n" + std::to_string((int)tr->GetCost());
+    callback(UpgradeWeapon, (void *)(new PackUpgrade(trap, EnumWeapon::trap)));
 }
 
 // Graphic
@@ -298,7 +293,6 @@ GraphicTrigger *Graphic::MakeTrigger(const Trigger *trig)
 GraphicSlapper *Graphic::MakeSlapper(Slapper *slapper)
 {
     auto temp = new GraphicSlapper(slapper);
-    temp->callback(SlapUpgrade, slapper);
     window->add(temp);
     return temp;
 }

@@ -13,6 +13,13 @@ enum Direction
     LEFT
 };
 
+enum EnumWeapon
+{
+    slapper = 0,
+    dichlorvos,
+    trap
+};
+
 class Point
 {
 public:

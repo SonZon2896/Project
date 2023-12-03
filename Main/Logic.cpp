@@ -68,13 +68,6 @@ void StartWave(Fl_Widget *w)
     }
 }
 
-enum EnumWeapon
-{
-    slapper = 0,
-    dichlorvos,
-    trap
-};
-
 struct PackWeapon
 {
     Point pos;
