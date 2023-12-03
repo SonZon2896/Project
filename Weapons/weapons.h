@@ -2,6 +2,9 @@
 #include "../Headers/heads.h"
 #include "../events/events.h"
 
+#define weapon_size_x 64
+#define weapon_size_y 64
+
 class Weapon
 {
 protected:
@@ -30,8 +33,6 @@ public:
     auto GetPos() const { return pos; }
 };
 
-#define slapper_size_x 64
-#define slapper_size_y 64
 #define slapper_trig_size_x 100
 #define slapper_trig_size_y 100
 
@@ -52,8 +53,6 @@ public:
     auto GetDir() const { return direction; }
 };
 
-#define dichlorvos_size_x 64
-#define dichlorvos_size_y 64
 #define dichlorvos_trig_size_x 40
 #define dichlorvos_trig_size_y 200
 
@@ -74,8 +73,6 @@ public:
     auto GetDir() const { return direction; }
 };
 
-#define trap_size_x 64
-#define trap_size_y 64
 #define trap_trig_size_x 30
 #define trap_trig_size_y 30
 

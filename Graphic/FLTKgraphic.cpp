@@ -137,7 +137,7 @@ void UpgradeWeapon(Fl_Widget *w, void *data)
             return;
         Event::money -= slapper->GetCost();
         slapper->Upgrade();
-        ((GraphicSlapper *)w)->name = std::to_string(slapper->GetLvl()) + "lvl\nSlapper\n" + std::to_string((int)slapper->GetCost());
+        ((GraphicSlapper *)w)->name = std::to_string(slapper->GetLvl()) + "lvl\n" + std::to_string((int)slapper->GetCost());
     }
     else if (unpack->type == EnumWeapon::dichlorvos)
     {
@@ -155,7 +155,7 @@ void UpgradeWeapon(Fl_Widget *w, void *data)
             return;
         Event::money -= trap->GetCost();
         trap->Upgrade();
-        ((GraphicTrap *)w)->name = std::to_string(trap->GetLvl()) + "lvl\nTrap\n" + std::to_string((int)trap->GetCost());
+        ((GraphicTrap *)w)->name = std::to_string(trap->GetLvl()) + "lvl\n" + std::to_string((int)trap->GetCost());
     }
 }
 
@@ -164,6 +164,7 @@ void UpgradeWeapon(Fl_Widget *w, void *data)
 void GraphicSlapper::draw()
 {
     pb->progress = slapper->GetProgress();
+    img->draw(slapper->GetPos().x - weapon_size_x / 2, slapper->GetPos().y - weapon_size_y / 2);
     GraphicWeapon::draw();
 }
 
@@ -171,8 +172,8 @@ GraphicSlapper::GraphicSlapper(Slapper *slapper)
     : slapper{slapper},
       GraphicWeapon(slapper->GetPos(), slapper->trigger)
 {
-    name = std::to_string(slapper->GetLvl()) + "lvl\nSlapper\n" + std::to_string((int)slapper->GetCost());
-    box(FL_UP_BOX);
+    name = std::to_string(slapper->GetLvl()) + "lvl\n" + std::to_string((int)slapper->GetCost());
+    img = new Fl_PNG_Image("./PNG/slapper_px.png");
     callback(UpgradeWeapon, (void *)(new PackUpgrade(slapper, EnumWeapon::slapper)));
 }
 
@@ -181,7 +182,7 @@ GraphicSlapper::GraphicSlapper(Slapper *slapper)
 void GraphicDichlorvos::draw()
 {
     pb->progress = dichlorvos->GetProgress();
-    img->draw(dichlorvos->GetPos().x - dichlorvos_size_x / 2, dichlorvos->GetPos().y - dichlorvos_size_y / 2);
+    img->draw(dichlorvos->GetPos().x - weapon_size_x / 2, dichlorvos->GetPos().y - weapon_size_y / 2);
     GraphicWeapon::draw();
 }
 
@@ -214,6 +215,7 @@ GraphicDichlorvos::GraphicDichlorvos(Dichlorvos *dichlorvos)
 
 void GraphicTrap::draw()
 {
+    img->draw(trap->GetPos().x - weapon_size_x / 2, trap->GetPos().y - weapon_size_y / 2);
     pb->progress = trap->GetProgress();
     GraphicWeapon::draw();
 }
@@ -222,8 +224,8 @@ GraphicTrap::GraphicTrap(Trap *trap)
     : trap{trap},
       GraphicWeapon(trap->GetPos(), trap->trigger)
 {
-    name = std::to_string(trap->GetLvl()) + "lvl\nTrap\n" + std::to_string((int)trap->GetCost());
-    box(FL_UP_BOX);
+    name = std::to_string(trap->GetLvl()) + "lvl\n" + std::to_string((int)trap->GetCost());
+    img = new Fl_PNG_Image("./PNG/trap_px.png");
     callback(UpgradeWeapon, (void *)(new PackUpgrade(trap, EnumWeapon::trap)));
 }
 

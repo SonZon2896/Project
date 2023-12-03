@@ -89,9 +89,6 @@ public:
     GraphicTrigger(const Trigger *trig);
 };
 
-#define weapon_size_x 64
-#define weapon_size_y 64
-
 class GraphicWeapon : public Fl_Button
 {
 protected:
@@ -119,6 +116,7 @@ void UpgradeWeapon(Fl_Widget *w, void *data);
 class GraphicSlapper : public GraphicWeapon
 {
 private:
+    Fl_PNG_Image *img;
     Slapper *slapper;
     void draw();
 
@@ -140,6 +138,7 @@ public:
 class GraphicTrap : public GraphicWeapon
 {
 private:
+    Fl_PNG_Image *img;
     Trap *trap;
     void draw();
 

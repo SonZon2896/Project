@@ -52,19 +52,19 @@ Slapper::Slapper(const Point &pos, Direction direction)
     switch (direction)
     {
     case UP:
-        trig.pos = {pos.x - slapper_trig_size_x / 2, pos.y - slapper_size_y / 2 - slapper_trig_size_y};
+        trig.pos = {pos.x - slapper_trig_size_x / 2, pos.y - weapon_size_y / 2 - slapper_trig_size_y};
         trig.size = {slapper_trig_size_x, slapper_trig_size_y};
         break;
     case DOWN:
-        trig.pos = {pos.x - slapper_trig_size_x / 2, pos.y + slapper_size_y / 2};
+        trig.pos = {pos.x - slapper_trig_size_x / 2, pos.y + weapon_size_y / 2};
         trig.size = {slapper_trig_size_x, slapper_trig_size_y};
         break;
     case LEFT:
-        trig.pos = {pos.x - slapper_size_x / 2 - slapper_trig_size_y, pos.y - slapper_trig_size_x / 2};
+        trig.pos = {pos.x - weapon_size_x / 2 - slapper_trig_size_y, pos.y - slapper_trig_size_x / 2};
         trig.size = {slapper_trig_size_y, slapper_trig_size_x};
         break;
     case RIGHT:
-        trig.pos = {pos.x + slapper_size_x / 2, pos.y - slapper_trig_size_x / 2};
+        trig.pos = {pos.x + weapon_size_x / 2, pos.y - slapper_trig_size_x / 2};
         trig.size = {slapper_trig_size_y, slapper_trig_size_x};
         break;
     }
@@ -89,19 +89,19 @@ Dichlorvos::Dichlorvos(const Point &pos, Direction direction)
     switch (direction)
     {
     case UP:
-        trig.pos = {pos.x - dichlorvos_trig_size_x / 2, pos.y - dichlorvos_size_y / 2 - dichlorvos_trig_size_y};
+        trig.pos = {pos.x - dichlorvos_trig_size_x / 2, pos.y - weapon_size_y / 2 - dichlorvos_trig_size_y};
         trig.size = {dichlorvos_trig_size_x, dichlorvos_trig_size_y};
         break;
     case DOWN:
-        trig.pos = {pos.x - dichlorvos_trig_size_x / 2, pos.y + dichlorvos_size_y / 2};
+        trig.pos = {pos.x - dichlorvos_trig_size_x / 2, pos.y + weapon_size_y / 2};
         trig.size = {dichlorvos_trig_size_x, dichlorvos_trig_size_y};
         break;
     case LEFT:
-        trig.pos = {pos.x - dichlorvos_size_x / 2 - dichlorvos_trig_size_y, pos.y - dichlorvos_trig_size_x / 2};
+        trig.pos = {pos.x - weapon_size_x / 2 - dichlorvos_trig_size_y, pos.y - dichlorvos_trig_size_x / 2};
         trig.size = {dichlorvos_trig_size_y, dichlorvos_trig_size_x};
         break;
     case RIGHT:
-        trig.pos = {pos.x + dichlorvos_size_x / 2, pos.y - dichlorvos_trig_size_x / 2};
+        trig.pos = {pos.x + weapon_size_x / 2, pos.y - dichlorvos_trig_size_x / 2};
         trig.size = {dichlorvos_trig_size_y, dichlorvos_trig_size_x};
         break;
     }
@@ -126,19 +126,19 @@ Trap::Trap(const Point &pos, Direction direction)
     switch (direction)
     {
     case UP:
-        trig.pos = {pos.x - trap_trig_size_x / 2, pos.y - trap_size_y / 2 - trap_trig_size_y};
+        trig.pos = {pos.x - trap_trig_size_x / 2, pos.y - weapon_size_y / 2 - trap_trig_size_y};
         trig.size = {trap_trig_size_x, trap_trig_size_y};
         break;
     case DOWN:
-        trig.pos = {pos.x - trap_trig_size_x / 2, pos.y + trap_size_y / 2};
+        trig.pos = {pos.x - trap_trig_size_x / 2, pos.y + weapon_size_y / 2};
         trig.size = {trap_trig_size_x, trap_trig_size_y};
         break;
     case LEFT:
-        trig.pos = {pos.x - trap_size_x / 2 - trap_trig_size_y, pos.y - trap_trig_size_x / 2};
+        trig.pos = {pos.x - weapon_size_x / 2 - trap_trig_size_y, pos.y - trap_trig_size_x / 2};
         trig.size = {trap_trig_size_y, trap_trig_size_x};
         break;
     case RIGHT:
-        trig.pos = {pos.x + trap_size_x / 2, pos.y - trap_trig_size_x / 2};
+        trig.pos = {pos.x + weapon_size_x / 2, pos.y - trap_trig_size_x / 2};
         trig.size = {trap_trig_size_y, trap_trig_size_x};
         break;
     }
