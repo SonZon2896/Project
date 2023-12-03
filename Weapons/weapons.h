@@ -39,6 +39,9 @@ public:
     auto GetPos() const { return pos; }
 };
 
+#define slapper_trig_size_x 100
+#define slapper_trig_size_y 100
+
 class Slapper : public Weapon
 {
 private:
@@ -56,6 +59,9 @@ public:
     auto GetLvl() const { return level; }
     auto GetDir() const { return direction; }
 };
+
+#define dichlorvos_trig_size_x 30
+#define dichlorvos_trig_size_y 200
 
 class Dichlorvos : public Weapon
 {
@@ -75,6 +81,8 @@ public:
     auto GetDir() const { return direction; }
 };
 
+#define trap_trig_size_x 30
+#define trap_trig_size_y 30
 class Trap : public Weapon
 {
 private:
