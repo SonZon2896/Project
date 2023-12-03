@@ -20,7 +20,7 @@ Line::Line(int x, int y, int x1, int y1)
 
 Background::Background() : Fl_Box(0, 0, 1280, 720)
 {
-    img = new Fl_PNG_Image("./PNG/game_field.png");
+    img = new Fl_PNG_Image("./PNG/main_field_px.png");
 }
 
 void Background::draw()
