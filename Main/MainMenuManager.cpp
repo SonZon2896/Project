@@ -20,6 +20,6 @@ bool MainMenuManager::GameStarted()
 
 void MainMenuManager::SetWidgets()
 {
-    Fl_Button* t = MainMenu::MakeButton(200, 200, 100, 100, "Start Game");
+    Fl_Button* t = MainMenu::MakeButton(150, 150, 200, 200, "Start Game");
     t->callback(MainMenu::Hide, (void*)nullptr);
 }
