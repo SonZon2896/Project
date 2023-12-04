@@ -5,11 +5,13 @@ install()
 
 set(SOURCES main.cpp
             Headers/Heads.cpp
+            Headers/MainMenu.cpp
             Graphic/FLTKgraphic.cpp
             events/events.cpp
             Weapons/weapons.cpp
             Main/Waves.cpp
             Main/GameManager.cpp
+            Main/MainMenuManager.cpp
             Main/Logic.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCES})

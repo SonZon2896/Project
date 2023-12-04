@@ -36,7 +36,7 @@ private:
     void draw();
 
 public:
-    Background();
+    Background(std::string);
     ~Background();
 };
 
@@ -195,5 +195,6 @@ public:
 
     static void ShowRoads(const std::vector<Road> &roads);
     static void ShowCockroaches();
+    static void Show();
     static void ClearCockroaches();
 };

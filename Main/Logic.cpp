@@ -125,6 +125,7 @@ void GameManager::Start()
 
     num_of_wave = 0;
     Graphic::MakeWindow(1280, 770);
+    Graphic::Show();
     Graphic::ShowRoads(roads);
 
     btn_start_wave = Graphic::MakeButton(0, 720, 100, 50, "start wave");
