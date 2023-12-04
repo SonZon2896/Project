@@ -37,6 +37,7 @@ private:
 
 public:
     Background();
+    ~Background();
 };
 
 /// @brief class to draw a cockroach
@@ -54,6 +55,7 @@ private:
 public:
     GraphicCockr(Cockroach *cockr);
     void UpdateImage();
+    ~GraphicCockr();
 };
 
 /// @brief class to output anyone text
@@ -69,12 +71,14 @@ public:
     Text(int x, int y, std::string name = "");
 };
 
+#define pb_size_x 50
+#define pb_size_y 10
+
 /// @brief class to draw readiness of weapon
 class ProgressBar : public Fl_Box
 {
 private:
     Point pos;
-    Point size;
     void draw();
 
 public:
@@ -82,6 +86,7 @@ public:
     double progress;
 
     ProgressBar(const Point &pos);
+    ~ProgressBar();
 };
 
 /// @brief class to draw triggers
@@ -109,6 +114,7 @@ private:
 public:
     std::string name;
     GraphicWeapon() = delete;
+    ~GraphicWeapon();
 };
 
 /// @brief struct to UpgradeWeapon()
@@ -132,6 +138,7 @@ private:
 
 public:
     GraphicSlapper(Slapper *slapper);
+    ~GraphicSlapper();
 };
 
 /// @brief class to draw Dichlorvos
@@ -144,6 +151,7 @@ private:
 
 public:
     GraphicDichlorvos(Dichlorvos *dichlorvos);
+    ~GraphicDichlorvos();
 };
 
 /// @brief class to draw Trap
@@ -156,6 +164,7 @@ private:
 
 public:
     GraphicTrap(Trap *trap);
+    ~GraphicTrap();
 };
 
 /// @brief class to draw on FLTK
@@ -174,6 +183,7 @@ private:
 public:
     /// @brief Making classes and add to window
     static void MakeWindow(int w, int h);
+    static void DeleteWindow();
     static Fl_Button *MakeButton(int x, int y, int w, int h, const char *name = "");
     static GraphicCockr *MakeCockr(Cockroach *cockr);
     static Text *MakeText(int x, int y, std::string name = "");

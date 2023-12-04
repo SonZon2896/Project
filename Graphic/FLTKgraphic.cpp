@@ -24,6 +24,11 @@ void Background::draw()
     img->draw(0, 0);
 }
 
+Background::~Background()
+{
+    delete img;
+}
+
 // GraphicCockr
 
 void GraphicCockr::draw()
@@ -43,6 +48,11 @@ GraphicCockr::GraphicCockr(Cockroach *cockr) : Fl_Box(0, 0, 0, 0), cockr{cockr}
     img = new Fl_PNG_Image("./PNG/cockroach_px.png");
     resize(cockr->pos.x - width / 2, cockr->pos.y - height / 2, width, height);
     prev_direction = Point{0, 0};
+}
+
+GraphicCockr::~GraphicCockr()
+{
+    delete img;
 }
 
 void GraphicCockr::UpdateImage()
@@ -79,17 +89,23 @@ void Text::draw()
 
 void ProgressBar::draw()
 {
-    progress_box->resize(pos.x, pos.y, size.x * progress, size.y);
+    progress_box->resize(pos.x, pos.y, pb_size_x * progress, pb_size_y);
     Fl_Box::draw();
 }
 
 ProgressBar::ProgressBar(const Point &pos)
-    : pos{pos}, size{50, 10}, Fl_Box{(int)pos.x, (int)pos.y, (int)size.x, (int)size.y},
-      progress_box(new Fl_Box((int)pos.x, (int)pos.y, 0, (int)size.y))
+    : pos{pos},
+      Fl_Box{(int)pos.x, (int)pos.y, pb_size_x, pb_size_y},
+      progress_box(new Fl_Box((int)pos.x, (int)pos.y, 0, pb_size_y))
 {
     box(FL_UP_BOX);
     progress_box->color(FL_GREEN);
     progress_box->box(FL_UP_BOX);
+}
+
+ProgressBar::~ProgressBar()
+{
+    delete progress_box;
 }
 
 // GraphicTrigger
@@ -121,10 +137,15 @@ void GraphicWeapon::draw()
 
 GraphicWeapon::GraphicWeapon(Point pos, const Trigger *trigger)
     : gtrig{Graphic::MakeTrigger(trigger)},
-      pb(Graphic::MakeProgressBar(pos + Point{-25., -weapon_size_y / 2 - 10})),
+      pb(Graphic::MakeProgressBar(pos + Point{-pb_size_x / 2, -weapon_size_y / 2 - 10})),
       Fl_Button(pos.x - weapon_size_x / 2, pos.y - weapon_size_y / 2, weapon_size_x, weapon_size_y)
 {
     box(FL_NO_BOX);
+}
+
+GraphicWeapon::~GraphicWeapon()
+{
+    delete pb, gtrig;
 }
 
 void UpgradeWeapon(Fl_Widget *w, void *data)
@@ -177,6 +198,11 @@ GraphicSlapper::GraphicSlapper(Slapper *slapper)
     callback(UpgradeWeapon, (void *)(new PackUpgrade(slapper, EnumWeapon::slapper)));
 }
 
+GraphicSlapper::~GraphicSlapper()
+{
+    delete img;
+}
+
 // GraphicDichlorvos
 
 void GraphicDichlorvos::draw()
@@ -211,6 +237,11 @@ GraphicDichlorvos::GraphicDichlorvos(Dichlorvos *dichlorvos)
     callback(UpgradeWeapon, (void *)(new PackUpgrade(dichlorvos, EnumWeapon::dichlorvos)));
 }
 
+GraphicDichlorvos::~GraphicDichlorvos()
+{
+    delete img;
+}
+
 // GraphicTrap
 
 void GraphicTrap::draw()
@@ -229,6 +260,11 @@ GraphicTrap::GraphicTrap(Trap *trap)
     callback(UpgradeWeapon, (void *)(new PackUpgrade(trap, EnumWeapon::trap)));
 }
 
+GraphicTrap::~GraphicTrap()
+{
+    delete img;
+}
+
 // Graphic
 
 void Graphic::MakeWindow(int w, int h)
@@ -238,6 +274,12 @@ void Graphic::MakeWindow(int w, int h)
     Background *bg = new Background();
     window->add(bg);
     Fl::add_timeout(1. / 60., Timer_CB, (void *)window);
+}
+
+void Graphic::DeleteWindow()
+{
+    ClearCockroaches();
+    delete window;
 }
 
 Fl_Button *Graphic::MakeButton(int x, int y, int w, int h, const char *name)
@@ -326,6 +368,6 @@ void Graphic::ShowCockroaches()
 void Graphic::ClearCockroaches()
 {
     for (auto cockr : cockroaches)
-        cockr->hide();
+        delete cockr;
     cockroaches.clear();
 }

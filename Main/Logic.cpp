@@ -39,7 +39,7 @@ std::vector<GraphicSlapper *> slappers;
 std::vector<GraphicDichlorvos *> dichlorvoses;
 std::vector<GraphicTrap *> traps;
 
-double timer = 0.;
+double timer;
 double timer_to_start_wave = 10.;
 
 // Functions ==============================================================================
@@ -57,7 +57,7 @@ void MakeWave()
     wave.interval = 0.2 * (1 - num_of_wave / (num_of_wave + 10));
 }
 
-void StartWave(Fl_Widget *w)
+void StartWave(Fl_Widget *w = nullptr)
 {
     if (!wave.Is_Started())
     {
@@ -113,6 +113,8 @@ void MakeWeapon(Fl_Widget *w, void *p)
 
 void GameManager::Start()
 {
+    timer = 0.;
+
     wave = Wave(roads);
     num_of_wave = 0;
     Graphic::MakeWindow(1280, 770);
@@ -177,8 +179,7 @@ void GameManager::Update()
 {
     if (!wave.Is_Started() && (timer += time::DeltaTime()) > timer_to_start_wave)
     {
-        wave.StartWave();
-        Graphic::ShowCockroaches();
+        StartWave();
         timer = 0.;
     }
 
