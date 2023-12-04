@@ -272,6 +272,7 @@ void Graphic::MakeWindow(int w, int h)
     window = new Fl_Window(w, h);
     Background *bg = new Background("./PNG/main_field_px.png");
     window->add(bg);
+    window->label("153 room");
     Fl::add_timeout(1. / 60., Timer_CB, (void *)window);
 }
 

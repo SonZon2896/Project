@@ -7,6 +7,7 @@ void MainMenu::MakeWindow(int w, int h)
     window->show();
     Background *bg = new Background("./PNG/trap_px.png");
     window->add(bg);
+    window->label("153 room");
 
 }
 
