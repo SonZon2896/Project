@@ -44,7 +44,6 @@ private:
     static void StartUpdate();
 
     static inline bool is_started = false;
-
 public:
     GameManager() = delete;
 

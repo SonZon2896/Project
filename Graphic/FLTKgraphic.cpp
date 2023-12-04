@@ -14,9 +14,9 @@ Line::Line(int x, int y, int x1, int y1)
 
 // Background
 
-Background::Background() : Fl_Box(0, 0, 1280, 720)
+Background::Background(std::string path) : Fl_Box(0, 0, 1280, 720)
 {
-    img = new Fl_PNG_Image("./PNG/main_field_px.png");
+    img = new Fl_PNG_Image(&path[0]);
 }
 
 void Background::draw()
@@ -270,8 +270,7 @@ GraphicTrap::~GraphicTrap()
 void Graphic::MakeWindow(int w, int h)
 {
     window = new Fl_Window(w, h);
-    window->show();
-    Background *bg = new Background();
+    Background *bg = new Background("./PNG/main_field_px.png");
     window->add(bg);
     Fl::add_timeout(1. / 60., Timer_CB, (void *)window);
 }
@@ -280,6 +279,10 @@ void Graphic::DeleteWindow()
 {
     ClearCockroaches();
     delete window;
+}
+
+void Graphic::Show(){
+    window->show();
 }
 
 Fl_Button *Graphic::MakeButton(int x, int y, int w, int h, const char *name)
