@@ -51,6 +51,6 @@ void GameManager::EndGame()
 
     fix_thr.join();
     upd_thr.join();
-    fix_thr.~thread();
-    upd_thr.~thread();
+
+    End();
 }

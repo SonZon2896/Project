@@ -34,6 +34,8 @@ private:
     static void FixedUpdate();
     /// @brief Do something like a cycle for
     static void Update();
+    /// @brief function to delete variables, when game is ended
+    static void End();
 
     /// @brief threads, which started FixedUpdate and Update
     static inline std::thread fix_thr;

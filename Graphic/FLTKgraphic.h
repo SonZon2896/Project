@@ -183,7 +183,7 @@ private:
 public:
     /// @brief Making classes and add to window
     static void MakeWindow(int w, int h);
-    static void DeleteWindow();
+    static void ClearWindow();
     static Fl_Button *MakeButton(int x, int y, int w, int h, const char *name = "");
     static GraphicCockr *MakeCockr(Cockroach *cockr);
     static Text *MakeText(int x, int y, std::string name = "");

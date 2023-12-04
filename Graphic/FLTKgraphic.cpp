@@ -200,7 +200,7 @@ GraphicSlapper::GraphicSlapper(Slapper *slapper)
 
 GraphicSlapper::~GraphicSlapper()
 {
-    delete img;
+    delete img, slapper;
 }
 
 // GraphicDichlorvos
@@ -239,7 +239,7 @@ GraphicDichlorvos::GraphicDichlorvos(Dichlorvos *dichlorvos)
 
 GraphicDichlorvos::~GraphicDichlorvos()
 {
-    delete img;
+    delete img, dichlorvos;
 }
 
 // GraphicTrap
@@ -262,7 +262,7 @@ GraphicTrap::GraphicTrap(Trap *trap)
 
 GraphicTrap::~GraphicTrap()
 {
-    delete img;
+    delete img, trap;
 }
 
 // Graphic
@@ -276,10 +276,9 @@ void Graphic::MakeWindow(int w, int h)
     Fl::add_timeout(1. / 60., Timer_CB, (void *)window);
 }
 
-void Graphic::DeleteWindow()
+void Graphic::ClearWindow()
 {
-    ClearCockroaches();
-    delete window;
+    window->clear();
 }
 
 Fl_Button *Graphic::MakeButton(int x, int y, int w, int h, const char *name)

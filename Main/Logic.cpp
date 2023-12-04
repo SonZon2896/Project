@@ -13,7 +13,7 @@ Point Fridge::pos{250, 210};
 double Fridge::health;
 double Event::money;
 double Event::money_speed{1800.};
-const bool Mark_Lox = true; // 1 december
+const bool Mark_Lox = true;  // 1 december
 const bool Artem_Lox = true; // 2 december
 std::vector<Road> roads{
     {{700., 250.}, {700., 350.}, {250., 350.}, Fridge::pos},
@@ -34,6 +34,7 @@ Text *survived;
 Text *fridge_hp;
 Text *stipubles;
 Text *timer_text;
+Text *wasted;
 
 std::vector<GraphicSlapper *> slappers;
 std::vector<GraphicDichlorvos *> dichlorvoses;
@@ -51,13 +52,13 @@ void MakeWave()
 
     ++num_of_wave;
 
-    wave.num = 3 + 2 * (num_of_wave / 2);
+    wave.num = 20 + 2 * (num_of_wave / 2);
     wave.health = 100. + num_of_wave * 20;
-    wave.speed = 75. + num_of_wave * 2;
-    wave.interval = 0.2 * (1 - num_of_wave / (num_of_wave + 10));
+    wave.speed = 200. + num_of_wave * 2;
+    wave.interval = 0.01;
 }
 
-void StartWave(Fl_Widget *w = nullptr)
+void StartWave()
 {
     if (!wave.Is_Started())
     {
@@ -66,6 +67,11 @@ void StartWave(Fl_Widget *w = nullptr)
         Graphic::ShowCockroaches();
         timer = 0.;
     }
+}
+
+void CBStartWave(Fl_Widget *w, void *p)
+{
+    StartWave();
 }
 
 struct PackWeapon
@@ -117,13 +123,12 @@ void GameManager::Start()
     Fridge::health = 100.;
     Event::money = 1500.;
 
-    // wave = Wave(roads);
     num_of_wave = 0;
     Graphic::MakeWindow(1280, 770);
     Graphic::ShowRoads(roads);
 
     btn_start_wave = Graphic::MakeButton(0, 720, 100, 50, "start wave");
-    btn_start_wave->callback(StartWave);
+    btn_start_wave->callback(CBStartWave, new int(5));
 
     btns_make_slapper.reserve(3);
     btns_make_slapper.push_back(Graphic::MakeButton(200, 500, 100, 50, "make slapper \n 100 sb"));
@@ -163,18 +168,17 @@ void GameManager::FixedUpdate()
         if (wave.GetSurvived() <= 0)
         {
             wave.EndWave();
-            // Graphic::ClearCockroaches();
             Event::Scholarship();
             MakeWave();
         }
     }
-    if (Fridge::health <= 0)
-    {
-        Graphic::MakeText(590, 335, "WASTED");
-        EndGame();
-    }
     for (auto weapon : Weapon::GetAll())
         weapon->Action(time::fixed);
+    if (Fridge::health <= 0)
+    {
+        wave.EndWave();
+        EndGame();
+    }
 }
 
 void GameManager::Update()
@@ -191,4 +195,10 @@ void GameManager::Update()
     fridge_hp->output = std::to_string((int)Fridge::health);
     stipubles->output = std::to_string((int)Event::money);
     timer_text->output = std::to_string((int)(timer_to_start_wave - timer + 0.99));
+}
+
+void GameManager::End()
+{
+    Graphic::ClearWindow();
+    Graphic::MakeText(590, 335, "WASTED");
 }
