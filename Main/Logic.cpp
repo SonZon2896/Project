@@ -10,9 +10,9 @@
 // Variables ==============================================================================
 
 Point Fridge::pos{250, 210};
-double Fridge::health{100.};
-double Event::money{1000.};
-double Event::money_speed{1500.};
+double Fridge::health;
+double Event::money;
+double Event::money_speed{1800.};
 const bool Mark_Lox = true; // 1 december
 const bool Artem_Lox = true; // 2 december
 std::vector<Road> roads{
@@ -20,7 +20,7 @@ std::vector<Road> roads{
     {{100., 630.}, {250., 630.}, {250., 350.}, Fridge::pos},
     {{1050., 525.}, {550., 525.}, {550., 350.}, {250., 350.}, Fridge::pos},
     {{500., 700.}, {600., 700.}, {600., 600.}, {400., 600.}, {400., 350.}, {250., 350.}, Fridge::pos}};
-Wave wave;
+Wave wave(roads);
 size_t num_of_wave;
 
 Fl_Button *btn_start_wave;
@@ -114,8 +114,10 @@ void MakeWeapon(Fl_Widget *w, void *p)
 void GameManager::Start()
 {
     timer = 0.;
+    Fridge::health = 100.;
+    Event::money = 1500.;
 
-    wave = Wave(roads);
+    // wave = Wave(roads);
     num_of_wave = 0;
     Graphic::MakeWindow(1280, 770);
     Graphic::ShowRoads(roads);
