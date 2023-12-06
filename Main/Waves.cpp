@@ -1,16 +1,21 @@
 #include "Waves.h"
 
-Wave::Wave(const std::vector<Road> &roads, size_t num, double interval, double speed, double health)
-    : roads{roads}, num{num}, interval{interval}, speed{speed}, health{health}
+Wave::Wave(const std::vector<Road> &roads)
+    : roads{roads}
 {
 }
 
 void Wave::StartWave()
 {
     cockroaches.reserve(roads.size() * num);
-    for (size_t i = 0; i < num; ++i)
-        for (size_t i = 0; i < roads.size(); ++i)
-            cockroaches.emplace_back(roads[i], speed, health);
+    // revive old cockroaches
+    for (auto cockr : cockroaches)
+        cockr->Revive(prototype);
+    // add new cockroaches
+    for (size_t i = cockroaches.size() / roads.size(); i < num; ++i)
+        for (size_t j = 0; j < roads.size(); ++j)
+            cockroaches.push_back(new Cockroach(roads[j], prototype));
+
     survived = cockroaches.size();
     time_from_start = 0.;
     is_started = true;
@@ -24,31 +29,27 @@ void Wave::MoveWave(double time)
         active_cockr = cockroaches.size();
     for (size_t i = 0; i < active_cockr; ++i)
     {
-        if (cockroaches[i].is_death)
+        if (cockroaches[i]->is_death)
             continue;
-        if (cockroaches[i].health <= 0)
+        if (cockroaches[i]->health <= 0)
         {
-            cockroaches[i].is_death = true;
+            cockroaches[i]->is_death = true;
             --survived;
             continue;
         }
-        if (cockroaches[i].Move(time))
+        if (cockroaches[i]->Move(time))
         {
-            Fridge::health -= cockroaches[i].damage;
-            cockroaches[i].pos = {-1000., -1000};
-            cockroaches[i].is_death = true;
+            Fridge::health -= cockroaches[i]->damage;
+            cockroaches[i]->pos = {-1000., -1000};
+            cockroaches[i]->is_death = true;
             --survived;
         }
-        cockroaches[i].CheckTrigger();
+        cockroaches[i]->CheckTrigger();
     }
 }
 
 void Wave::EndWave()
 {
-    cockroaches.clear();
-    auto triggers = Trigger::GetAll();
-    for (auto trig : triggers)
-        trig->cockroaches.clear();
     survived = 0;
     is_started = false;
 }

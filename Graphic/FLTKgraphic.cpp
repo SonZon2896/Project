@@ -359,10 +359,11 @@ GraphicTrap *Graphic::MakeTrap(Trap *trap)
 
 void Graphic::ShowCockroaches()
 {
-    cockroaches.reserve(Cockroach::GetAll().size());
-    for (auto cockr : Cockroach::GetAll())
+    auto all = Cockroach::GetAll();
+    cockroaches.reserve(all.size());
+    for (size_t i = cockroaches.size(); i < all.size(); ++i)
     {
-        cockroaches.push_back(new GraphicCockr(cockr));
+        cockroaches.push_back(new GraphicCockr(all[i]));
         window->add(cockroaches[cockroaches.size() - 1]);
     }
 }
@@ -370,6 +371,5 @@ void Graphic::ShowCockroaches()
 void Graphic::ClearCockroaches()
 {
     for (auto cockr : cockroaches)
-        delete cockr;
-    cockroaches.clear();
+        cockr->hide();
 }

@@ -3,19 +3,17 @@
 
 #define EPS 1e-8
 
-
 std::map<Direction, std::string> cockroach_direction = {
     {UP, "./PNG/cockroach_px_up.png"},
     {RIGHT, "./PNG/cockroach_px_right.png"},
     {DOWN, "./PNG/cockroach_px_down.png"},
-    {LEFT, "./PNG/cockroach_px_left.png"}
-};
+    {LEFT, "./PNG/cockroach_px_left.png"}};
 
-bool is_equal(double a, double b){
+bool is_equal(double a, double b)
+{
     long double eps = EPS;
     return abs(a - b) <= eps;
 }
-
 
 Point operator+(Point first, const Point &second)
 {
@@ -42,14 +40,15 @@ double Point::Dist()
     return std::sqrt(std::pow(x, 2) + std::pow(y, 2));
 }
 
-std::string GetPathToImageCockr(Cockroach &cockr){
+std::string GetPathToImageCockr(Cockroach &cockr)
+{
     return cockroach_direction[cockr.GetOrientation()];
 }
 
 // Cockroaches
 
-Cockroach::Cockroach(const Road &road, double speed, double health, double damage)
-    : road{road}, pos{this->road[0]}, speed{speed}, health{health}, damage{damage}
+Cockroach::Cockroach(const Road &road, PrototypeCockroach prototype)
+    : road{road}, pos{this->road[0]}, speed{prototype.speed}, health{prototype.health}, damage{prototype.damage}
 {
     if (this->road[this->road.size() - 1] != Fridge::pos)
         this->road.push_back(Fridge::pos);
@@ -57,11 +56,13 @@ Cockroach::Cockroach(const Road &road, double speed, double health, double damag
     UpdateDir();
 }
 
-Point Cockroach::GetDirection(){
+Point Cockroach::GetDirection()
+{
     return direction;
 }
 
-Direction Cockroach::GetOrientation(){
+Direction Cockroach::GetOrientation()
+{
     if (is_equal(direction.x, 0) && is_equal(direction.y, 1))
         return DOWN;
     if (is_equal(direction.x, 1) && is_equal(direction.y, 0))
@@ -69,10 +70,10 @@ Direction Cockroach::GetOrientation(){
     if (is_equal(direction.x, 0) && is_equal(direction.y, -1))
         return UP;
     if (is_equal(direction.x, -1) && is_equal(direction.y, 0))
-        return LEFT;   
+        return LEFT;
 
     return UP;
-}   
+}
 
 void Cockroach::UpdateDir()
 {
@@ -80,6 +81,19 @@ void Cockroach::UpdateDir()
     ++point_on_road;
     double distance = (road[point_on_road] - road[point_on_road - 1]).Dist() * !is_death;
     direction = {(this->road[point_on_road] - this->road[point_on_road - 1]) / distance};
+}
+
+void Cockroach::Revive(PrototypeCockroach prototype)
+{
+    this->speed = prototype.speed;
+    this->health = prototype.health;
+    this->damage = prototype.damage;
+
+    is_in_trig = false;
+    is_death = false;
+    pos = road[0];
+    point_on_road = 0;
+    UpdateDir();
 }
 
 bool Cockroach::Move(double time)

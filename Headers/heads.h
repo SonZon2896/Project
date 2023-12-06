@@ -98,6 +98,15 @@ public:
 
 class Trigger;
 
+struct PrototypeCockroach
+{
+    double health = 100.;
+    double speed = 100.;
+    double damage = 5.;
+    PrototypeCockroach() = default;
+    PrototypeCockroach(double hp, double sp, double dm) : health{hp}, speed{sp}, damage{dm} {}
+};
+
 /// @brief Main enemy class
 class Cockroach
 {
@@ -123,8 +132,9 @@ public:
     bool is_death = false;
 
     Cockroach() = delete;
-    Cockroach(const Road &road, double speed = 1, double health = 100., double damage = 5.);
+    Cockroach(const Road &road, PrototypeCockroach prototype);
 
+    void Revive(PrototypeCockroach prototype);
     bool Move(double time);
     void CheckTrigger();
     static auto GetAll() { return all_cockr; }

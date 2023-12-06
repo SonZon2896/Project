@@ -52,10 +52,11 @@ void MakeWave()
 
     ++num_of_wave;
 
-    wave.num = 20 + 2 * (num_of_wave / 2);
-    wave.health = 100. + num_of_wave * 20;
-    wave.speed = 200. + num_of_wave * 2;
-    wave.interval = 0.01;
+    wave.prototype.health = 100. + num_of_wave * 20;
+    wave.prototype.speed = 200. + num_of_wave * 2;
+    wave.prototype.damage = 5;
+    wave.num = 20 + num_of_wave;
+    wave.interval = 0.05;
 }
 
 void StartWave()
@@ -63,7 +64,7 @@ void StartWave()
     if (!wave.Is_Started())
     {
         wave.StartWave();
-        Graphic::ClearCockroaches();
+        // Graphic::ClearCockroaches();
         Graphic::ShowCockroaches();
         timer = 0.;
     }
@@ -120,7 +121,7 @@ void MakeWeapon(Fl_Widget *w, void *p)
 void GameManager::Start()
 {
     timer = 0.;
-    Fridge::health = 100.;
+    Fridge::health = 100;
     Event::money = 1500.;
 
     num_of_wave = 0;
