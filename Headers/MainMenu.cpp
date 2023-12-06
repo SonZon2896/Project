@@ -14,7 +14,7 @@ void MainMenu::Show(){
     window->show();
 }
 
-void MainMenu::Hide(Fl_Widget* w, void *p){
+void MainMenu::Hide(){
     window->hide();
 }
 

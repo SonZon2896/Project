@@ -1,3 +1,7 @@
+#pragma once
+#include "GameManager.h"
+#include "../Headers/MainMenu.h"
+
 class MainMenuManager
 {
 private:
@@ -10,6 +14,7 @@ public:
     MainMenuManager() = delete;
 
     static void StartMenu();
+    static void StartGame();
     static void EndMenu();
 
     static bool GameStarted();

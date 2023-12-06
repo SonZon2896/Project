@@ -1,3 +1,4 @@
+#pragma once
 #include "../Headers/heads.h"
 #include "../Weapons/weapons.h"
 #include "../Graphic/FLTKgraphic.h"

@@ -32,7 +32,7 @@ public:
     );
 
     static void Show();
-    static void Hide(Fl_Widget *w, void *p);
+    static void Hide();
 
 };
 

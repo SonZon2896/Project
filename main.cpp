@@ -10,9 +10,5 @@ int main()
 {
     MainMenuManager::StartMenu();
     Fl::run();   
-
-    GameManager::StartGame();
-    Fl::run();
-    GameManager::EndGame();
     return 0;
 }
