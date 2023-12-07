@@ -7,6 +7,7 @@
 #include <FL/Fl_Widget.H>
 #include <FL/Enumerations.H>
 #include <FL/Fl_PNG_Image.H>
+#include <FL/Fl_RGB_Image.H>
 #include <FL/Fl_JPEG_Image.H>
 #include <string>
 #include <filesystem>
