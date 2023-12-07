@@ -7,7 +7,9 @@ void MainMenu::MakeWindow(int w, int h)
     window->show();
     Background *bg = new Background("./PNG/main_menu.png");
     window->add(bg);
-
+    Fl_PNG_Image *ico = new Fl_PNG_Image("./PNG/cockroach_px.png");
+    window->icon(ico);
+    window->default_icon(ico);
 }
 
 void MainMenu::Show(){
