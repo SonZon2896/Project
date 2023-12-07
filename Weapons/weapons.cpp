@@ -29,7 +29,7 @@ Weapon::~Weapon()
         if (all_weapons[i] == this)
         {
             all_weapons.erase(all_weapons.begin() + i);
-            return;
+            break;
         }
 }
 

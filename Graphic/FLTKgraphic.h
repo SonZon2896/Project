@@ -114,7 +114,6 @@ private:
 public:
     std::string name;
     GraphicWeapon() = delete;
-    ~GraphicWeapon();
 };
 
 /// @brief struct to UpgradeWeapon()

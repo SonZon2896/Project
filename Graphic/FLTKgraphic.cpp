@@ -143,11 +143,6 @@ GraphicWeapon::GraphicWeapon(Point pos, const Trigger *trigger)
     box(FL_NO_BOX);
 }
 
-GraphicWeapon::~GraphicWeapon()
-{
-    delete pb, gtrig;
-}
-
 void UpgradeWeapon(Fl_Widget *w, void *data)
 {
     auto unpack = (PackUpgrade *)data;
@@ -200,7 +195,8 @@ GraphicSlapper::GraphicSlapper(Slapper *slapper)
 
 GraphicSlapper::~GraphicSlapper()
 {
-    delete img, slapper;
+    // delete img;
+    // delete slapper;
 }
 
 // GraphicDichlorvos
@@ -239,7 +235,8 @@ GraphicDichlorvos::GraphicDichlorvos(Dichlorvos *dichlorvos)
 
 GraphicDichlorvos::~GraphicDichlorvos()
 {
-    delete img, dichlorvos;
+    delete img;
+    delete dichlorvos;
 }
 
 // GraphicTrap
@@ -262,7 +259,8 @@ GraphicTrap::GraphicTrap(Trap *trap)
 
 GraphicTrap::~GraphicTrap()
 {
-    delete img, trap;
+    delete img;
+    delete trap;
 }
 
 // Graphic

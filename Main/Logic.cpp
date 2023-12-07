@@ -113,7 +113,6 @@ void MakeWeapon(Fl_Widget *w, void *p)
         auto trap = new Trap(unpack->pos, unpack->direction);
         traps.push_back(Graphic::MakeTrap(trap));
     }
-    delete unpack;
 }
 
 // Main ===================================================================================
