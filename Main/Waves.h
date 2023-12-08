@@ -16,7 +16,7 @@ private:
 public:
     /// @brief variables to make a cockroaches
     std::vector<Road> roads;
-    PrototypeCockroach prototype;
+    PrototypeEnemy prototype;
     double interval;
     size_t num;
 

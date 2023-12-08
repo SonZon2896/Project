@@ -31,40 +31,56 @@ Background::~Background()
 
 // GraphicCockr
 
-void GraphicCockr::draw()
+void GraphicEnemy::draw()
 {
-    Point cur_direction = cockr->GetDirection();
-    if (prev_direction != cur_direction || (cockr->is_death && !is_death_img))
+    Point cur_direction = enemy->GetDirection();
+    if (prev_direction != cur_direction || (enemy->is_death && !is_death_img))
     {
         UpdateImage();
         prev_direction = cur_direction;
     }
-
-    img->draw(cockr->pos.x - width / 2, cockr->pos.y - height / 2);
+    img_now->draw(enemy->pos.x - ENEMY_SIZE_X / 2, enemy->pos.y - ENEMY_SIZE_Y / 2);
 }
 
-GraphicCockr::GraphicCockr(Cockroach *cockr) : Fl_Box(0, 0, 0, 0), cockr{cockr}
+GraphicEnemy::GraphicEnemy(Enemy *enemy, std::string path_to_img) : Fl_Box(0, 0, 0, 0), enemy{enemy}
 {
-    img = new Fl_PNG_Image("./PNG/cockroach_px.png");
-    resize(cockr->pos.x - width / 2, cockr->pos.y - height / 2, width, height);
+    resize(enemy->pos.x - ENEMY_SIZE_X / 2, enemy->pos.y - ENEMY_SIZE_Y / 2, ENEMY_SIZE_X, ENEMY_SIZE_Y);
     prev_direction = Point{0, 0};
+    img_up = new Fl_PNG_Image(&(path_to_img + "_up.png")[0]);
+    img_down = new Fl_PNG_Image(&(path_to_img + "_down.png")[0]);
+    img_left = new Fl_PNG_Image(&(path_to_img + "_left.png")[0]);
+    img_right = new Fl_PNG_Image(&(path_to_img + "_right.png")[0]);
+    img_death = new Fl_PNG_Image(&(path_to_img + "_death.png")[0]);
 }
 
-GraphicCockr::~GraphicCockr()
+GraphicEnemy::~GraphicEnemy()
 {
-    delete img;
+    delete img_up, img_down, img_left, img_right, img_death;
 }
 
-void GraphicCockr::UpdateImage()
+void GraphicEnemy::UpdateImage()
 {
-    delete img;
-    if (cockr->is_death)
+    if (enemy->is_death)
     {
-        img = new Fl_PNG_Image("./PNG/cockroach_px_death.png");
+        img_now = img_death;
         is_death_img = true;
         return;
     }
-    img = new Fl_PNG_Image(&GetPathToImageCockr(*cockr)[0]);
+    switch (enemy->GetOrientation())
+    {
+    case UP:
+        img_now = img_up;
+        break;
+    case DOWN:
+        img_now = img_down;
+        break;
+    case LEFT:
+        img_now = img_left;
+        break;
+    case RIGHT:
+        img_now = img_right;
+        break;
+    }
 }
 
 // Text
@@ -112,7 +128,7 @@ ProgressBar::~ProgressBar()
 
 void GraphicTrigger::draw()
 {
-    if (trig->cockroaches.size() > 0)
+    if (trig->enemies.size() > 0)
         fl_color(FL_RED);
     else
         fl_color(FL_GREEN);
@@ -308,9 +324,16 @@ void Graphic::ShowRoads(const std::vector<Road> &roads)
 
 // Graphic Fabric
 
-GraphicCockr *Graphic::MakeCockr(Cockroach *cockr)
+GraphicEnemy *Graphic::MakeCockr(Cockroach *cockr)
 {
-    auto temp = new GraphicCockr(cockr);
+    auto temp = new GraphicEnemy(cockr, "./PNG/cockroach_px");
+    window->add(temp);
+    return temp;
+}
+
+GraphicEnemy *Graphic::MakeMouse(Mouse *mouse)
+{
+    auto temp = new GraphicEnemy(mouse, "./PNG/mouse");
     window->add(temp);
     return temp;
 }
@@ -358,13 +381,15 @@ GraphicTrap *Graphic::MakeTrap(Trap *trap)
     return temp;
 }
 
-void Graphic::ShowCockroaches()
+void Graphic::ShowEnemies()
 {
-    auto all = Cockroach::GetAll();
-    cockroaches.reserve(all.size());
-    for (size_t i = cockroaches.size(); i < all.size(); ++i)
-    {
-        cockroaches.push_back(new GraphicCockr(all[i]));
-        window->add(cockroaches[cockroaches.size() - 1]);
-    }
+    auto all_cockr = Cockroach::GetAll();
+    cockroaches.reserve(all_cockr.size());
+    for (size_t i = cockroaches.size(); i < all_cockr.size(); ++i)
+        cockroaches.push_back(MakeCockr(all_cockr[i]));
+    
+    auto all_mouses = Mouse::GetAll();
+    mouses.reserve(all_mouses.size());
+    for (size_t i = mouses.size(); i < all_mouses.size(); ++i)
+        mouses.push_back(MakeMouse(all_mouses[i]));
 }

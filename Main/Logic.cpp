@@ -20,7 +20,10 @@ std::vector<Road> roads{
     {{100., 630.}, {250., 630.}, {250., 350.}, Fridge::pos},
     {{1050., 525.}, {550., 525.}, {550., 350.}, {250., 350.}, Fridge::pos},
     {{500., 700.}, {600., 700.}, {600., 600.}, {400., 600.}, {400., 350.}, {250., 350.}, Fridge::pos}};
+
+std::vector<Road> mouse_road{{{700., 500.}, Fridge::pos}};
 Wave wave(roads);
+Wave mouse_wave(mouse_road);
 size_t num_of_wave;
 
 Fl_Button *btn_start_wave;
@@ -64,7 +67,7 @@ void StartWave()
     if (!wave.Is_Started())
     {
         wave.StartWave();
-        Graphic::ShowCockroaches();
+        Graphic::ShowEnemies();
         timer = 0.;
     }
 }

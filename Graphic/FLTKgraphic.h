@@ -40,22 +40,29 @@ public:
     ~Background();
 };
 
+#define ENEMY_SIZE_X 64
+#define ENEMY_SIZE_Y 64
+
 /// @brief class to draw a cockroach
-class GraphicCockr : public Fl_Box
+class GraphicEnemy : public Fl_Box
 {
 private:
-    Cockroach *cockr;
-    Fl_PNG_Image *img;
+    Enemy *enemy;
+    Fl_Image *img_now;
     bool is_death_img = false;
-    int width = 64;
-    int height = 64;
     Point prev_direction;
     void draw();
 
 public:
-    GraphicCockr(Cockroach *cockr);
+    Fl_Image *img_up;
+    Fl_Image *img_down;
+    Fl_Image *img_left;
+    Fl_Image *img_right;
+    Fl_Image *img_death;
+
+    GraphicEnemy(Enemy *enemy, std::string path_to_image);
     void UpdateImage();
-    ~GraphicCockr();
+    ~GraphicEnemy();
 };
 
 /// @brief class to output anyone text
@@ -171,7 +178,8 @@ private:
     static inline Fl_Window *window;
     static inline bool is_window;
     /// @brief all cockroaches to output
-    static inline std::vector<GraphicCockr *> cockroaches;
+    static inline std::vector<GraphicEnemy *> cockroaches;
+    static inline std::vector<GraphicEnemy *> mouses;
 
     /// @brief function to redraw window by timer
     /// @param userdata something
@@ -183,7 +191,8 @@ public:
     static void MakeBackground(std::string path_to_img);
     static void ClearWindow();
     static Fl_Button *MakeButton(int x, int y, int w, int h, const char *name = "");
-    static GraphicCockr *MakeCockr(Cockroach *cockr);
+    static GraphicEnemy *MakeCockr(Cockroach *cockr);
+    static GraphicEnemy *MakeMouse(Mouse *mouse);
     static Text *MakeText(int x, int y, std::string name = "");
     static ProgressBar *MakeProgressBar(const Point &pos);
     static GraphicTrigger *MakeTrigger(const Trigger *trig);
@@ -192,7 +201,6 @@ public:
     static GraphicTrap *MakeTrap(Trap *trap);
 
     static void ShowRoads(const std::vector<Road> &roads);
-    static void ShowCockroaches();
+    static void ShowEnemies();
     static void Show();
-    static void ClearCockroaches();
 };

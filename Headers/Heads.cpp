@@ -45,23 +45,23 @@ std::string GetPathToImageCockr(Cockroach &cockr)
     return cockroach_direction[cockr.GetOrientation()];
 }
 
-// Cockroaches
+// Enemy
 
-Cockroach::Cockroach(const Road &road, PrototypeCockroach prototype)
+Enemy::Enemy(const Road &road, PrototypeEnemy prototype)
     : road{road}, pos{this->road[0]}, speed{prototype.speed}, health{prototype.health}, damage{prototype.damage}
 {
     if (this->road[this->road.size() - 1] != Fridge::pos)
         this->road.push_back(Fridge::pos);
-    all_cockr.push_back(this);
+    all_enemy.push_back(this);
     UpdateDir();
 }
 
-Point Cockroach::GetDirection()
+Point Enemy::GetDirection()
 {
     return direction;
 }
 
-Direction Cockroach::GetOrientation()
+Direction Enemy::GetOrientation()
 {
     if (is_equal(direction.x, 0) && is_equal(direction.y, 1))
         return DOWN;
@@ -75,7 +75,7 @@ Direction Cockroach::GetOrientation()
     return UP;
 }
 
-void Cockroach::UpdateDir()
+void Enemy::UpdateDir()
 {
 
     ++point_on_road;
@@ -83,7 +83,7 @@ void Cockroach::UpdateDir()
     direction = {(this->road[point_on_road] - this->road[point_on_road - 1]) / distance};
 }
 
-void Cockroach::Revive(PrototypeCockroach prototype)
+void Enemy::Revive(PrototypeEnemy prototype)
 {
     this->speed = prototype.speed;
     this->health = prototype.health;
@@ -96,7 +96,7 @@ void Cockroach::Revive(PrototypeCockroach prototype)
     UpdateDir();
 }
 
-bool Cockroach::Move(double time)
+bool Enemy::Move(double time)
 {
     pos += direction * speed * time;
     // Проверяем не пробежал ли таракан точку поворота
@@ -111,9 +111,8 @@ bool Cockroach::Move(double time)
     return false;
 }
 
-void Cockroach::CheckTrigger()
+void Enemy::CheckTrigger()
 {
-
     if (is_in_trig)
         return;
     for (auto &trigger : Trigger::GetAll())
@@ -121,18 +120,54 @@ void Cockroach::CheckTrigger()
         if (trigger->In(pos))
         {
             is_in_trig = true;
-            trigger->cockroaches.push_back(this);
+            trigger->enemies.push_back(this);
             return;
         }
     }
 }
 
+Enemy::~Enemy()
+{
+    for (size_t i = 0; i < all_enemy.size(); ++i)
+        if (all_enemy[i] == this)
+        {
+            all_enemy.erase(all_enemy.begin() + i);
+            break;
+        }
+}
+
+// Cockroaches
+
+Cockroach::Cockroach(const Road &road, PrototypeEnemy prototype)
+    : Enemy(road, prototype)
+{
+    all_cockroaches.push_back(this);
+}
+
 Cockroach::~Cockroach()
 {
-    for (size_t i = 0; i < all_cockr.size(); ++i)
-        if (all_cockr[i] == this)
+    for (size_t i = 0; i < all_cockroaches.size(); ++i)
+        if (all_cockroaches[i] == this)
         {
-            all_cockr.erase(all_cockr.begin() + i);
+            all_cockroaches.erase(all_cockroaches.begin() + i);
+            break;
+        }
+}
+
+// Mouse
+
+Mouse::Mouse(const Road &road, PrototypeEnemy prototype)
+    : Enemy(road, prototype)
+{
+    all_mouses.push_back(this);
+}
+
+Mouse::~Mouse()
+{
+    for (size_t i = 0; i < all_mouses.size(); ++i)
+        if (all_mouses[i] == this)
+        {
+            all_mouses.erase(all_mouses.begin() + i);
             break;
         }
 }
@@ -145,14 +180,14 @@ Trigger::Trigger(Point pos, Point size)
     all_trig.push_back(this);
 }
 
-void Trigger::CheckCockroaches()
+void Trigger::CheckEnemies()
 {
-    for (size_t i = 0; i < cockroaches.size(); ++i)
+    for (size_t i = 0; i < enemies.size(); ++i)
     {
-        if (!In(cockroaches[i]->pos))
+        if (!In(enemies[i]->pos))
         {
-            cockroaches[i]->is_in_trig = false;
-            cockroaches.erase(cockroaches.begin() + i--);
+            enemies[i]->is_in_trig = false;
+            enemies.erase(enemies.begin() + i--);
         }
     }
 }

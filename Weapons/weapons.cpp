@@ -10,14 +10,14 @@ Weapon::Weapon(const Point &pos, Trigger *trigger, double interval, double damag
 
 void Weapon::Attack()
 {
-    for (auto cockr : trigger->cockroaches)
+    for (auto enemy : trigger->enemies)
     {
-        cockr->health -= damage;
-        if (cockr->health <= 0)
-            for (size_t i = 0; i < trigger->cockroaches.size(); ++i)
-                if (trigger->cockroaches[i] == cockr)
+        enemy->health -= damage;
+        if (enemy->health <= 0)
+            for (size_t i = 0; i < trigger->enemies.size(); ++i)
+                if (trigger->enemies[i] == enemy)
                 {
-                    trigger->cockroaches.erase(trigger->cockroaches.begin() + i);
+                    trigger->enemies.erase(trigger->enemies.begin() + i);
                     break;
                 }
     }
@@ -36,8 +36,8 @@ Weapon::~Weapon()
 void Weapon::Action(double time)
 {
     time_last += time;
-    trigger->CheckCockroaches();
-    if (trigger->cockroaches.size() != 0 && time_last >= interval)
+    trigger->CheckEnemies();
+    if (trigger->enemies.size() != 0 && time_last >= interval)
     {
         Attack();
         time_last = 0;

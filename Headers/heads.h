@@ -98,21 +98,22 @@ public:
 
 class Trigger;
 
-struct PrototypeCockroach
+struct PrototypeEnemy
 {
     double health = 100.;
     double speed = 100.;
     double damage = 5.;
-    PrototypeCockroach() = default;
-    PrototypeCockroach(double hp, double sp, double dm) : health{hp}, speed{sp}, damage{dm} {}
+    PrototypeEnemy() = default;
+    PrototypeEnemy(double hp, double sp, double dm) : health{hp}, speed{sp}, damage{dm} {}
 };
 
 /// @brief Main enemy class
-class Cockroach
+class Enemy
 {
 protected:
     /// @brief vector of pointers to all cockroaches
-    static inline std::vector<Cockroach *> all_cockr{};
+    static inline std::vector<Enemy *> all_enemy;
+    Enemy(const Road& road, PrototypeEnemy prototype);
 
 private:
     Road road;
@@ -131,17 +132,40 @@ public:
     double damage;
     bool is_death = false;
 
-    Cockroach() = delete;
-    Cockroach(const Road &road, PrototypeCockroach prototype);
+    Enemy() = delete;
 
-    void Revive(PrototypeCockroach prototype);
+    void Revive(PrototypeEnemy prototype);
     bool Move(double time);
     void CheckTrigger();
-    static auto GetAll() { return all_cockr; }
+    static auto GetAll() { return all_enemy; }
     Direction GetOrientation();
     Point GetDirection();
 
+    ~Enemy();
+};
+
+class Cockroach : public Enemy
+{
+private:
+    static inline std::vector<Cockroach *> all_cockroaches;
+public:
+    Cockroach() = delete;
+    Cockroach(const Road &road, PrototypeEnemy prototype);
     ~Cockroach();
+
+    static auto GetAll() {return all_cockroaches;}
+};
+
+class Mouse : public Enemy
+{
+private:
+    static inline std::vector<Mouse *> all_mouses;
+public:
+    Mouse() = delete;
+    Mouse(const Road &road, PrototypeEnemy prototype);
+    ~Mouse();
+
+    static auto GetAll() {return all_mouses;}
 };
 
 /// @brief class to check cockroaches
@@ -154,13 +178,13 @@ protected:
 public:
     Point pos;
     Point size;
-    std::vector<Cockroach *> cockroaches;
+    std::vector<Enemy *> enemies;
 
     Trigger() = delete;
     Trigger(Point pos, Point size);
 
     /// @brief check cockroach move out from trigger
-    void CheckCockroaches();
+    void CheckEnemies();
     /// @brief check point in trigger or not
     bool In(Point pos);
 
