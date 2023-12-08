@@ -262,15 +262,23 @@ GraphicTrap::~GraphicTrap()
 
 void Graphic::MakeWindow(int w, int h)
 {
+    if (is_window)
+        return;
     window = new Fl_Window(w, h);
-    Background *bg = new Background("./PNG/main_field_px.png");
-    window->add(bg);
+    is_window = true;
     Fl::add_timeout(1. / 60., Timer_CB, (void *)window);
+}
+
+void Graphic::MakeBackground(std::string path)
+{
+    Background *bg = new Background(&path[0]);
+    window->add(bg);
 }
 
 void Graphic::ClearWindow()
 {
     window->clear();
+    cockroaches.clear();
 }
 
 void Graphic::Show(){
@@ -359,10 +367,4 @@ void Graphic::ShowCockroaches()
         cockroaches.push_back(new GraphicCockr(all[i]));
         window->add(cockroaches[cockroaches.size() - 1]);
     }
-}
-
-void Graphic::ClearCockroaches()
-{
-    for (auto cockr : cockroaches)
-        cockr->hide();
 }

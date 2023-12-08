@@ -169,6 +169,7 @@ class Graphic
 private:
     /// @brief main window
     static inline Fl_Window *window;
+    static inline bool is_window;
     /// @brief all cockroaches to output
     static inline std::vector<GraphicCockr *> cockroaches;
 
@@ -179,6 +180,7 @@ private:
 public:
     /// @brief Making classes and add to window
     static void MakeWindow(int w, int h);
+    static void MakeBackground(std::string path_to_img);
     static void ClearWindow();
     static Fl_Button *MakeButton(int x, int y, int w, int h, const char *name = "");
     static GraphicCockr *MakeCockr(Cockroach *cockr);

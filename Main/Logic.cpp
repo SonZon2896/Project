@@ -119,6 +119,7 @@ void GameManager::Start()
 
     num_of_wave = 0;
     Graphic::MakeWindow(1280, 770);
+    Graphic::MakeBackground("./PNG/main_field_px.png");
     Graphic::Show();
     Graphic::ShowRoads(roads);
 
@@ -197,4 +198,6 @@ void GameManager::End()
 {
     Graphic::ClearWindow();
     Graphic::MakeText(590, 335, "WASTED");
+    auto btn_restart = Graphic::MakeButton(590, 385, 100, 50, "RESTART");
+    btn_restart->callback([](Fl_Widget *w){w->hide(); StartGame();});
 }
