@@ -21,6 +21,7 @@ void GameManager::StartGame()
     Start();
 
     fix_thr = std::thread(StartFixedUpdate);
+    time::Update();
     upd_thr = std::thread(StartUpdate);
 }
 

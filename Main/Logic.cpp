@@ -64,15 +64,9 @@ void StartWave()
     if (!wave.Is_Started())
     {
         wave.StartWave();
-        // Graphic::ClearCockroaches();
         Graphic::ShowCockroaches();
         timer = 0.;
     }
-}
-
-void CBStartWave(Fl_Widget *w, void *p)
-{
-    StartWave();
 }
 
 struct PackWeapon
@@ -129,7 +123,8 @@ void GameManager::Start()
     Graphic::ShowRoads(roads);
 
     btn_start_wave = Graphic::MakeButton(0, 720, 100, 50, "start wave");
-    btn_start_wave->callback(CBStartWave, new int(5));
+    btn_start_wave->callback([](Fl_Widget *w)
+                             { StartWave(); });
 
     btns_make_slapper.reserve(3);
     btns_make_slapper.push_back(Graphic::MakeButton(200, 500, 100, 50, "make slapper \n 100 sb"));

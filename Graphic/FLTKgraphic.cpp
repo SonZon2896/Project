@@ -143,38 +143,6 @@ GraphicWeapon::GraphicWeapon(Point pos, const Trigger *trigger)
     box(FL_NO_BOX);
 }
 
-void UpgradeWeapon(Fl_Widget *w, void *data)
-{
-    auto unpack = (PackUpgrade *)data;
-    if (unpack->type == EnumWeapon::slapper)
-    {
-        auto slapper = (Slapper *)unpack->weapon;
-        if (Event::money < slapper->GetCost())
-            return;
-        Event::money -= slapper->GetCost();
-        slapper->Upgrade();
-        ((GraphicSlapper *)w)->name = std::to_string(slapper->GetLvl()) + "lvl\n" + std::to_string((int)slapper->GetCost());
-    }
-    else if (unpack->type == EnumWeapon::dichlorvos)
-    {
-        auto dichlorvos = (Dichlorvos *)unpack->weapon;
-        if (Event::money < dichlorvos->GetCost())
-            return;
-        Event::money -= dichlorvos->GetCost();
-        dichlorvos->Upgrade();
-        ((GraphicDichlorvos *)w)->name = std::to_string(dichlorvos->GetLvl()) + "lvl\n" + std::to_string((int)dichlorvos->GetCost());
-    }
-    else if (unpack->type == EnumWeapon::trap)
-    {
-        auto trap = (Trap *)unpack->weapon;
-        if (Event::money < trap->GetCost())
-            return;
-        Event::money -= trap->GetCost();
-        trap->Upgrade();
-        ((GraphicTrap *)w)->name = std::to_string(trap->GetLvl()) + "lvl\n" + std::to_string((int)trap->GetCost());
-    }
-}
-
 // GraphicSlapper
 
 void GraphicSlapper::draw()
@@ -190,13 +158,22 @@ GraphicSlapper::GraphicSlapper(Slapper *slapper)
 {
     name = std::to_string(slapper->GetLvl()) + "lvl\n" + std::to_string((int)slapper->GetCost());
     img = new Fl_PNG_Image("./PNG/slapper_px.png");
-    callback(UpgradeWeapon, (void *)(new PackUpgrade(slapper, EnumWeapon::slapper)));
+    auto upgrade = [](Fl_Widget *w, void *data)
+    {
+        auto weap = (Slapper *)data;
+        if (Event::money < weap->GetCost())
+            return;
+        Event::money -= weap->GetCost();
+        weap->Upgrade();
+        ((GraphicWeapon *)w)->name = std::to_string(weap->GetLvl()) + "lvl\n" + std::to_string((int)weap->GetCost());
+    };
+    callback(upgrade, slapper);
 }
 
 GraphicSlapper::~GraphicSlapper()
 {
-    // delete img;
-    // delete slapper;
+    delete img;
+    delete slapper;
 }
 
 // GraphicDichlorvos
@@ -230,7 +207,16 @@ GraphicDichlorvos::GraphicDichlorvos(Dichlorvos *dichlorvos)
     default:
         img = new Fl_PNG_Image("./PNG/dichlorvos_up.png");
     }
-    callback(UpgradeWeapon, (void *)(new PackUpgrade(dichlorvos, EnumWeapon::dichlorvos)));
+    auto upgrade = [](Fl_Widget *w, void *data)
+    {
+        auto weap = (Dichlorvos *)data;
+        if (Event::money < weap->GetCost())
+            return;
+        Event::money -= weap->GetCost();
+        weap->Upgrade();
+        ((GraphicWeapon *)w)->name = std::to_string(weap->GetLvl()) + "lvl\n" + std::to_string((int)weap->GetCost());
+    };
+    callback(upgrade, dichlorvos);
 }
 
 GraphicDichlorvos::~GraphicDichlorvos()
@@ -254,7 +240,16 @@ GraphicTrap::GraphicTrap(Trap *trap)
 {
     name = std::to_string(trap->GetLvl()) + "lvl\n" + std::to_string((int)trap->GetCost());
     img = new Fl_PNG_Image("./PNG/trap_px.png");
-    callback(UpgradeWeapon, (void *)(new PackUpgrade(trap, EnumWeapon::trap)));
+    auto upgrade = [](Fl_Widget *w, void *data)
+    {
+        auto weap = (Trap *)data;
+        if (Event::money < weap->GetCost())
+            return;
+        Event::money -= weap->GetCost();
+        weap->Upgrade();
+        ((GraphicWeapon *)w)->name = std::to_string(weap->GetLvl()) + "lvl\n" + std::to_string((int)weap->GetCost());
+    };
+    callback(upgrade, trap);
 }
 
 GraphicTrap::~GraphicTrap()

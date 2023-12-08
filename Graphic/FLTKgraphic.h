@@ -124,9 +124,6 @@ struct PackUpgrade
     PackUpgrade(Weapon *weapon, EnumWeapon type) : weapon{weapon}, type{type} {}
 };
 
-/// @brief callback func for weapons
-void UpgradeWeapon(Fl_Widget *w, void *data);
-
 /// @brief class to draw Slapper
 class GraphicSlapper : public GraphicWeapon
 {
