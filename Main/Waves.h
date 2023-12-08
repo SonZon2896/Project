@@ -3,32 +3,71 @@
 #include "../Headers/heads.h"
 #include "../Weapons/weapons.h"
 
-/// @brief Wave of cockroaches
+/// @brief Abstract Class
 class Wave
 {
-private:
-    std::vector<Cockroach *> cockroaches;
+protected:
+    Wave();
+    
     double time_from_start;
-    size_t active_cockr = 0;
+    double interval;
+    size_t num;
+    size_t active_enemy;
     size_t survived;
     bool is_started = false;
 
-public:
-    /// @brief variables to make a cockroaches
-    std::vector<Road> roads;
-    PrototypeEnemy prototype;
-    double interval;
-    size_t num;
+private:
+    static inline std::vector<Wave *> all_waves;
 
-    Wave() = default;
-    Wave(const std::vector<Road> &roads);
+public:
+    std::vector<Road> roads;
+
+    // Wave() = delete;
+    ~Wave();
+
     /// @brief main functions, which control logic of wave
-    void StartWave();
-    void MoveWave(double time);
-    void EndWave();
+    virtual void Start(size_t num_of_wave) = 0;
+    virtual void Action(double time) = 0;
+    virtual void End() = 0;
+
+    static void StartAll(size_t num_of_wave);
+    static void ActionAll(double time);
+    static void EndAll();
 
     /// @brief Get functions
     size_t GetSurvived() { return survived; }
-    size_t GetRunning() { return active_cockr + survived >= num * roads.size() ? active_cockr + survived - num * roads.size() : 0; }
-    bool Is_Started() { return is_started; }
+    size_t GetRunning() { return active_enemy + survived >= num * roads.size() ? active_enemy + survived - num * roads.size() : 0; }
+    bool IsStarted() { return is_started; }
+    static size_t GetAllSurvived();
+    static size_t GetAllRunning();
+    static bool IsAllStarted();
+    static auto GetAll() {return all_waves;}
+};
+
+class WaveCockroaches : public Wave
+{
+private:
+    std::vector<Cockroach *> cockroaches;
+    PrototypeEnemy prototype;
+
+public:
+    WaveCockroaches() = default;
+
+    void Start(size_t num_of_wave) final;
+    void Action(double time) final;
+    void End() final;
+};
+
+class WaveMouses : public Wave
+{
+private:
+    std::vector<Mouse *> mouses;
+    PrototypeEnemy prototype;
+
+public:
+    WaveMouses() = default;
+
+    void Start(size_t num_of_wave) final;
+    void Action(double time) final;
+    void End() final;
 };

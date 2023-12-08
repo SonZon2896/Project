@@ -20,10 +20,10 @@ std::vector<Road> roads{
     {{100., 630.}, {250., 630.}, {250., 350.}, Fridge::pos},
     {{1050., 525.}, {550., 525.}, {550., 350.}, {250., 350.}, Fridge::pos},
     {{500., 700.}, {600., 700.}, {600., 600.}, {400., 600.}, {400., 350.}, {250., 350.}, Fridge::pos}};
+std::vector<Road> mouse_roads{{{700., 500.}, Fridge::pos}};
 
-std::vector<Road> mouse_road{{{700., 500.}, Fridge::pos}};
-Wave wave(roads);
-Wave mouse_wave(mouse_road);
+WaveCockroaches wave_cockroaches;
+WaveMouses wave_mouses;
 size_t num_of_wave;
 
 Fl_Button *btn_start_wave;
@@ -34,6 +34,7 @@ std::vector<Fl_Button *> btns_make_trap;
 Text *events;
 Text *num_wave_text;
 Text *survived;
+Text *wave_started;
 Text *fridge_hp;
 Text *stipubles;
 Text *timer_text;
@@ -48,28 +49,23 @@ double timer_to_start_wave = 10.;
 
 // Functions ==============================================================================
 
-void MakeWave()
-{
-    if (wave.Is_Started())
-        throw std::runtime_error("Making wave, when it started");
-
-    ++num_of_wave;
-
-    wave.prototype.health = 100. + num_of_wave * 20;
-    wave.prototype.speed = 200. + num_of_wave * 2;
-    wave.prototype.damage = 5;
-    wave.num = 20 + num_of_wave;
-    wave.interval = 0.05;
-}
-
 void StartWave()
 {
-    if (!wave.Is_Started())
+    if (!Wave::IsAllStarted())
     {
-        wave.StartWave();
+        auto all_waves = Wave::GetAll();
+        for (auto wave : all_waves)
+            wave->Start(num_of_wave);
         Graphic::ShowEnemies();
         timer = 0.;
     }
+}
+
+void NextWave()
+{
+    Wave::EndAll();
+    ++num_of_wave;
+    Event::Scholarship();
 }
 
 struct PackWeapon
@@ -120,6 +116,9 @@ void GameManager::Start()
     Fridge::health = 100;
     Event::money = 1500.;
 
+    wave_cockroaches.roads = roads;
+    wave_mouses.roads = mouse_roads;
+
     num_of_wave = 0;
     Graphic::MakeWindow(1280, 770);
     Graphic::MakeBackground("./PNG/main_field_px.png");
@@ -155,43 +154,42 @@ void GameManager::Start()
     survived = Graphic::MakeText(200, 720, "survived");
     stipubles = Graphic::MakeText(300, 720, "stipubles");
     timer_text = Graphic::MakeText(400, 720, "timer");
+    wave_started = Graphic::MakeText(500, 720, "Started?");
     fridge_hp = Graphic::MakeText(125, 50, "fridge hp");
-
-    MakeWave();
 }
 
 void GameManager::FixedUpdate()
 {
-    if (wave.Is_Started())
+    if (Wave::IsAllStarted())
     {
-        wave.MoveWave(time::fixed);
-        if (wave.GetSurvived() <= 0)
-        {
-            wave.EndWave();
-            Event::Scholarship();
-            MakeWave();
-        }
+        Wave::ActionAll(time::fixed);
+        if (Wave::GetAllSurvived() <= 0)
+            NextWave();
     }
+    for (auto enemy : Enemy::GetAll())
+        enemy->CheckTrigger();
     for (auto weapon : Weapon::GetAll())
         weapon->Action(time::fixed);
     if (Fridge::health <= 0)
     {
-        wave.EndWave();
+        auto all_waves = Wave::GetAll();
+        Wave::EndAll();
         EndGame();
     }
 }
 
 void GameManager::Update()
 {
-    if (!wave.Is_Started() && (timer += time::DeltaTime()) > timer_to_start_wave)
+    if (!Wave::IsAllStarted() && (timer += time::DeltaTime()) > timer_to_start_wave)
     {
         StartWave();
         timer = 0.;
     }
 
     num_wave_text->output = std::to_string(num_of_wave);
-    events->output = Event::Evil_Woman(wave.GetRunning());
-    survived->output = std::to_string(wave.GetSurvived());
+    events->output = Event::Evil_Woman(Wave::GetAllRunning());
+    survived->output = std::to_string(Wave::GetAllSurvived());
+    wave_started->output = Wave::IsAllStarted() ? "Started" : "Not Started";
     fridge_hp->output = std::to_string((int)Fridge::health);
     stipubles->output = std::to_string((int)Event::money);
     timer_text->output = std::to_string((int)(timer_to_start_wave - timer + 0.99));
