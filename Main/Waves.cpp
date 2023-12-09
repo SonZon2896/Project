@@ -124,7 +124,7 @@ void WaveMouses::Start(size_t num_of_wave)
     prototype.health = 1000;
     prototype.speed = 20;
     prototype.damage = 50;
-    num = 1;
+    num = (num_of_wave / 5) * ((num_of_wave % 5) == 0);
     interval = 10;
 
     mouses.reserve(roads.size() * num);

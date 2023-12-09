@@ -34,11 +34,7 @@ Background::~Background()
 void GraphicEnemy::draw()
 {
     Point cur_direction = enemy->GetDirection();
-    if (prev_direction != cur_direction || (enemy->is_death && !is_death_img))
-    {
         UpdateImage();
-        prev_direction = cur_direction;
-    }
     img_now->draw(enemy->pos.x - ENEMY_SIZE_X / 2, enemy->pos.y - ENEMY_SIZE_Y / 2);
 }
 
@@ -63,7 +59,6 @@ void GraphicEnemy::UpdateImage()
     if (enemy->is_death)
     {
         img_now = img_death;
-        is_death_img = true;
         return;
     }
     switch (enemy->GetOrientation())

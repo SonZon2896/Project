@@ -49,7 +49,6 @@ class GraphicEnemy : public Fl_Box
 private:
     Enemy *enemy;
     Fl_Image *img_now;
-    bool is_death_img = false;
     Point prev_direction;
     void draw();
 
