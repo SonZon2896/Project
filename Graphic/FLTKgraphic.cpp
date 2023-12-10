@@ -269,6 +269,138 @@ GraphicTrap::~GraphicTrap()
     delete trap;
 }
 
+// ButtonMakeWeapon
+
+ButtonMakeWeapon::ButtonMakeWeapon(Point pos)
+    : pos{pos},
+      Fl_Button(pos.x - BUTTON_MAKE_WEAPON_SIZE / 2, pos.y - BUTTON_MAKE_WEAPON_SIZE / 2, BUTTON_MAKE_WEAPON_SIZE, BUTTON_MAKE_WEAPON_SIZE),
+      btn_back{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3, "BACK")},
+      btn_accept{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y + BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3, "ACCEPT")},
+      btn_make_slapper{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 2, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3, "SLAPPER")},
+      btn_make_dichlorvos{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 2, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3, "DICHLORVOS")},
+      btn_make_trap{Graphic::MakeButton(pos.x + BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3, "TRAP")},
+      btn_dir_up{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 2, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3, "UP")},
+      btn_dir_down{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y + BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3, "DOWN")},
+      btn_dir_left{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 2, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3, "LEFT")},
+      btn_dir_right{Graphic::MakeButton(pos.x + BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3, "RIGHT")}
+{
+    box(FL_NO_BOX);
+    StageZero();
+
+    auto StageZeroCB = [](Fl_Widget *w, void *data){((ButtonMakeWeapon *)data)->StageZero();};
+    auto StageWeaponCB = [](Fl_Widget *w, void *data){((ButtonMakeWeapon *)data)->StageWeapon();};
+    auto StageDirectionCB = [](Fl_Widget *w, void *data){auto unpack = ((std::pair<ButtonMakeWeapon *, EnumWeapon> *)data);
+                                                         unpack->first->type = unpack->second;
+                                                         unpack->first->StageDirection();};
+    auto StageAcceptCB = [](Fl_Widget *w, void *data){auto unpack = ((std::pair<ButtonMakeWeapon *, Direction> *)data);
+                                                     unpack->first->direction = unpack->second;
+                                                     unpack->first->StageAccept();};
+    auto MakeWeaponCB = [](Fl_Widget *w, void *data){((ButtonMakeWeapon *)data)->MakeWeapon();};
+    
+    callback(StageWeaponCB, this);
+    btn_back->callback(StageZeroCB, this);
+    btn_accept->callback(MakeWeaponCB, this);
+    btn_make_slapper->callback(StageDirectionCB, (void *)(new std::pair<ButtonMakeWeapon *, EnumWeapon>(this, EnumWeapon::slapper)));
+    btn_make_dichlorvos->callback(StageDirectionCB, (void *)(new std::pair<ButtonMakeWeapon *, EnumWeapon>(this, EnumWeapon::dichlorvos)));
+    btn_make_trap->callback(StageDirectionCB, (void *)(new std::pair<ButtonMakeWeapon *, EnumWeapon>(this, EnumWeapon::trap)));
+    btn_dir_up->callback(StageAcceptCB, (void *)(new std::pair<ButtonMakeWeapon *, Direction>(this, UP)));
+    btn_dir_down->callback(StageAcceptCB, (void *)(new std::pair<ButtonMakeWeapon *, Direction>(this, DOWN)));
+    btn_dir_left->callback(StageAcceptCB, (void *)(new std::pair<ButtonMakeWeapon *, Direction>(this, LEFT)));
+    btn_dir_right->callback(StageAcceptCB, (void *)(new std::pair<ButtonMakeWeapon *, Direction>(this, RIGHT)));
+}
+
+void ButtonMakeWeapon::StageZero()
+{
+    btn_back->hide();
+    btn_accept->hide();
+    btn_make_slapper->hide();
+    btn_make_dichlorvos->hide();
+    btn_make_trap->hide();
+    btn_dir_up->hide();
+    btn_dir_down->hide();
+    btn_dir_left->hide();
+    btn_dir_right->hide();
+    this->show();
+}
+
+void ButtonMakeWeapon::StageWeapon()
+{
+    btn_back->show();
+    btn_accept->hide();
+    btn_make_slapper->show();
+    btn_make_dichlorvos->show();
+    btn_make_trap->show();
+    btn_dir_up->hide();
+    btn_dir_down->hide();
+    btn_dir_left->hide();
+    btn_dir_right->hide();
+    this->hide();
+}
+
+void ButtonMakeWeapon::StageDirection()
+{
+    btn_back->show();
+    btn_accept->hide();
+    btn_make_slapper->hide();
+    btn_make_dichlorvos->hide();
+    btn_make_trap->hide();
+    btn_dir_up->show();
+    btn_dir_down->show();
+    btn_dir_left->show();
+    btn_dir_right->show();
+    this->hide();
+}
+
+void ButtonMakeWeapon::StageAccept()
+{
+    btn_back->show();
+    btn_accept->show();
+    btn_make_slapper->hide();
+    btn_make_dichlorvos->hide();
+    btn_make_trap->hide();
+    btn_dir_up->hide();
+    btn_dir_down->hide();
+    btn_dir_left->hide();
+    btn_dir_right->hide();
+    this->hide();
+}
+
+void ButtonMakeWeapon::MakeWeapon()
+{
+    btn_back->hide();
+    btn_accept->hide();
+    btn_make_slapper->hide();
+    btn_make_dichlorvos->hide();
+    btn_make_trap->hide();
+    btn_dir_up->hide();
+    btn_dir_down->hide();
+    btn_dir_left->hide();
+    btn_dir_right->hide();
+    this->hide();
+
+    switch (type)
+    {
+    case EnumWeapon::slapper:
+    {
+        auto slapper = new Slapper(pos, direction);
+        Graphic::MakeSlapper(slapper);
+        break;
+    }
+    case EnumWeapon::dichlorvos:
+    {
+        auto dichlorvos = new Dichlorvos(pos, direction);
+        Graphic::MakeDichlorvos(dichlorvos);
+        break;
+    }
+    case EnumWeapon::trap:
+    {
+        auto trap = new Trap(pos, direction);
+        Graphic::MakeTrap(trap);
+        break;
+    }
+    }
+}
+
 // Graphic
 
 void Graphic::MakeWindow(int w, int h)
@@ -372,6 +504,13 @@ GraphicDichlorvos *Graphic::MakeDichlorvos(Dichlorvos *dichlorvos)
 GraphicTrap *Graphic::MakeTrap(Trap *trap)
 {
     auto temp = new GraphicTrap(trap);
+    window->add(temp);
+    return temp;
+}
+
+ButtonMakeWeapon *Graphic::MakeBTNWeapon(Point pos)
+{
+    auto temp = new ButtonMakeWeapon(pos);
     window->add(temp);
     return temp;
 }

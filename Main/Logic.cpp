@@ -129,26 +129,11 @@ void GameManager::Start()
     btn_start_wave->callback([](Fl_Widget *w)
                              { StartWave(); });
 
-    btns_make_slapper.reserve(3);
-    btns_make_slapper.push_back(Graphic::MakeButton(200, 500, 100, 50, "make slapper \n 100 sb"));
-    btns_make_slapper[btns_make_slapper.size() - 1]->callback(MakeWeapon, (void *)(new PackWeapon{{200 + 50, 500 + (-30)}, DOWN, EnumWeapon::slapper}));
-    btns_make_slapper.push_back(Graphic::MakeButton(700, 500, 100, 50, "make slapper \n 100 sb"));
-    btns_make_slapper[btns_make_slapper.size() - 1]->callback(MakeWeapon, (void *)(new PackWeapon{{700 + 50, 500 + (-30)}, LEFT, EnumWeapon::slapper}));
-    btns_make_slapper.push_back(Graphic::MakeButton(500, 400, 100, 50, "make slapper \n 100 sb"));
-    btns_make_slapper[btns_make_slapper.size() - 1]->callback(MakeWeapon, (void *)(new PackWeapon{{500 + 50, 400 + (-30)}, RIGHT, EnumWeapon::slapper}));
+    for (size_t i = BUTTON_MAKE_WEAPON_SIZE / 2; i <= 1280 - BUTTON_MAKE_WEAPON_SIZE / 2; i += BUTTON_MAKE_WEAPON_SIZE)
+        for (size_t j = BUTTON_MAKE_WEAPON_SIZE / 2; j <= 720 - BUTTON_MAKE_WEAPON_SIZE / 2; j += BUTTON_MAKE_WEAPON_SIZE)
+            Graphic::MakeBTNWeapon({i, j});
 
-    btns_make_dichlorvos.reserve(2);
-    btns_make_dichlorvos.push_back(Graphic::MakeButton(150, 300, 100, 50, "make dichlorvos \n 400 sb"));
-    btns_make_dichlorvos[btns_make_dichlorvos.size() - 1]->callback(MakeWeapon, (void *)(new PackWeapon({150 + 50, 300 + 50}, RIGHT, EnumWeapon::dichlorvos)));
-    btns_make_dichlorvos.push_back(Graphic::MakeButton(350, 300, 100, 50, "make dichlorvos \n 400 sb"));
-    btns_make_dichlorvos[btns_make_dichlorvos.size() - 1]->callback(MakeWeapon, (void *)(new PackWeapon({350 + 50, 300 + 20}, DOWN, EnumWeapon::dichlorvos)));
-
-    btns_make_trap.reserve(2);
-    btns_make_trap.push_back(Graphic::MakeButton(900, 500, 100, 50, "make trap \n 150 sb"));
-    btns_make_trap[btns_make_trap.size() - 1]->callback(MakeWeapon, (void *)(new PackWeapon({900 + 50, 500 + 0}, DOWN, EnumWeapon::trap)));
-    btns_make_trap.push_back(Graphic::MakeButton(200, 350, 100, 50, "make trap \n 150 sb"));
-    btns_make_trap[btns_make_trap.size() - 1]->callback(MakeWeapon, (void *)(new PackWeapon({200 + 50, 350 + 50}, DOWN, EnumWeapon::trap)));
-
+    
     events = Graphic::MakeText(1000, 720, "output");
     num_wave_text = Graphic::MakeText(100, 720, "wave");
     survived = Graphic::MakeText(200, 720, "survived");

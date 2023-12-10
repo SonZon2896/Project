@@ -169,6 +169,43 @@ public:
     ~GraphicTrap();
 };
 
+#define BUTTON_MAKE_WEAPON_SIZE 64
+
+class ButtonMakeWeapon : public Fl_Button
+{
+private:
+    Point pos;
+
+    EnumWeapon type;
+    Fl_Button *btn_make_slapper;
+    Fl_Button *btn_make_dichlorvos;
+    Fl_Button *btn_make_trap;
+
+    Direction direction;
+    Fl_Button *btn_dir_up;
+    Fl_Button *btn_dir_down;
+    Fl_Button *btn_dir_left;
+    Fl_Button *btn_dir_right;
+
+    Fl_Button *btn_accept;
+    Fl_Button *btn_back;
+    void StageZero();
+    void StageWeapon();
+    void StageDirection();
+    void StageAccept();
+    void MakeWeapon();
+
+public:
+    friend void StageWeaponCB(Fl_Widget *, void *);
+    friend void StageDirectionCB(Fl_Widget *, void *);
+    friend void StageZeroCB(Fl_Widget *, void *);
+    friend void StageAcceptCB(Fl_Widget *, void *);
+    friend void MakeWeaponCB(Fl_Widget *, void *);
+
+    ButtonMakeWeapon() = delete;
+    ButtonMakeWeapon(Point pos);
+};
+
 /// @brief class to draw on FLTK
 class Graphic
 {
@@ -198,6 +235,7 @@ public:
     static GraphicSlapper *MakeSlapper(Slapper *slapper);
     static GraphicDichlorvos *MakeDichlorvos(Dichlorvos *dichlorvos);
     static GraphicTrap *MakeTrap(Trap *trap);
+    static ButtonMakeWeapon *MakeBTNWeapon(Point pos);
 
     static void ShowRoads(const std::vector<Road> &roads);
     static void ShowEnemies();
