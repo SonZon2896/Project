@@ -47,7 +47,7 @@ void Weapon::Action(double time)
 // Slapper
 
 Slapper::Slapper(const Point &pos, Direction direction)
-    : trig({0., 0.}, {0., 0.}), Weapon(pos, &this->trig, 0.4, 150), direction{direction}
+    : trig({0., 0.}, {0., 0.}), Weapon(pos, &this->trig, 1.2, 110), direction{direction}
 {
     switch (direction)
     {
@@ -72,9 +72,9 @@ Slapper::Slapper(const Point &pos, Direction direction)
 
 void Slapper::Upgrade()
 {
-    upgrade_cost += 100;
+    upgrade_cost += 200;
     ++level;
-    damage += 20;
+    damage += 5;
     interval -= interval / 100.;
 }
 
@@ -84,7 +84,7 @@ void Slapper::Upgrade()
 // Dichlorvos
 
 Dichlorvos::Dichlorvos(const Point &pos, Direction direction)
-    : trig({0., 0.}, {0., 0.}), Weapon(pos, &this->trig, 0.1, 15), direction{direction}
+    : trig({0., 0.}, {0., 0.}), Weapon(pos, &this->trig, 1., 120), direction{direction}
 {
     switch (direction)
     {
@@ -112,7 +112,7 @@ Dichlorvos::Dichlorvos(const Point &pos, Direction direction)
 
 void Dichlorvos::Upgrade()
 {
-    upgrade_cost += 100;
+    upgrade_cost += 400;
     ++level;
     damage += 10;
     interval -= interval / 50.;

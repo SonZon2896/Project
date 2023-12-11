@@ -60,7 +60,7 @@ public:
     auto GetDir() const { return direction; }
 };
 
-#define dichlorvos_trig_size_x 30
+#define dichlorvos_trig_size_x 50
 #define dichlorvos_trig_size_y 200
 
 class Dichlorvos : public Weapon
@@ -69,7 +69,7 @@ private:
     int level = 1;
     Trigger trig;
     Direction direction;
-    double upgrade_cost = 500;
+    double upgrade_cost = 1000;
 
 public:
     Dichlorvos(const Point &pos, Direction direction);

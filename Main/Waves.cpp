@@ -64,10 +64,10 @@ bool Wave::IsAllStarted()
 
 void WaveCockroaches::Start(size_t num_of_wave) 
 {
-    prototype.health = 100 + 20 * num_of_wave;
-    prototype.speed = 100 + 5 * num_of_wave;
+    prototype.health = 100 + 5 * num_of_wave;
+    prototype.speed = 100 + 10 * num_of_wave;
     prototype.damage = 5;
-    num = 10 + 2 * num_of_wave;
+    num = 20 + 5 * num_of_wave;
     interval = 0.2 * (1 - num_of_wave / (num_of_wave + 10));
 
     cockroaches.reserve(roads.size() * num);
@@ -113,6 +113,7 @@ void WaveCockroaches::Action(double time)
 
 void WaveCockroaches::End()
 {
+    Event::money += WaveCockroaches::num * 100;
     survived = 0;
     is_started = false;
 }
@@ -121,8 +122,8 @@ void WaveCockroaches::End()
 
 void WaveMouses::Start(size_t num_of_wave)
 {
-    prototype.health = 1000;
-    prototype.speed = 20;
+    prototype.health = 3000;
+    prototype.speed = 50;
     prototype.damage = 50;
     num = (num_of_wave / 5) * ((num_of_wave % 5) == 0);
     interval = 10;

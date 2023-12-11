@@ -167,6 +167,7 @@ GraphicSlapper::GraphicSlapper(Slapper *slapper)
     : slapper{slapper},
       GraphicWeapon(slapper->GetPos(), slapper->trigger)
 {
+    
     name = std::to_string(slapper->GetLvl()) + "lvl\n" + std::to_string((int)slapper->GetCost());
     img = new Fl_PNG_Image("./PNG/slapper_px.png");
     auto upgrade = [](Fl_Widget *w, void *data)
@@ -367,6 +368,8 @@ void ButtonMakeWeapon::StageAccept()
 
 void ButtonMakeWeapon::MakeWeapon()
 {
+    if(Event::money < 300)
+        return;
     btn_back->hide();
     btn_accept->hide();
     btn_make_slapper->hide();
@@ -382,18 +385,21 @@ void ButtonMakeWeapon::MakeWeapon()
     {
     case EnumWeapon::slapper:
     {
+        Event::money -= 400;
         auto slapper = new Slapper(pos, direction);
         Graphic::MakeSlapper(slapper);
         break;
     }
     case EnumWeapon::dichlorvos:
     {
+        Event::money -= 1000;
         auto dichlorvos = new Dichlorvos(pos, direction);
         Graphic::MakeDichlorvos(dichlorvos);
         break;
     }
     case EnumWeapon::trap:
     {
+        Event::money -= 400;
         auto trap = new Trap(pos, direction);
         Graphic::MakeTrap(trap);
         break;

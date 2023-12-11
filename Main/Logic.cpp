@@ -12,15 +12,16 @@
 Point Fridge::pos{250, 210};
 double Fridge::health;
 double Event::money;
-double Event::money_speed{1800.};
-const bool Mark_Lox = true;  // 1 december
+double Event::money_speed{1500};
+constexpr bool Mark_Lox = false;  // 1 december
 const bool Artem_Lox = true; // 2 december
+constexpr bool Vanya_Lox = true; // 11 decenmber
 std::vector<Road> roads{
     {{700., 250.}, {700., 350.}, {250., 350.}, Fridge::pos},
     {{100., 630.}, {250., 630.}, {250., 350.}, Fridge::pos},
     {{1050., 525.}, {550., 525.}, {550., 350.}, {250., 350.}, Fridge::pos},
     {{500., 700.}, {600., 700.}, {600., 600.}, {400., 600.}, {400., 350.}, {250., 350.}, Fridge::pos}};
-std::vector<Road> mouse_roads{{{700., 500.}, Fridge::pos}};
+std::vector<Road> mouse_roads{{{500., 700.}, {600., 700.}, {600., 600.}, {400., 600.}, {400., 350.}, {250., 350.}, Fridge::pos}};
 
 WaveCockroaches wave_cockroaches;
 WaveMouses wave_mouses;
@@ -83,7 +84,7 @@ void MakeWeapon(Fl_Widget *w, void *p)
     {
         if (Event::money < 100)
             return;
-        Event::money -= 100;
+        Event::money -= 400;
         w->hide();
         auto slapper = new Slapper(unpack->pos, unpack->direction);
         slappers.push_back(Graphic::MakeSlapper(slapper));
@@ -92,7 +93,7 @@ void MakeWeapon(Fl_Widget *w, void *p)
     {
         if (Event::money < 400)
             return;
-        Event::money -= 400;
+        Event::money -= 1000;
         w->hide();
         auto dichlorvos = new Dichlorvos(unpack->pos, unpack->direction);
         dichlorvoses.push_back(Graphic::MakeDichlorvos(dichlorvos));
