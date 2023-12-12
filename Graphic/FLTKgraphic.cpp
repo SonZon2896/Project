@@ -275,18 +275,36 @@ GraphicTrap::~GraphicTrap()
 ButtonMakeWeapon::ButtonMakeWeapon(Point pos)
     : pos{pos},
       Fl_Button(pos.x - BUTTON_MAKE_WEAPON_SIZE / 2, pos.y - BUTTON_MAKE_WEAPON_SIZE / 2, BUTTON_MAKE_WEAPON_SIZE, BUTTON_MAKE_WEAPON_SIZE),
-      btn_back{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3, "BACK")},
-      btn_accept{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y + BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3, "ACCEPT")},
-      btn_make_slapper{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 2, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3, "SLAPPER")},
-      btn_make_dichlorvos{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 2, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3, "DICHLORVOS")},
-      btn_make_trap{Graphic::MakeButton(pos.x + BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3, "TRAP")},
-      btn_dir_up{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 2, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3, "UP")},
-      btn_dir_down{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y + BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3, "DOWN")},
-      btn_dir_left{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 2, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3, "LEFT")},
-      btn_dir_right{Graphic::MakeButton(pos.x + BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3, "RIGHT")}
+      btn_back{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3)},
+      btn_accept{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y + BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3)},
+      btn_make_slapper{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 2, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3)},
+      btn_make_dichlorvos{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 2, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3)},
+      btn_make_trap{Graphic::MakeButton(pos.x + BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3)},
+      btn_dir_up{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 2, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3)},
+      btn_dir_down{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y + BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3)},
+      btn_dir_left{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 2, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3)},
+      btn_dir_right{Graphic::MakeButton(pos.x + BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3)}
 {
     box(FL_NO_BOX);
-    StageZero();
+
+    btn_back->image(new Fl_PNG_Image("./PNG/reject_box.png"));
+    btn_back->box(FL_NO_BOX);
+    btn_accept->image(new Fl_PNG_Image("./PNG/accept_box.png"));
+    btn_accept->box(FL_NO_BOX);
+    btn_dir_up->image(new Fl_PNG_Image("./PNG/arrow_up_box.png"));
+    btn_dir_up->box(FL_NO_BOX);
+    btn_dir_down->image(new Fl_PNG_Image("./PNG/arrow_down_box.png"));
+    btn_dir_down->box(FL_NO_BOX);
+    btn_dir_left->image(new Fl_PNG_Image("./PNG/arrow_left_box.png"));
+    btn_dir_left->box(FL_NO_BOX);
+    btn_dir_right->image(new Fl_PNG_Image("./PNG/arrow_right_box.png"));
+    btn_dir_right->box(FL_NO_BOX);
+    btn_make_slapper->image(new Fl_PNG_Image("./PNG/slapper_box.png"));
+    btn_make_slapper->box(FL_NO_BOX);
+    btn_make_dichlorvos->image(new Fl_PNG_Image("./PNG/dichlorvos_box.png"));
+    btn_make_dichlorvos->box(FL_NO_BOX);
+    btn_make_trap->image(new Fl_PNG_Image("./PNG/trap_box.png"));
+    btn_make_trap->box(FL_NO_BOX);
 
     auto StageZeroCB = [](Fl_Widget *w, void *data){((ButtonMakeWeapon *)data)->StageZero();};
     auto StageWeaponCB = [](Fl_Widget *w, void *data){((ButtonMakeWeapon *)data)->StageWeapon();};
@@ -308,6 +326,8 @@ ButtonMakeWeapon::ButtonMakeWeapon(Point pos)
     btn_dir_down->callback(StageAcceptCB, (void *)(new std::pair<ButtonMakeWeapon *, Direction>(this, DOWN)));
     btn_dir_left->callback(StageAcceptCB, (void *)(new std::pair<ButtonMakeWeapon *, Direction>(this, LEFT)));
     btn_dir_right->callback(StageAcceptCB, (void *)(new std::pair<ButtonMakeWeapon *, Direction>(this, RIGHT)));
+
+    StageZero();
 }
 
 void ButtonMakeWeapon::StageZero()
