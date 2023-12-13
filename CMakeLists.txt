@@ -3,6 +3,8 @@ project(cockroaches VERSION 0.1.0 LANGUAGES CXX)
 
 install()
 
+file(GLOB FLTK_SOURCES "lib/fltk/*.cpp")
+
 set(SOURCES main.cpp
             Headers/Heads.cpp
             Headers/MainMenu.cpp
@@ -12,7 +14,9 @@ set(SOURCES main.cpp
             Main/Waves.cpp
             Main/GameManager.cpp
             Main/MainMenuManager.cpp
-            Main/Logic.cpp)
+            Main/Logic.cpp
+            ${FLTK_SOURCES}
+            )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
