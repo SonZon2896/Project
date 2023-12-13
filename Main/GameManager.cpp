@@ -43,7 +43,7 @@ void GameManager::StartUpdate()
     }
 }
 
-void GameManager::EndGame()
+void GameManager::EndGame(GameOverStatus status)
 {
     if (!is_started)
         return;
@@ -53,5 +53,12 @@ void GameManager::EndGame()
     fix_thr.join();
     upd_thr.join();
 
-    End();
+    if (status == GAMEOVER_WASTED)
+        End();
+    
+}
+
+void GameManager::QuitGame(){
+    EndGame(GAMEOVER_QUIT);
+    Graphic::Hide();
 }

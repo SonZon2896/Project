@@ -252,4 +252,6 @@ public:
     static void ShowRoads(const std::vector<Road> &roads);
     static void ShowEnemies();
     static void Show();
+
+    static void Hide();
 };

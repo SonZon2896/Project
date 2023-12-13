@@ -50,7 +50,7 @@ Labels labels;
 Roads roads;
 
 Fl_Button *btn_start_wave;
-
+GraphicButton *btn_close_game;
 
 // Functions ==============================================================================
 
@@ -130,9 +130,15 @@ void GameManager::Start()
     Graphic::Show();
     Graphic::ShowRoads(roads.cockroach_roads);
 
-    btn_start_wave = Graphic::MakeButton(0, 720, 100, 50, "start wave");
-    btn_start_wave->callback([](Fl_Widget *w)
-                             { StartWave(); });
+    btn_start_wave = Graphic::MakeButton(0, 720, 100, 50, "Start wave");
+    btn_start_wave->callback([](Fl_Widget *w){
+                                StartWave(); 
+                            });
+
+    btn_close_game = Graphic::MakeButton(1180, 0, 100, 50, "Quit game");
+    btn_close_game->callback([](Fl_Widget *w){
+                                GameManager::QuitGame();
+                            });
 
     for (size_t i = BUTTON_MAKE_WEAPON_SIZE / 2; i <= 1280 - BUTTON_MAKE_WEAPON_SIZE / 2; i += BUTTON_MAKE_WEAPON_SIZE)
         for (size_t j = BUTTON_MAKE_WEAPON_SIZE / 2; j <= 720 - BUTTON_MAKE_WEAPON_SIZE / 2; j += BUTTON_MAKE_WEAPON_SIZE)
@@ -164,7 +170,7 @@ void GameManager::FixedUpdate()
     {
         auto all_waves = Wave::GetAll();
         Wave::EndAll();
-        EndGame();
+        EndGame(GAMEOVER_WASTED);
     }
 }
 

@@ -600,6 +600,10 @@ void Graphic::Show(){
     window->show();
 }
 
+void Graphic::Hide(){
+    window->hide();
+}
+
 GraphicButton *Graphic::MakeButton(int x, int y, int w, int h, const char *name)
 {
     GraphicButton *btn = new GraphicButton(x, y, w, h, name);

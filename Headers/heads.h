@@ -19,6 +19,12 @@ enum Direction
     LEFT
 };
 
+/// @brief Enum with game exit statuses
+enum GameOverStatus{
+    GAMEOVER_WASTED,
+    GAMEOVER_QUIT
+};
+
 /// @brief enum for Pack Structures
 enum EnumWeapon
 {

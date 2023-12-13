@@ -51,5 +51,6 @@ public:
     GameManager() = delete;
 
     static void StartGame();
-    static void EndGame();
+    static void EndGame(GameOverStatus);
+    static void QuitGame();
 };
