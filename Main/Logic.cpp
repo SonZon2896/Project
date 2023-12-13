@@ -135,7 +135,7 @@ void GameManager::Start()
                                 StartWave(); 
                             });
 
-    btn_close_game = Graphic::MakeButton(1180, 0, 100, 50, "Quit game");
+    btn_close_game = Graphic::MakeButton(1230, 720, 50, 50, "Quit");
     btn_close_game->callback([](Fl_Widget *w){
                                 GameManager::QuitGame();
                             });
@@ -197,4 +197,6 @@ void GameManager::End()
     Graphic::MakeText(590, 335, "WASTED");
     auto btn_restart = Graphic::MakeButton(590, 385, 100, 50, "RESTART");
     btn_restart->callback([](Fl_Widget *w){w->hide(); StartGame();});
+    auto btn_quit = Graphic::MakeButton(590, 435, 100, 50, "QUIT");
+    btn_restart->callback([](Fl_Widget *w){GameManager::QuitGame();});
 }
