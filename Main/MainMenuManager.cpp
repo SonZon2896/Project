@@ -38,7 +38,7 @@ void MainMenuManager::SetWidgets()
         BTN_START_SIZE_X, BTN_START_SIZE_Y
     );
 
-    t->image(new Fl_PNG_Image(PATH_IMAGE_MAIN_MENU));
+    t->image = new Fl_PNG_Image(PATH_IMAGE_MAIN_MENU);
 
     t->box(FL_NO_BOX);
     auto lambda = [](Fl_Widget *w) {MainMenuManager::StartGame();};

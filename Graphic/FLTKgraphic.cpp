@@ -412,23 +412,23 @@ ButtonMakeWeapon::ButtonMakeWeapon(Point pos)
 {
     box(FL_NO_BOX);
 
-    btn_back->image(new Fl_PNG_Image(PATH_IMAGE_REJECT_BOX));
+    btn_back->image = new Fl_PNG_Image(PATH_IMAGE_REJECT_BOX);
     btn_back->box(FL_NO_BOX);
-    btn_accept->image(new Fl_PNG_Image(PATH_IMAGE_ACCEPT_BOX));
+    btn_accept->image = new Fl_PNG_Image(PATH_IMAGE_ACCEPT_BOX);
     btn_accept->box(FL_NO_BOX);
-    btn_dir_up->image(new Fl_PNG_Image(PATH_IMAGE_ARROW_UP_BOX));
+    btn_dir_up->image = new Fl_PNG_Image(PATH_IMAGE_ARROW_UP_BOX);
     btn_dir_up->box(FL_NO_BOX);
-    btn_dir_down->image(new Fl_PNG_Image(PATH_IMAGE_ARROW_DOWN_BOX));
+    btn_dir_down->image = new Fl_PNG_Image(PATH_IMAGE_ARROW_DOWN_BOX);
     btn_dir_down->box(FL_NO_BOX);
-    btn_dir_left->image(new Fl_PNG_Image(PATH_IMAGE_ARROW_LEFT_BOX));
+    btn_dir_left->image = new Fl_PNG_Image(PATH_IMAGE_ARROW_LEFT_BOX);
     btn_dir_left->box(FL_NO_BOX);
-    btn_dir_right->image(new Fl_PNG_Image(PATH_IMAGE_ARROW_RIGHT_BOX));
+    btn_dir_right->image = new Fl_PNG_Image(PATH_IMAGE_ARROW_RIGHT_BOX);
     btn_dir_right->box(FL_NO_BOX);
-    btn_make_slapper->image(new Fl_PNG_Image(PATH_IMAGE_SLAPPER_BOX));
+    btn_make_slapper->image = new Fl_PNG_Image(PATH_IMAGE_SLAPPER_BOX);
     btn_make_slapper->box(FL_NO_BOX);
-    btn_make_dichlorvos->image(new Fl_PNG_Image(PATH_IMAGE_DICHLORVOS_BOX));
+    btn_make_dichlorvos->image = new Fl_PNG_Image(PATH_IMAGE_DICHLORVOS_BOX);
     btn_make_dichlorvos->box(FL_NO_BOX);
-    btn_make_trap->image(new Fl_PNG_Image(PATH_IMAGE_TRAP_BOX));
+    btn_make_trap->image = new Fl_PNG_Image(PATH_IMAGE_TRAP_BOX);
     btn_make_trap->box(FL_NO_BOX);
 
     auto StageZeroCB = [](Fl_Widget *w, void *data){((ButtonMakeWeapon *)data)->StageZero();};
