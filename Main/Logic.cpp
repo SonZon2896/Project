@@ -13,9 +13,7 @@ Point Fridge::pos{250, 210};
 double Fridge::health;
 double Event::money;
 double Event::money_speed{1500};
-constexpr bool Mark_Lox = false;  // 1 december
 const bool Artem_Lox = true; // 2 december
-constexpr bool Vanya_Lox = true; // 11 decenmber
 std::vector<Road> roads{
     {{700., 250.}, {700., 350.}, {250., 350.}, Fridge::pos},
     {{100., 630.}, {250., 630.}, {250., 350.}, Fridge::pos},
@@ -27,10 +25,7 @@ WaveCockroaches wave_cockroaches;
 WaveMouses wave_mouses;
 size_t num_of_wave;
 
-Fl_Button *btn_start_wave;
-std::vector<Fl_Button *> btns_make_slapper;
-std::vector<Fl_Button *> btns_make_dichlorvos;
-std::vector<Fl_Button *> btns_make_trap;
+GraphicButton *btn_start_wave;
 
 Text *events;
 Text *num_wave_text;

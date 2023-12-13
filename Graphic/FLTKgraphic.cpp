@@ -12,6 +12,23 @@ void Line::draw()
 Line::Line(int x, int y, int x1, int y1)
     : Fl_Box(x, y, x1, y1), x{x}, y{y}, x1{x1}, y1{y1} {}
 
+// GraphicButton
+
+void GraphicButton::draw()
+{
+    Fl_Button::draw();
+    if (image != nullptr)
+        image->draw(pos.x, pos.y);
+}
+
+GraphicButton::GraphicButton(int x, int y, int w, int h, const char*name)
+    : Fl_Button{x, y, w, h, name}, pos{x, y} {}
+
+GraphicButton::~GraphicButton()
+{
+    delete image;
+}
+
 // Background
 
 Background::Background(std::string path) : Fl_Box(0, 0, 1280, 720)
@@ -287,23 +304,23 @@ ButtonMakeWeapon::ButtonMakeWeapon(Point pos)
 {
     box(FL_NO_BOX);
 
-    btn_back->image(new Fl_PNG_Image("./PNG/reject_box.png"));
+    btn_back->image = new Fl_PNG_Image("./PNG/reject_box.png");
     btn_back->box(FL_NO_BOX);
-    btn_accept->image(new Fl_PNG_Image("./PNG/accept_box.png"));
+    btn_accept->image = new Fl_PNG_Image("./PNG/accept_box.png");
     btn_accept->box(FL_NO_BOX);
-    btn_dir_up->image(new Fl_PNG_Image("./PNG/arrow_up_box.png"));
+    btn_dir_up->image = new Fl_PNG_Image("./PNG/arrow_up_box.png");
     btn_dir_up->box(FL_NO_BOX);
-    btn_dir_down->image(new Fl_PNG_Image("./PNG/arrow_down_box.png"));
+    btn_dir_down->image = new Fl_PNG_Image("./PNG/arrow_down_box.png");
     btn_dir_down->box(FL_NO_BOX);
-    btn_dir_left->image(new Fl_PNG_Image("./PNG/arrow_left_box.png"));
+    btn_dir_left->image = new Fl_PNG_Image("./PNG/arrow_left_box.png");
     btn_dir_left->box(FL_NO_BOX);
-    btn_dir_right->image(new Fl_PNG_Image("./PNG/arrow_right_box.png"));
+    btn_dir_right->image = new Fl_PNG_Image("./PNG/arrow_right_box.png");
     btn_dir_right->box(FL_NO_BOX);
-    btn_make_slapper->image(new Fl_PNG_Image("./PNG/slapper_box.png"));
+    btn_make_slapper->image = new Fl_PNG_Image("./PNG/slapper_box.png");
     btn_make_slapper->box(FL_NO_BOX);
-    btn_make_dichlorvos->image(new Fl_PNG_Image("./PNG/dichlorvos_box.png"));
+    btn_make_dichlorvos->image = new Fl_PNG_Image("./PNG/dichlorvos_box.png");
     btn_make_dichlorvos->box(FL_NO_BOX);
-    btn_make_trap->image(new Fl_PNG_Image("./PNG/trap_box.png"));
+    btn_make_trap->image = new Fl_PNG_Image("./PNG/trap_box.png");
     btn_make_trap->box(FL_NO_BOX);
 
     auto StageZeroCB = [](Fl_Widget *w, void *data){((ButtonMakeWeapon *)data)->StageZero();};
@@ -454,9 +471,9 @@ void Graphic::Show(){
     window->show();
 }
 
-Fl_Button *Graphic::MakeButton(int x, int y, int w, int h, const char *name)
+GraphicButton *Graphic::MakeButton(int x, int y, int w, int h, const char *name)
 {
-    Fl_Button *btn = new Fl_Button(x, y, w, h, name);
+    GraphicButton *btn = new GraphicButton(x, y, w, h, name);
     window->add(btn);
     return btn;
 }
