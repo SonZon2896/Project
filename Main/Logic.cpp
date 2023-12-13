@@ -3,50 +3,53 @@
 #include "GameManager.h"
 #include "Waves.h"
 #include "../Headers/heads.h"
-#include "../Graphic/FLTKgraphic.h"
 #include "../Weapons/weapons.h"
 #include "../events/events.h"
+#include "../Headers/utils.h"
+
+
+
+/// @brief Start money
+#define START_MONEY 1500.
+/// @brief Speed of money coming
+#define MONEY_SPEED 1500
+/// @brief Coast of slapper
+#define SLAPPER_COAST 400
+/// @brief Coast of dichlorvos
+#define DICHLORVOS_COAST 1000
+/// @brief Coast of trap
+#define TRAP_COAST 150
+
+/// @brief Position of the fridge
+#define FRIDGE_POS {250, 210}
+/// @brief Start hp of the Fridge 
+#define FRIDGE_START_HEALTH 100
+
+/// @brief Time to start new wave
+#define WAVE_DELAY 10.
+
+
+/// @brief Default window width
+#define WINDOW_WIDTH 1280
+/// @brief Default window height
+#define WINDOW_HEIGHT 770
+
+/// @brief default path to main field image
+#define PATH_TO_MAIN_FIELD "./PNG/main_field_px.png"
+
 
 // Variables ==============================================================================
 
-Point Fridge::pos{250, 210};
+Point Fridge::pos(FRIDGE_POS);
 double Fridge::health;
+double Event::money_speed{MONEY_SPEED};
 double Event::money;
-double Event::money_speed{1500};
-constexpr bool Mark_Lox = false;  // 1 december
-const bool Artem_Lox = true; // 2 december
-constexpr bool Vanya_Lox = true; // 11 decenmber
-std::vector<Road> roads{
-    {{700., 250.}, {700., 350.}, {250., 350.}, Fridge::pos},
-    {{100., 630.}, {250., 630.}, {250., 350.}, Fridge::pos},
-    {{1050., 525.}, {550., 525.}, {550., 350.}, {250., 350.}, Fridge::pos},
-    {{500., 700.}, {600., 700.}, {600., 600.}, {400., 600.}, {400., 350.}, {250., 350.}, Fridge::pos}};
-std::vector<Road> mouse_roads{{{500., 700.}, {600., 700.}, {600., 600.}, {400., 600.}, {400., 350.}, {250., 350.}, Fridge::pos}};
 
-WaveCockroaches wave_cockroaches;
-WaveMouses wave_mouses;
-size_t num_of_wave;
+FieldState field_state;
+Labels labels;
+Roads roads;
 
 Fl_Button *btn_start_wave;
-std::vector<Fl_Button *> btns_make_slapper;
-std::vector<Fl_Button *> btns_make_dichlorvos;
-std::vector<Fl_Button *> btns_make_trap;
-
-Text *events;
-Text *num_wave_text;
-Text *survived;
-Text *wave_started;
-Text *fridge_hp;
-Text *stipubles;
-Text *timer_text;
-Text *wasted;
-
-std::vector<GraphicSlapper *> slappers;
-std::vector<GraphicDichlorvos *> dichlorvoses;
-std::vector<GraphicTrap *> traps;
-
-double timer;
-double timer_to_start_wave = 10.;
 
 // Functions ==============================================================================
 
@@ -56,16 +59,16 @@ void StartWave()
     {
         auto all_waves = Wave::GetAll();
         for (auto wave : all_waves)
-            wave->Start(num_of_wave);
+            wave->Start(field_state.num_of_wave);
         Graphic::ShowEnemies();
-        timer = 0.;
+        field_state.timer = 0.;
     }
 }
 
 void NextWave()
 {
     Wave::EndAll();
-    ++num_of_wave;
+    ++field_state.num_of_wave;
     Event::Scholarship();
 }
 
@@ -82,30 +85,30 @@ void MakeWeapon(Fl_Widget *w, void *p)
     auto unpack = (PackWeapon *)p;
     if (unpack->type == EnumWeapon::slapper)
     {
-        if (Event::money < 100)
+        if (Event::money < SLAPPER_COAST)
             return;
-        Event::money -= 400;
+        Event::money -= SLAPPER_COAST;
         w->hide();
         auto slapper = new Slapper(unpack->pos, unpack->direction);
-        slappers.push_back(Graphic::MakeSlapper(slapper));
+        field_state.slappers.push_back(Graphic::MakeSlapper(slapper));
     }
     else if (unpack->type == EnumWeapon::dichlorvos)
     {
-        if (Event::money < 400)
+        if (Event::money < DICHLORVOS_COAST)
             return;
-        Event::money -= 1000;
+        Event::money -= DICHLORVOS_COAST;
         w->hide();
         auto dichlorvos = new Dichlorvos(unpack->pos, unpack->direction);
-        dichlorvoses.push_back(Graphic::MakeDichlorvos(dichlorvos));
+        field_state.dichlorvoses.push_back(Graphic::MakeDichlorvos(dichlorvos));
     }
     else if (unpack->type == EnumWeapon::trap)
     {
-        if (Event::money < 150)
+        if (Event::money < TRAP_COAST)
             return;
-        Event::money -= 150;
+        Event::money -= TRAP_COAST;
         w->hide();
         auto trap = new Trap(unpack->pos, unpack->direction);
-        traps.push_back(Graphic::MakeTrap(trap));
+        field_state.traps.push_back(Graphic::MakeTrap(trap));
     }
 }
 
@@ -113,18 +116,18 @@ void MakeWeapon(Fl_Widget *w, void *p)
 
 void GameManager::Start()
 {
-    timer = 0.;
-    Fridge::health = 100;
-    Event::money = 1500.;
+    field_state.timer = 0.;
+    Fridge::health = FRIDGE_START_HEALTH;
+    Event::money = START_MONEY;
 
-    wave_cockroaches.roads = roads;
-    wave_mouses.roads = mouse_roads;
+    field_state.wave_cockroaches.roads = roads.cockroach_roads;
+    field_state.wave_mouses.roads = roads.mouse_roads;
 
-    num_of_wave = 0;
-    Graphic::MakeWindow(1280, 770);
-    Graphic::MakeBackground("./PNG/main_field_px.png");
+    field_state.num_of_wave = 0;
+    Graphic::MakeWindow(WINDOW_WIDTH, WINDOW_HEIGHT);
+    Graphic::MakeBackground(PATH_TO_MAIN_FIELD);
     Graphic::Show();
-    Graphic::ShowRoads(roads);
+    Graphic::ShowRoads(roads.cockroach_roads);
 
     btn_start_wave = Graphic::MakeButton(0, 720, 100, 50, "start wave");
     btn_start_wave->callback([](Fl_Widget *w)
@@ -135,13 +138,13 @@ void GameManager::Start()
             Graphic::MakeBTNWeapon({i, j});
 
     
-    events = Graphic::MakeText(1000, 720, "output");
-    num_wave_text = Graphic::MakeText(100, 720, "wave");
-    survived = Graphic::MakeText(200, 720, "survived");
-    stipubles = Graphic::MakeText(300, 720, "stipubles");
-    timer_text = Graphic::MakeText(400, 720, "timer");
-    wave_started = Graphic::MakeText(500, 720, "Started?");
-    fridge_hp = Graphic::MakeText(125, 50, "fridge hp");
+    labels.events = Graphic::MakeText(1000, 720, "output");
+    labels.num_wave_text = Graphic::MakeText(100, 720, "wave");
+    labels.survived = Graphic::MakeText(200, 720, "survived");
+    labels.stipubles = Graphic::MakeText(300, 720, "stipubles");
+    labels.timer_text = Graphic::MakeText(400, 720, "timer");
+    labels.wave_started = Graphic::MakeText(500, 720, "Started?");
+    labels.fridge_hp = Graphic::MakeText(125, 50, "fridge hp");
 }
 
 void GameManager::FixedUpdate()
@@ -166,19 +169,19 @@ void GameManager::FixedUpdate()
 
 void GameManager::Update()
 {
-    if (!Wave::IsAllStarted() && (timer += time::DeltaTime()) > timer_to_start_wave)
+    if (!Wave::IsAllStarted() && (field_state.timer += time::DeltaTime()) > WAVE_DELAY)
     {
         StartWave();
-        timer = 0.;
+        field_state.timer = 0.;
     }
 
-    num_wave_text->output = std::to_string(num_of_wave);
-    events->output = Event::Evil_Woman(Wave::GetAllRunning());
-    survived->output = std::to_string(Wave::GetAllSurvived());
-    wave_started->output = Wave::IsAllStarted() ? "Started" : "Not Started";
-    fridge_hp->output = std::to_string((int)Fridge::health);
-    stipubles->output = std::to_string((int)Event::money);
-    timer_text->output = std::to_string((int)(timer_to_start_wave - timer + 0.99));
+    labels.num_wave_text->output = std::to_string(field_state.num_of_wave);
+    labels.events->output = Event::Evil_Woman(Wave::GetAllRunning());
+    labels.survived->output = std::to_string(Wave::GetAllSurvived());
+    labels.wave_started->output = Wave::IsAllStarted() ? "Started" : "Not Started";
+    labels.fridge_hp->output = std::to_string((int)Fridge::health);
+    labels.stipubles->output = std::to_string((int)Event::money);
+    labels.timer_text->output = std::to_string((int)(WAVE_DELAY - field_state.timer + 0.99));
 }
 
 void GameManager::End()

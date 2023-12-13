@@ -3,6 +3,8 @@
 #define WINDOW_SIZE_X 500
 #define WINDOW_SIZE_Y 500
 
+#define PATH_IMAGE_MAIN_MENU "PNG/button_start_game.png"
+
 void MainMenuManager::StartMenu()
 {
     MainMenu::MakeWindow(WINDOW_SIZE_X, WINDOW_SIZE_Y);
@@ -31,8 +33,12 @@ bool MainMenuManager::GameStarted()
 
 void MainMenuManager::SetWidgets()
 {
-    Fl_Button* t = MainMenu::MakeButton(WINDOW_SIZE_X / 2 - BTN_START_SIZE_X / 2, WINDOW_SIZE_Y / 2 - BTN_START_SIZE_Y / 2, BTN_START_SIZE_X, BTN_START_SIZE_Y);
-    t->image(new Fl_PNG_Image("PNG/button_start_game.png"));
+    Fl_Button* t = MainMenu::MakeButton(
+        WINDOW_SIZE_X / 2 - BTN_START_SIZE_X / 2, WINDOW_SIZE_Y / 2 - BTN_START_SIZE_Y / 2, 
+        BTN_START_SIZE_X, BTN_START_SIZE_Y
+    );
+
+    t->image(new Fl_PNG_Image(PATH_IMAGE_MAIN_MENU));
     t->box(FL_NO_BOX);
     auto lambda = [](Fl_Widget *w) {MainMenuManager::StartGame();};
     t->callback(lambda);

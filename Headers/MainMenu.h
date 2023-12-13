@@ -20,6 +20,7 @@
 #include "../Graphic/FLTKgraphic.h"
 
 
+/// @brief class of main menu window
 class MainMenu
 {
 private:

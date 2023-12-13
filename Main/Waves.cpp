@@ -1,4 +1,19 @@
 #include "Waves.h"
+#include "../Headers/heads.h"
+
+#define HEALTH_DELTA_MULT 10
+#define SPEED_DELTA_MULT 5
+
+#define START_AMOUNT_COCKROACHES 20
+#define AMOUNT_COCKROACHES_DELTA_MULT 5
+#define SPAWN_DELAY .2
+
+#define MOUSE_HEALTH 3000
+#define MOUSE_DAMAGE 50
+#define MOUSE_SPEED 50
+#define MOUSE_INTERVAL 10
+#define MOUSE_WAVE_MULTIPLICITY 5
+
 
 // Wave
 
@@ -64,11 +79,11 @@ bool Wave::IsAllStarted()
 
 void WaveCockroaches::Start(size_t num_of_wave) 
 {
-    prototype.health = 100 + 5 * num_of_wave;
-    prototype.speed = 100 + 10 * num_of_wave;
-    prototype.damage = 5;
-    num = 20 + 5 * num_of_wave;
-    interval = 0.2 * (1 - num_of_wave / (num_of_wave + 10));
+    prototype.health = ENEMY_HEALTH + HEALTH_DELTA_MULT * num_of_wave;
+    prototype.speed = ENEMY_SPEED + HEALTH_DELTA_MULT * num_of_wave;
+    prototype.damage = ENEMY_DAMAGE;
+    num = START_AMOUNT_COCKROACHES + AMOUNT_COCKROACHES_DELTA_MULT * num_of_wave;
+    interval = SPAWN_DELAY * (1 - num_of_wave / (num_of_wave + 10));
 
     cockroaches.reserve(roads.size() * num);
     // revive old cockroaches
@@ -104,7 +119,7 @@ void WaveCockroaches::Action(double time)
         if (cockroaches[i]->Move(time))
         {
             Fridge::health -= cockroaches[i]->damage;
-            cockroaches[i]->pos = {-1000., -1000};
+            cockroaches[i]->pos = {-1000, -1000};
             cockroaches[i]->is_death = true;
             --survived;
         }
@@ -122,11 +137,14 @@ void WaveCockroaches::End()
 
 void WaveMouses::Start(size_t num_of_wave)
 {
-    prototype.health = 3000;
-    prototype.speed = 50;
-    prototype.damage = 50;
-    num = (num_of_wave / 5) * ((num_of_wave % 5) == 0);
-    interval = 10;
+    prototype.health = MOUSE_HEALTH;
+    prototype.speed = MOUSE_DAMAGE;
+    prototype.damage = MOUSE_SPEED;
+    num = (
+        num_of_wave / MOUSE_WAVE_MULTIPLICITY) * 
+        ((num_of_wave % MOUSE_WAVE_MULTIPLICITY) == 0
+    );
+    interval = MOUSE_INTERVAL;
 
     mouses.reserve(roads.size() * num);
     // revive old mouses
@@ -161,7 +179,7 @@ void WaveMouses::Action(double time)
         if (mouses[i]->Move(time))
         {
             Fridge::health -= mouses[i]->damage;
-            mouses[i]->pos = {-1000., -1000};
+            mouses[i]->pos = {-1000, -1000};
             mouses[i]->is_death = true;
             --survived;
         }
