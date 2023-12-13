@@ -2,8 +2,17 @@
 #include "../Headers/heads.h"
 #include "../events/events.h"
 
-#define weapon_size_x 64
-#define weapon_size_y 64
+#define WEAPON_SIZE_X 64
+#define WEAPON_SIZE_Y 64
+
+#define SLAPPER_TRIGGER_SIZE_X 100
+#define SLAPPER_TRIGGER_SIZE_Y 100
+
+#define DICHLORVOS_TRIGGER_SIZE_X 50
+#define DICHLORVOS_TRIGGER_SIZE_Y 200
+
+#define TRAP_TRIGGER_SIZE_X 30
+#define TRAP_TRIGGER_SIZE_Y 30
 
 /// @brief Absolute class to make weapons
 class Weapon
@@ -39,8 +48,7 @@ public:
     auto GetPos() const { return pos; }
 };
 
-#define slapper_trig_size_x 100
-#define slapper_trig_size_y 100
+
 
 class Slapper : public Weapon
 {
@@ -60,8 +68,6 @@ public:
     auto GetDir() const { return direction; }
 };
 
-#define dichlorvos_trig_size_x 50
-#define dichlorvos_trig_size_y 200
 
 class Dichlorvos : public Weapon
 {
@@ -81,8 +87,6 @@ public:
     auto GetDir() const { return direction; }
 };
 
-#define trap_trig_size_x 30
-#define trap_trig_size_y 30
 class Trap : public Weapon
 {
 private:

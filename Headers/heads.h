@@ -5,6 +5,12 @@
 #include <map>
 #include <string>
 
+#define ENEMY_HEALTH 100.
+#define ENEMY_SPEED 100.
+#define ENEMY_DAMAGE 5.
+#define ENEMY_START_POINT 0
+
+/// @brief Enum of directions
 enum Direction
 {
     UP,
@@ -21,14 +27,15 @@ enum EnumWeapon
     trap
 };
 
+/// @brief Utility structure for positioning objects
 class Point
 {
 public:
-    double x;
-    double y;
+    int x;
+    int y;
 
     Point() = default;
-    Point(double x, double y)
+    Point(int x, int y)
         : x{x}, y{y} {}
 
     Point operator+=(const Point &point)
@@ -87,6 +94,7 @@ Point operator-(Point first, const Point &second);
 Point operator/(Point first, double second);
 Point operator*(Point first, double second);
 
+/// @brief Fridge on game field
 class Fridge
 {
 public:
@@ -98,11 +106,12 @@ public:
 
 class Trigger;
 
+/// @brief Structure with default common field of all enemies
 struct PrototypeEnemy
 {
-    double health = 100.;
-    double speed = 100.;
-    double damage = 5.;
+    double health = ENEMY_HEALTH;
+    double speed = ENEMY_SPEED;
+    double damage = ENEMY_DAMAGE;
     PrototypeEnemy() = default;
     PrototypeEnemy(double hp, double sp, double dm) : health{hp}, speed{sp}, damage{dm} {}
 };
@@ -118,7 +127,7 @@ protected:
 private:
     Road road;
     Point direction;
-    std::size_t point_on_road = 0;
+    std::size_t point_on_road = ENEMY_START_POINT;
     bool is_in_trig = false;
 
     /// @brief update directory, when turn
@@ -144,6 +153,7 @@ public:
     ~Enemy();
 };
 
+/// @brief Class of cockroaches
 class Cockroach : public Enemy
 {
 private:
@@ -156,6 +166,7 @@ public:
     static auto GetAll() {return all_cockroaches;}
 };
 
+/// @brief Class of mouse
 class Mouse : public Enemy
 {
 private:
@@ -168,7 +179,7 @@ public:
     static auto GetAll() {return all_mouses;}
 };
 
-/// @brief class to check cockroaches
+/// @brief Class of enter trigger 
 class Trigger
 {
 protected:
@@ -193,4 +204,5 @@ public:
     ~Trigger();
 };
 
+/// @brief Function which takes orientated image of cockroach 
 std::string GetPathToImageCockr(Cockroach &);

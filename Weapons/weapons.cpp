@@ -47,25 +47,25 @@ void Weapon::Action(double time)
 // Slapper
 
 Slapper::Slapper(const Point &pos, Direction direction)
-    : trig({0., 0.}, {0., 0.}), Weapon(pos, &this->trig, 1.2, 110), direction{direction}
+    : trig({0, 0}, {0, 0}), Weapon(pos, &this->trig, 1.2, 110), direction{direction}
 {
     switch (direction)
     {
     case UP:
-        trig.pos = {pos.x - slapper_trig_size_x / 2, pos.y - weapon_size_y / 2 - slapper_trig_size_y};
-        trig.size = {slapper_trig_size_x, slapper_trig_size_y};
+        trig.pos = {pos.x - SLAPPER_TRIGGER_SIZE_X / 2, pos.y - WEAPON_SIZE_Y / 2 - SLAPPER_TRIGGER_SIZE_Y};
+        trig.size = {SLAPPER_TRIGGER_SIZE_X, SLAPPER_TRIGGER_SIZE_Y};
         break;
     case DOWN:
-        trig.pos = {pos.x - slapper_trig_size_x / 2, pos.y + weapon_size_y / 2};
-        trig.size = {slapper_trig_size_x, slapper_trig_size_y};
+        trig.pos = {pos.x - SLAPPER_TRIGGER_SIZE_X / 2, pos.y + WEAPON_SIZE_Y / 2};
+        trig.size = {SLAPPER_TRIGGER_SIZE_X, SLAPPER_TRIGGER_SIZE_Y};
         break;
     case LEFT:
-        trig.pos = {pos.x - weapon_size_x / 2 - slapper_trig_size_y, pos.y - slapper_trig_size_x / 2};
-        trig.size = {slapper_trig_size_y, slapper_trig_size_x};
+        trig.pos = {pos.x - WEAPON_SIZE_X / 2 - SLAPPER_TRIGGER_SIZE_Y, pos.y - SLAPPER_TRIGGER_SIZE_X / 2};
+        trig.size = {SLAPPER_TRIGGER_SIZE_Y, SLAPPER_TRIGGER_SIZE_X};
         break;
     case RIGHT:
-        trig.pos = {pos.x + weapon_size_x / 2, pos.y - slapper_trig_size_x / 2};
-        trig.size = {slapper_trig_size_y, slapper_trig_size_x};
+        trig.pos = {pos.x + WEAPON_SIZE_X / 2, pos.y - SLAPPER_TRIGGER_SIZE_X / 2};
+        trig.size = {SLAPPER_TRIGGER_SIZE_Y, SLAPPER_TRIGGER_SIZE_X};
         break;
     }
 }
@@ -78,37 +78,37 @@ void Slapper::Upgrade()
     interval -= interval / 100.;
 }
 
-#undef slapper_trig_size_x
-#undef slapper_trig_size_y
+#undef SLAPPER_TRIGGER_SIZE_X
+#undef SLAPPER_TRIGGER_SIZE_Y
 
 // Dichlorvos
 
 Dichlorvos::Dichlorvos(const Point &pos, Direction direction)
-    : trig({0., 0.}, {0., 0.}), Weapon(pos, &this->trig, 1., 120), direction{direction}
+    : trig({0, 0}, {0, 0}), Weapon(pos, &this->trig, 1, 120), direction{direction}
 {
     switch (direction)
     {
     case UP:
-        trig.pos = {pos.x - dichlorvos_trig_size_x / 2, pos.y - weapon_size_y / 2 - dichlorvos_trig_size_y};
-        trig.size = {dichlorvos_trig_size_x, dichlorvos_trig_size_y};
+        trig.pos = {pos.x - DICHLORVOS_TRIGGER_SIZE_X / 2, pos.y - WEAPON_SIZE_Y / 2 - DICHLORVOS_TRIGGER_SIZE_Y};
+        trig.size = {DICHLORVOS_TRIGGER_SIZE_X, DICHLORVOS_TRIGGER_SIZE_Y};
         break;
     case DOWN:
-        trig.pos = {pos.x - dichlorvos_trig_size_x / 2, pos.y + weapon_size_y / 2};
-        trig.size = {dichlorvos_trig_size_x, dichlorvos_trig_size_y};
+        trig.pos = {pos.x - DICHLORVOS_TRIGGER_SIZE_X / 2, pos.y + WEAPON_SIZE_Y / 2};
+        trig.size = {DICHLORVOS_TRIGGER_SIZE_X, DICHLORVOS_TRIGGER_SIZE_Y};
         break;
     case LEFT:
-        trig.pos = {pos.x - weapon_size_x / 2 - dichlorvos_trig_size_y, pos.y - dichlorvos_trig_size_x / 2};
-        trig.size = {dichlorvos_trig_size_y, dichlorvos_trig_size_x};
+        trig.pos = {pos.x - WEAPON_SIZE_X / 2 - DICHLORVOS_TRIGGER_SIZE_Y, pos.y - DICHLORVOS_TRIGGER_SIZE_X / 2};
+        trig.size = {DICHLORVOS_TRIGGER_SIZE_Y, DICHLORVOS_TRIGGER_SIZE_X};
         break;
     case RIGHT:
-        trig.pos = {pos.x + weapon_size_x / 2, pos.y - dichlorvos_trig_size_x / 2};
-        trig.size = {dichlorvos_trig_size_y, dichlorvos_trig_size_x};
+        trig.pos = {pos.x + WEAPON_SIZE_X / 2, pos.y - DICHLORVOS_TRIGGER_SIZE_X / 2};
+        trig.size = {DICHLORVOS_TRIGGER_SIZE_Y, DICHLORVOS_TRIGGER_SIZE_X};
         break;
     }
 }
 
-#undef dichlorvos_trig_size_x
-#undef dichlorvos_trig_size_y
+#undef DICHLORVOS_TRIGGER_SIZE_X
+#undef DICHLORVOS_TRIGGER_SIZE_Y
 
 void Dichlorvos::Upgrade()
 {
@@ -121,31 +121,31 @@ void Dichlorvos::Upgrade()
 // Catch
 
 Trap::Trap(const Point &pos, Direction direction)
-    : trig({0., 0.}, {0., 0.}), Weapon(pos, &this->trig, 3., 200), direction{direction}
+    : trig({0, 0}, {0, 0}), Weapon(pos, &this->trig, 3, 200), direction{direction}
 {
     switch (direction)
     {
     case UP:
-        trig.pos = {pos.x - trap_trig_size_x / 2, pos.y - weapon_size_y / 2 - trap_trig_size_y};
-        trig.size = {trap_trig_size_x, trap_trig_size_y};
+        trig.pos = {pos.x - TRAP_TRIGGER_SIZE_X / 2, pos.y - WEAPON_SIZE_Y / 2 - TRAP_TRIGGER_SIZE_Y};
+        trig.size = {TRAP_TRIGGER_SIZE_X, TRAP_TRIGGER_SIZE_Y};
         break;
     case DOWN:
-        trig.pos = {pos.x - trap_trig_size_x / 2, pos.y + weapon_size_y / 2};
-        trig.size = {trap_trig_size_x, trap_trig_size_y};
+        trig.pos = {pos.x - TRAP_TRIGGER_SIZE_X / 2, pos.y + WEAPON_SIZE_Y / 2};
+        trig.size = {TRAP_TRIGGER_SIZE_X, TRAP_TRIGGER_SIZE_Y};
         break;
     case LEFT:
-        trig.pos = {pos.x - weapon_size_x / 2 - trap_trig_size_y, pos.y - trap_trig_size_x / 2};
-        trig.size = {trap_trig_size_y, trap_trig_size_x};
+        trig.pos = {pos.x - WEAPON_SIZE_X / 2 - TRAP_TRIGGER_SIZE_Y, pos.y - TRAP_TRIGGER_SIZE_X / 2};
+        trig.size = {TRAP_TRIGGER_SIZE_Y, TRAP_TRIGGER_SIZE_X};
         break;
     case RIGHT:
-        trig.pos = {pos.x + weapon_size_x / 2, pos.y - trap_trig_size_x / 2};
-        trig.size = {trap_trig_size_y, trap_trig_size_x};
+        trig.pos = {pos.x + WEAPON_SIZE_X / 2, pos.y - TRAP_TRIGGER_SIZE_X / 2};
+        trig.size = {TRAP_TRIGGER_SIZE_Y, TRAP_TRIGGER_SIZE_X};
         break;
     }
 }
 
-#undef trap_trig_size_x
-#undef trap_trig_size_y
+#undef TRAP_TRIGGER_SIZE_X
+#undef TRAP_TRIGGER_SIZE_Y
 
 void Trap::Upgrade()
 {

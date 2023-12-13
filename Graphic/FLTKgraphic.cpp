@@ -1,4 +1,28 @@
+
 #include "FLTKgraphic.h"
+
+
+#define PATH_IMAGE_SLAPPER "./PNG/slapper_px.png"
+
+#define PATH_IMAGE_TRAP "./PNG/trap_px.png"
+
+#define PATH_IMAGE_DEFAULT_COCKROACH "./PNG/cockroach_px"
+#define PATH_IMAGE_MOUSE "./PNG/mouse"
+
+#define PATH_IMAGE_DICHLORVOS_UP "./PNG/dichlorvos_up.png"
+#define PATH_IMAGE_DICHLORVOS_DOWN "./PNG/dichlorvos_down.png"
+#define PATH_IMAGE_DICHLORVOS_LEFT "./PNG/dichlorvos_left.png"
+#define PATH_IMAGE_DICHLORVOS_RIGHT "./PNG/dichlorvos_right.png"
+
+#define PATH_IMAGE_REJECT_BOX "./PNG/reject_box.png"
+#define PATH_IMAGE_ACCEPT_BOX "./PNG/accept_box.png"
+#define PATH_IMAGE_ARROW_UP_BOX "./PNG/arrow_up_box.png"
+#define PATH_IMAGE_ARROW_DOWN_BOX "./PNG/arrow_down_box.png"
+#define PATH_IMAGE_ARROW_LEFT_BOX "./PNG/arrow_left_box.png"
+#define PATH_IMAGE_ARROW_RIGHT_BOX "./PNG/arrow_right_box.png"
+#define PATH_IMAGE_SLAPPER_BOX "./PNG/slapper_box.png"
+#define PATH_IMAGE_DICHLORVOS_BOX "./PNG/dichlorvos_box.png"
+#define PATH_IMAGE_TRAP_BOX "./PNG/trap_box.png"
 
 // Line
 
@@ -57,7 +81,10 @@ void GraphicEnemy::draw()
 
 GraphicEnemy::GraphicEnemy(Enemy *enemy, std::string path_to_img) : Fl_Box(0, 0, 0, 0), enemy{enemy}
 {
-    resize(enemy->pos.x - ENEMY_SIZE_X / 2, enemy->pos.y - ENEMY_SIZE_Y / 2, ENEMY_SIZE_X, ENEMY_SIZE_Y);
+    resize(
+        enemy->pos.x - ENEMY_SIZE_X / 2, enemy->pos.y - ENEMY_SIZE_Y / 2, 
+        ENEMY_SIZE_X, ENEMY_SIZE_Y);
+
     prev_direction = Point{0, 0};
     img_up = new Fl_PNG_Image(&(path_to_img + "_up.png")[0]);
     img_down = new Fl_PNG_Image(&(path_to_img + "_down.png")[0]);
@@ -144,8 +171,21 @@ void GraphicTrigger::draw()
         fl_color(FL_RED);
     else
         fl_color(FL_GREEN);
-    fl_line(trig->pos.x, trig->pos.y, trig->pos.x + trig->size.x, trig->pos.y, trig->pos.x + trig->size.x, trig->pos.y + trig->size.y);
-    fl_line(trig->pos.x, trig->pos.y, trig->pos.x, trig->pos.y + trig->size.y, trig->pos.x + trig->size.x, trig->pos.y + trig->size.y);
+    fl_line(
+        trig->pos.x, trig->pos.y, 
+        trig->pos.x + trig->size.x,
+        trig->pos.y, 
+        trig->pos.x + trig->size.x, 
+        trig->pos.y + trig->size.y
+    );
+    fl_line(
+        trig->pos.x, trig->pos.y, 
+        trig->pos.x, 
+        trig->pos.y + trig->size.y, 
+        trig->pos.x + trig->size.x,
+        trig->pos.y + trig->size.y
+    );
+
     Fl_Box::draw();
 }
 
@@ -165,8 +205,11 @@ void GraphicWeapon::draw()
 
 GraphicWeapon::GraphicWeapon(Point pos, const Trigger *trigger)
     : gtrig{Graphic::MakeTrigger(trigger)},
-      pb(Graphic::MakeProgressBar(pos + Point{-pb_size_x / 2, -weapon_size_y / 2 - 10})),
-      Fl_Button(pos.x - weapon_size_x / 2, pos.y - weapon_size_y / 2, weapon_size_x, weapon_size_y)
+      pb(Graphic::MakeProgressBar(pos + Point{-pb_size_x / 2, -WEAPON_SIZE_Y / 2 - 10})),
+      Fl_Button(
+        pos.x - WEAPON_SIZE_X / 2, pos.y - WEAPON_SIZE_Y / 2, 
+        WEAPON_SIZE_X, WEAPON_SIZE_Y
+      )
 {
     box(FL_NO_BOX);
 }
@@ -176,7 +219,10 @@ GraphicWeapon::GraphicWeapon(Point pos, const Trigger *trigger)
 void GraphicSlapper::draw()
 {
     pb->progress = slapper->GetProgress();
-    img->draw(slapper->GetPos().x - weapon_size_x / 2, slapper->GetPos().y - weapon_size_y / 2);
+    img->draw(
+        slapper->GetPos().x - WEAPON_SIZE_X / 2, 
+        slapper->GetPos().y - WEAPON_SIZE_Y / 2
+    );
     GraphicWeapon::draw();
 }
 
@@ -186,15 +232,21 @@ GraphicSlapper::GraphicSlapper(Slapper *slapper)
 {
     
     name = std::to_string(slapper->GetLvl()) + "lvl\n" + std::to_string((int)slapper->GetCost());
-    img = new Fl_PNG_Image("./PNG/slapper_px.png");
+    img = new Fl_PNG_Image(PATH_IMAGE_SLAPPER);
+
     auto upgrade = [](Fl_Widget *w, void *data)
     {
         auto weap = (Slapper *)data;
+
         if (Event::money < weap->GetCost())
             return;
+
         Event::money -= weap->GetCost();
         weap->Upgrade();
-        ((GraphicWeapon *)w)->name = std::to_string(weap->GetLvl()) + "lvl\n" + std::to_string((int)weap->GetCost());
+        ((GraphicWeapon *)w)->name = std::to_string(
+            weap->GetLvl()) + "lvl\n" + 
+            std::to_string((int)weap->GetCost()
+        );
     };
     callback(upgrade, slapper);
 }
@@ -210,7 +262,10 @@ GraphicSlapper::~GraphicSlapper()
 void GraphicDichlorvos::draw()
 {
     pb->progress = dichlorvos->GetProgress();
-    img->draw(dichlorvos->GetPos().x - weapon_size_x / 2, dichlorvos->GetPos().y - weapon_size_y / 2);
+    img->draw(
+        dichlorvos->GetPos().x - WEAPON_SIZE_X / 2, 
+        dichlorvos->GetPos().y - WEAPON_SIZE_Y / 2
+    );
     GraphicWeapon::draw();
 }
 
@@ -218,23 +273,27 @@ GraphicDichlorvos::GraphicDichlorvos(Dichlorvos *dichlorvos)
     : dichlorvos{dichlorvos},
       GraphicWeapon(dichlorvos->GetPos(), dichlorvos->trigger)
 {
-    name = std::to_string(dichlorvos->GetLvl()) + "lvl\n" + std::to_string((int)dichlorvos->GetCost());
+    name = std::to_string(
+        dichlorvos->GetLvl()) + "lvl\n" + 
+        std::to_string((int)dichlorvos->GetCost()
+    );
+
     switch (dichlorvos->GetDir())
     {
     case UP:
-        img = new Fl_PNG_Image("./PNG/dichlorvos_up.png");
+        img = new Fl_PNG_Image(PATH_IMAGE_DICHLORVOS_UP);
         break;
     case DOWN:
-        img = new Fl_PNG_Image("./PNG/dichlorvos_down.png");
+        img = new Fl_PNG_Image(PATH_IMAGE_DICHLORVOS_DOWN);
         break;
     case LEFT:
-        img = new Fl_PNG_Image("./PNG/dichlorvos_left.png");
+        img = new Fl_PNG_Image(PATH_IMAGE_DICHLORVOS_LEFT);
         break;
     case RIGHT:
-        img = new Fl_PNG_Image("./PNG/dichlorvos_right.png");
+        img = new Fl_PNG_Image(PATH_IMAGE_DICHLORVOS_RIGHT);
         break;
     default:
-        img = new Fl_PNG_Image("./PNG/dichlorvos_up.png");
+        img = new Fl_PNG_Image(PATH_IMAGE_DICHLORVOS_UP);
     }
     auto upgrade = [](Fl_Widget *w, void *data)
     {
@@ -258,7 +317,7 @@ GraphicDichlorvos::~GraphicDichlorvos()
 
 void GraphicTrap::draw()
 {
-    img->draw(trap->GetPos().x - weapon_size_x / 2, trap->GetPos().y - weapon_size_y / 2);
+    img->draw(trap->GetPos().x - WEAPON_SIZE_X / 2, trap->GetPos().y - WEAPON_SIZE_Y / 2);
     pb->progress = trap->GetProgress();
     GraphicWeapon::draw();
 }
@@ -267,17 +326,27 @@ GraphicTrap::GraphicTrap(Trap *trap)
     : trap{trap},
       GraphicWeapon(trap->GetPos(), trap->trigger)
 {
-    name = std::to_string(trap->GetLvl()) + "lvl\n" + std::to_string((int)trap->GetCost());
-    img = new Fl_PNG_Image("./PNG/trap_px.png");
+    name = std::to_string(
+        trap->GetLvl()) + "lvl\n" + 
+        std::to_string((int)trap->GetCost()
+    );
+
+    img = new Fl_PNG_Image(PATH_IMAGE_TRAP);
     auto upgrade = [](Fl_Widget *w, void *data)
     {
         auto weap = (Trap *)data;
+
         if (Event::money < weap->GetCost())
             return;
+
         Event::money -= weap->GetCost();
         weap->Upgrade();
-        ((GraphicWeapon *)w)->name = std::to_string(weap->GetLvl()) + "lvl\n" + std::to_string((int)weap->GetCost());
+        ((GraphicWeapon *)w)->name = std::to_string(
+            weap->GetLvl()) + "lvl\n" + 
+            std::to_string((int)weap->GetCost()
+        );
     };
+
     callback(upgrade, trap);
 }
 
@@ -291,36 +360,75 @@ GraphicTrap::~GraphicTrap()
 
 ButtonMakeWeapon::ButtonMakeWeapon(Point pos)
     : pos{pos},
-      Fl_Button(pos.x - BUTTON_MAKE_WEAPON_SIZE / 2, pos.y - BUTTON_MAKE_WEAPON_SIZE / 2, BUTTON_MAKE_WEAPON_SIZE, BUTTON_MAKE_WEAPON_SIZE),
-      btn_back{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3)},
-      btn_accept{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y + BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3)},
-      btn_make_slapper{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 2, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3)},
-      btn_make_dichlorvos{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 2, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3)},
-      btn_make_trap{Graphic::MakeButton(pos.x + BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3)},
-      btn_dir_up{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 2, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3)},
-      btn_dir_down{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y + BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3)},
-      btn_dir_left{Graphic::MakeButton(pos.x - BUTTON_MAKE_WEAPON_SIZE / 2, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3)},
-      btn_dir_right{Graphic::MakeButton(pos.x + BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3)}
+      Fl_Button(
+        pos.x - BUTTON_MAKE_WEAPON_SIZE / 2, pos.y - BUTTON_MAKE_WEAPON_SIZE / 2, 
+        BUTTON_MAKE_WEAPON_SIZE, BUTTON_MAKE_WEAPON_SIZE
+      ),
+
+      btn_back{Graphic::MakeButton(
+        pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, 
+        BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3  
+      )},
+
+      btn_accept{Graphic::MakeButton(
+        pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y + BUTTON_MAKE_WEAPON_SIZE / 6, 
+        BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3
+      )},
+
+      btn_make_slapper{Graphic::MakeButton(
+        pos.x - BUTTON_MAKE_WEAPON_SIZE / 2, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, 
+        BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3
+      )},
+
+      btn_make_dichlorvos{Graphic::MakeButton(
+        pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 2, 
+        BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3
+      )},
+
+      btn_make_trap{Graphic::MakeButton(
+        pos.x + BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, 
+        BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3
+      )},
+
+      btn_dir_up{Graphic::MakeButton(
+        pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 2, 
+        BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3
+      )},
+
+      btn_dir_down{Graphic::MakeButton(
+        pos.x - BUTTON_MAKE_WEAPON_SIZE / 6, pos.y + BUTTON_MAKE_WEAPON_SIZE / 6, 
+        BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3
+      )},
+
+      btn_dir_left{Graphic::MakeButton(
+        pos.x - BUTTON_MAKE_WEAPON_SIZE / 2, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, 
+        BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3
+      )},
+      
+      btn_dir_right{Graphic::MakeButton(
+        pos.x + BUTTON_MAKE_WEAPON_SIZE / 6, pos.y - BUTTON_MAKE_WEAPON_SIZE / 6, 
+        BUTTON_MAKE_WEAPON_SIZE / 3, BUTTON_MAKE_WEAPON_SIZE / 3
+      )}
 {
     box(FL_NO_BOX);
 
-    btn_back->image = new Fl_PNG_Image("./PNG/reject_box.png");
+    btn_back->image(new Fl_PNG_Image(PATH_IMAGE_REJECT_BOX));
     btn_back->box(FL_NO_BOX);
-    btn_accept->image = new Fl_PNG_Image("./PNG/accept_box.png");
+    btn_accept->image(new Fl_PNG_Image(PATH_IMAGE_ACCEPT_BOX));
     btn_accept->box(FL_NO_BOX);
-    btn_dir_up->image = new Fl_PNG_Image("./PNG/arrow_up_box.png");
+    btn_dir_up->image(new Fl_PNG_Image(PATH_IMAGE_ARROW_UP_BOX));
     btn_dir_up->box(FL_NO_BOX);
-    btn_dir_down->image = new Fl_PNG_Image("./PNG/arrow_down_box.png");
+    btn_dir_down->image(new Fl_PNG_Image(PATH_IMAGE_ARROW_DOWN_BOX));
     btn_dir_down->box(FL_NO_BOX);
-    btn_dir_left->image = new Fl_PNG_Image("./PNG/arrow_left_box.png");
+    btn_dir_left->image(new Fl_PNG_Image(PATH_IMAGE_ARROW_LEFT_BOX));
     btn_dir_left->box(FL_NO_BOX);
-    btn_dir_right->image = new Fl_PNG_Image("./PNG/arrow_right_box.png");
+    btn_dir_right->image(new Fl_PNG_Image(PATH_IMAGE_ARROW_RIGHT_BOX));
     btn_dir_right->box(FL_NO_BOX);
-    btn_make_slapper->image = new Fl_PNG_Image("./PNG/slapper_box.png");
+    btn_make_slapper->image(new Fl_PNG_Image(PATH_IMAGE_SLAPPER_BOX));
     btn_make_slapper->box(FL_NO_BOX);
-    btn_make_dichlorvos->image = new Fl_PNG_Image("./PNG/dichlorvos_box.png");
+    btn_make_dichlorvos->image(new Fl_PNG_Image(PATH_IMAGE_DICHLORVOS_BOX));
     btn_make_dichlorvos->box(FL_NO_BOX);
-    btn_make_trap->image = new Fl_PNG_Image("./PNG/trap_box.png");
+    btn_make_trap->image(new Fl_PNG_Image(PATH_IMAGE_TRAP_BOX));
     btn_make_trap->box(FL_NO_BOX);
 
     auto StageZeroCB = [](Fl_Widget *w, void *data){((ButtonMakeWeapon *)data)->StageZero();};
@@ -336,13 +444,34 @@ ButtonMakeWeapon::ButtonMakeWeapon(Point pos)
     callback(StageWeaponCB, this);
     btn_back->callback(StageZeroCB, this);
     btn_accept->callback(MakeWeaponCB, this);
-    btn_make_slapper->callback(StageDirectionCB, (void *)(new std::pair<ButtonMakeWeapon *, EnumWeapon>(this, EnumWeapon::slapper)));
-    btn_make_dichlorvos->callback(StageDirectionCB, (void *)(new std::pair<ButtonMakeWeapon *, EnumWeapon>(this, EnumWeapon::dichlorvos)));
-    btn_make_trap->callback(StageDirectionCB, (void *)(new std::pair<ButtonMakeWeapon *, EnumWeapon>(this, EnumWeapon::trap)));
-    btn_dir_up->callback(StageAcceptCB, (void *)(new std::pair<ButtonMakeWeapon *, Direction>(this, UP)));
-    btn_dir_down->callback(StageAcceptCB, (void *)(new std::pair<ButtonMakeWeapon *, Direction>(this, DOWN)));
-    btn_dir_left->callback(StageAcceptCB, (void *)(new std::pair<ButtonMakeWeapon *, Direction>(this, LEFT)));
-    btn_dir_right->callback(StageAcceptCB, (void *)(new std::pair<ButtonMakeWeapon *, Direction>(this, RIGHT)));
+    btn_make_slapper->callback(
+        StageDirectionCB, 
+        (void *)(new std::pair<ButtonMakeWeapon *, EnumWeapon>(this, EnumWeapon::slapper))
+    );
+    btn_make_dichlorvos->callback(
+        StageDirectionCB, 
+        (void *)(new std::pair<ButtonMakeWeapon *, EnumWeapon>(this, EnumWeapon::dichlorvos))
+    );
+    btn_make_trap->callback(
+        StageDirectionCB, 
+        (void *)(new std::pair<ButtonMakeWeapon *, EnumWeapon>(this, EnumWeapon::trap))
+    );
+    btn_dir_up->callback(
+        StageAcceptCB, 
+        (void *)(new std::pair<ButtonMakeWeapon *, Direction>(this, UP))
+    );
+    btn_dir_down->callback(
+        StageAcceptCB, 
+        (void *)(new std::pair<ButtonMakeWeapon *, Direction>(this, DOWN))
+    );
+    btn_dir_left->callback(
+        StageAcceptCB, 
+        (void *)(new std::pair<ButtonMakeWeapon *, Direction>(this, LEFT))
+    );
+    btn_dir_right->callback(
+        StageAcceptCB, 
+        (void *)(new std::pair<ButtonMakeWeapon *, Direction>(this, RIGHT))
+    );
 
     StageZero();
 }
@@ -478,6 +607,7 @@ GraphicButton *Graphic::MakeButton(int x, int y, int w, int h, const char *name)
     return btn;
 }
 
+
 void Graphic::Timer_CB(void *userdata)
 {
     Fl_Window *w = (Fl_Window *)userdata;
@@ -496,14 +626,14 @@ void Graphic::ShowRoads(const std::vector<Road> &roads)
 
 GraphicEnemy *Graphic::MakeCockr(Cockroach *cockr)
 {
-    auto temp = new GraphicEnemy(cockr, "./PNG/cockroach_px");
+    auto temp = new GraphicEnemy(cockr, PATH_IMAGE_DEFAULT_COCKROACH);
     window->add(temp);
     return temp;
 }
 
 GraphicEnemy *Graphic::MakeMouse(Mouse *mouse)
 {
-    auto temp = new GraphicEnemy(mouse, "./PNG/mouse");
+    auto temp = new GraphicEnemy(mouse, PATH_IMAGE_MOUSE);
     window->add(temp);
     return temp;
 }
