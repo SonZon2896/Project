@@ -28,7 +28,7 @@ private:
 
 public:
     static void MakeWindow(int, int);
-    static Fl_Button *MakeButton(
+    static GraphicButton *MakeButton(
         int x, int y, int w, int h, 
         const char *name = ""
     );

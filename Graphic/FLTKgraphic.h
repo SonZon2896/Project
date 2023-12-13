@@ -28,6 +28,18 @@ public:
     Line(int x, int y, int x1, int y1);
 };
 
+class GraphicButton : public Fl_Button
+{
+private:
+    void draw();
+
+public:
+    Point pos;
+    Fl_PNG_Image *image = nullptr;
+    GraphicButton(int x, int y, int w, int h, const char* name = "");
+    ~GraphicButton();
+};
+
 /// @brief class to draw a background
 class Background : public Fl_Box
 {
@@ -177,18 +189,18 @@ private:
     Point pos;
 
     EnumWeapon type;
-    Fl_Button *btn_make_slapper;
-    Fl_Button *btn_make_dichlorvos;
-    Fl_Button *btn_make_trap;
+    GraphicButton *btn_make_slapper;
+    GraphicButton *btn_make_dichlorvos;
+    GraphicButton *btn_make_trap;
 
     Direction direction;
-    Fl_Button *btn_dir_up;
-    Fl_Button *btn_dir_down;
-    Fl_Button *btn_dir_left;
-    Fl_Button *btn_dir_right;
+    GraphicButton *btn_dir_up;
+    GraphicButton *btn_dir_down;
+    GraphicButton *btn_dir_left;
+    GraphicButton *btn_dir_right;
 
-    Fl_Button *btn_accept;
-    Fl_Button *btn_back;
+    GraphicButton *btn_accept;
+    GraphicButton *btn_back;
     void StageZero();
     void StageWeapon();
     void StageDirection();
@@ -226,7 +238,7 @@ public:
     static void MakeWindow(int w, int h);
     static void MakeBackground(std::string path_to_img);
     static void ClearWindow();
-    static Fl_Button *MakeButton(int x, int y, int w, int h, const char *name = "");
+    static GraphicButton *MakeButton(int x, int y, int w, int h, const char *name = "");
     static GraphicEnemy *MakeCockr(Cockroach *cockr);
     static GraphicEnemy *MakeMouse(Mouse *mouse);
     static Text *MakeText(int x, int y, std::string name = "");

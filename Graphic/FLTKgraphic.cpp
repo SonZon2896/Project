@@ -1,3 +1,4 @@
+
 #include "FLTKgraphic.h"
 
 
@@ -34,6 +35,23 @@ void Line::draw()
 
 Line::Line(int x, int y, int x1, int y1)
     : Fl_Box(x, y, x1, y1), x{x}, y{y}, x1{x1}, y1{y1} {}
+
+// GraphicButton
+
+void GraphicButton::draw()
+{
+    Fl_Button::draw();
+    if (image != nullptr)
+        image->draw(pos.x, pos.y);
+}
+
+GraphicButton::GraphicButton(int x, int y, int w, int h, const char*name)
+    : Fl_Button{x, y, w, h, name}, pos{x, y} {}
+
+GraphicButton::~GraphicButton()
+{
+    delete image;
+}
 
 // Background
 
@@ -582,12 +600,13 @@ void Graphic::Show(){
     window->show();
 }
 
-Fl_Button *Graphic::MakeButton(int x, int y, int w, int h, const char *name)
+GraphicButton *Graphic::MakeButton(int x, int y, int w, int h, const char *name)
 {
-    Fl_Button *btn = new Fl_Button(x, y, w, h, name);
+    GraphicButton *btn = new GraphicButton(x, y, w, h, name);
     window->add(btn);
     return btn;
 }
+
 
 void Graphic::Timer_CB(void *userdata)
 {

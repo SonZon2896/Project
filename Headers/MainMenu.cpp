@@ -23,9 +23,9 @@ void MainMenu::Hide(){
 }
 
 
-Fl_Button *MainMenu::MakeButton(int x, int y, int w, int h, const char *label)
+GraphicButton *MainMenu::MakeButton(int x, int y, int w, int h, const char *label)
 {
-    Fl_Button *btn = new Fl_Button(x, y, w, h, label);
+    GraphicButton *btn = new GraphicButton(x, y, w, h, label);
     window->add(btn);
     return btn;
 }
