@@ -8,10 +8,6 @@ struct FieldState{
 
     size_t num_of_wave;
     double timer;
-
-    std::vector<GraphicSlapper *> slappers;
-    std::vector<GraphicDichlorvos *> dichlorvoses;
-    std::vector<GraphicTrap *> traps;
 };
 
 

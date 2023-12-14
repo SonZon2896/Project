@@ -86,38 +86,6 @@ struct PackWeapon
     PackWeapon(Point pos, Direction direction, EnumWeapon type) : pos{pos}, direction{direction}, type{type} {}
 };
 
-void MakeWeapon(Fl_Widget *w, void *p)
-{
-    auto unpack = (PackWeapon *)p;
-    if (unpack->type == EnumWeapon::slapper)
-    {
-        if (Event::money < SLAPPER_COAST)
-            return;
-        Event::money -= SLAPPER_COAST;
-        w->hide();
-        auto slapper = new Slapper(unpack->pos, unpack->direction);
-        field_state.slappers.push_back(Graphic::MakeSlapper(slapper));
-    }
-    else if (unpack->type == EnumWeapon::dichlorvos)
-    {
-        if (Event::money < DICHLORVOS_COAST)
-            return;
-        Event::money -= DICHLORVOS_COAST;
-        w->hide();
-        auto dichlorvos = new Dichlorvos(unpack->pos, unpack->direction);
-        field_state.dichlorvoses.push_back(Graphic::MakeDichlorvos(dichlorvos));
-    }
-    else if (unpack->type == EnumWeapon::trap)
-    {
-        if (Event::money < TRAP_COAST)
-            return;
-        Event::money -= TRAP_COAST;
-        w->hide();
-        auto trap = new Trap(unpack->pos, unpack->direction);
-        field_state.traps.push_back(Graphic::MakeTrap(trap));
-    }
-}
-
 // Main ===================================================================================
 
 void GameManager::Start()
