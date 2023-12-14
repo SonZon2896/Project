@@ -22,9 +22,15 @@
 * Игровое поле ![](PNG/main_field_px_updated.png)
 
 * Противники
-* * Таракан ![](PNG/cockroach_px.png)
-* * Мышь ![](PNG/mouse_up.png)
+  
+  Таракан ![](PNG/cockroach_px.png)
+  
+  Мышь ![](PNG/mouse_up.png)
+  
 * Оружие
-* * Тапок ![](PNG/slapper_px.png)
-* * Дихлофоз ![](PNG/dichlorvos_down.png)
-* * Ловушка ![](PNG/trap_px.png)
+  
+  Тапок ![](PNG/slapper_px.png)
+  
+  Дихлофоз ![](PNG/dichlorvos_down.png)
+  
+  Ловушка ![](PNG/trap_px.png)
