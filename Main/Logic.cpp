@@ -28,6 +28,11 @@
 /// @brief Time to start new wave
 #define WAVE_DELAY 10.
 
+#define PATH_IMAGE_BUTTON_START_WAVE "./PNG/new_wave.png"
+#define PATH_IMAGE_BUTTON_QUIT_GAME "./PNG/quit_game_button.png"
+#define PATH_IMAGE_WASTED_SCREEN "./PNG/wasted_screen.png"
+#define PATH_IMAGE_BUTTON_RESTART "./PNG/restart_button.png"
+#define PATH_IMAGE_BUTTON_QUIT "./PNG/quit_button.png"
 
 /// @brief Default window width
 #define WINDOW_WIDTH 1280
@@ -49,7 +54,7 @@ FieldState field_state;
 Labels labels;
 Roads roads;
 
-Fl_Button *btn_start_wave;
+GraphicButton *btn_start_wave;
 GraphicButton *btn_close_game;
 
 // Functions ==============================================================================
@@ -126,6 +131,7 @@ void GameManager::Start()
 
     field_state.num_of_wave = 0;
     Graphic::MakeWindow(WINDOW_WIDTH, WINDOW_HEIGHT);
+    Graphic::ClearWindow();
     Graphic::MakeBackground(PATH_TO_MAIN_FIELD);
     Graphic::Show();
     Graphic::ShowRoads(roads.cockroach_roads);
@@ -134,11 +140,13 @@ void GameManager::Start()
     btn_start_wave->callback([](Fl_Widget *w){
                                 StartWave(); 
                             });
+    btn_start_wave->image = new Fl_PNG_Image(PATH_IMAGE_BUTTON_START_WAVE);
 
     btn_close_game = Graphic::MakeButton(1230, 720, 50, 50, "Quit");
     btn_close_game->callback([](Fl_Widget *w){
                                 GameManager::QuitGame();
                             });
+    btn_close_game->image = new Fl_PNG_Image(PATH_IMAGE_BUTTON_QUIT_GAME);
 
     for (int i = BUTTON_MAKE_WEAPON_SIZE / 2; i <= 1280 - BUTTON_MAKE_WEAPON_SIZE / 2; i += BUTTON_MAKE_WEAPON_SIZE)
         for (int j = BUTTON_MAKE_WEAPON_SIZE / 2; j <= 720 - BUTTON_MAKE_WEAPON_SIZE / 2; j += BUTTON_MAKE_WEAPON_SIZE)
@@ -194,9 +202,13 @@ void GameManager::Update()
 void GameManager::End()
 {
     Graphic::ClearWindow();
-    Graphic::MakeText(590, 335, "WASTED");
-    auto btn_restart = Graphic::MakeButton(590, 385, 100, 50, "RESTART");
+    Graphic::MakeBackground(PATH_IMAGE_WASTED_SCREEN);
+
+    GraphicButton* btn_restart = Graphic::MakeButton(590, 285, 256, 128, "");
     btn_restart->callback([](Fl_Widget *w){w->hide(); StartGame();});
-    auto btn_quit = Graphic::MakeButton(590, 435, 100, 50, "QUIT");
-    btn_restart->callback([](Fl_Widget *w){GameManager::QuitGame();});
+    btn_restart->image = new Fl_PNG_Image(PATH_IMAGE_BUTTON_RESTART);
+
+    GraphicButton* btn_quit = Graphic::MakeButton(590, 423, 256, 128, "");
+    btn_quit->callback([](Fl_Widget *w){GameManager::QuitGame();});
+    btn_quit->image = new Fl_PNG_Image(PATH_IMAGE_BUTTON_QUIT);
 }
