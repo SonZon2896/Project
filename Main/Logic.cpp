@@ -29,6 +29,9 @@
 /// @brief Time to start new wave
 #define WAVE_DELAY 10.
 
+#define DOOMGUY_POS_X 720
+#define DOOMGUY_POS_Y 745
+
 #define PATH_IMAGE_BUTTON_START_WAVE "./PNG/new_wave.png"
 #define PATH_IMAGE_BUTTON_QUIT_GAME "./PNG/quit_game_button.png"
 #define PATH_IMAGE_WASTED_SCREEN "./PNG/wasted_screen.png"
@@ -58,6 +61,8 @@ Roads roads;
 
 GraphicButton *btn_start_wave;
 GraphicButton *btn_close_game;
+
+DoomGuy* doom_guy = new DoomGuy(DOOMGUY_POS_X, DOOMGUY_POS_Y);
 
 // Functions ==============================================================================
 
@@ -117,7 +122,6 @@ void GameManager::Start()
     for (int i = BUTTON_MAKE_WEAPON_SIZE / 2; i <= 1280 - BUTTON_MAKE_WEAPON_SIZE / 2; i += BUTTON_MAKE_WEAPON_SIZE)
         for (int j = BUTTON_MAKE_WEAPON_SIZE / 2; j <= 720 - BUTTON_MAKE_WEAPON_SIZE / 2; j += BUTTON_MAKE_WEAPON_SIZE)
             Graphic::MakeBTNWeapon({i, j});
-
     
     labels.events = Graphic::MakeText(1000, 720, "output");
     labels.num_wave_text = Graphic::MakeText(100, 720, "wave");
@@ -125,6 +129,9 @@ void GameManager::Start()
     labels.stipubles = Graphic::MakeText(300, 720, "stipubles");
     labels.timer_text = Graphic::MakeText(400, 720, "timer");
     labels.fridge_hp = Graphic::MakeText(125, 50, "fridge hp");
+
+    Graphic::AddDoomGuy(doom_guy);
+
 }
 
 void GameManager::FixedUpdate()
@@ -175,6 +182,9 @@ void GameManager::Update()
     labels.fridge_hp->output = std::to_string((int)Fridge::health);
     labels.stipubles->output = std::to_string((int)Event::money);
     labels.timer_text->output = std::to_string((int)(WAVE_DELAY - field_state.timer + 0.99));
+
+    doom_guy->update_state(Wave::GetAllRunning());
+
 }
 
 void GameManager::End()

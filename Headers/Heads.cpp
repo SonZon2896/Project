@@ -1,7 +1,10 @@
-#include "../Headers/heads.h"
 #include <cmath>
 
+#include "../Headers/heads.h"
+
 #define EPS 1e-8
+
+
 
 std::map<Direction, std::string> cockroach_direction = {
     {UP, "./PNG/cockroach_px_up.png"},
@@ -209,4 +212,21 @@ Trigger::~Trigger()
             all_trig.erase(all_trig.begin() + i);
             break;
         }
+}
+
+DoomGuy::DoomGuy(int w, int h){
+    pos = Point(w, h);
+}
+
+void DoomGuy::update_state(size_t amount_alive){
+    if (amount_alive <= DOOMGUY_NORMAL)
+        _current_state = DGSates::NORMAL;
+    else if (amount_alive <= DOOMGUY_LITTLE_WARNING)
+        _current_state = DGSates::LITTLE_WARNING;
+    else if (amount_alive <= DOOMGUY_WARNING)
+        _current_state = DGSates::WARNING;
+}
+
+DGSates DoomGuy::get_state(){
+    return _current_state;
 }

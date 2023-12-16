@@ -53,6 +53,27 @@ public:
     ~Background();
 };
 
+
+class GraphicDoomGuy : public Fl_Box{
+private:
+    Fl_PNG_Image* _cur_img;
+    DoomGuy* _guy;
+
+    Fl_PNG_Image* _state_normal;
+    Fl_PNG_Image* _state_little_warning;
+    Fl_PNG_Image* _state_warning;
+    
+
+    void draw();
+
+public:
+    GraphicDoomGuy(DoomGuy *guy);
+    ~GraphicDoomGuy();
+
+    void UpdateImage();
+};
+
+
 #define ENEMY_SIZE_X 64
 #define ENEMY_SIZE_Y 64
 
@@ -219,6 +240,7 @@ public:
     ButtonMakeWeapon(Point pos);
 };
 
+
 /// @brief class to draw on FLTK
 class Graphic
 {
@@ -239,6 +261,7 @@ public:
     static void MakeWindow(int w, int h);
     static void MakeBackground(std::string path_to_img);
     static void ClearWindow();
+    static void AddDoomGuy(DoomGuy *doom_guy);
     static GraphicButton *MakeButton(int x, int y, int w, int h, const char *name = "");
     static GraphicEnemy *MakeCockr(Cockroach *cockr);
     static GraphicEnemy *MakeMouse(Mouse *mouse);
@@ -256,3 +279,4 @@ public:
 
     static void Hide();
 };
+
