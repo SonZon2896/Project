@@ -217,10 +217,6 @@ Trigger::~Trigger()
 }
 
 DoomGuy::DoomGuy(){
-    _states.push_back("./PNG/gavkosmig_1.png");
-    _states.push_back("./PNG/gavkosmig_2.png");
-    _states.push_back("./PNG/gavkosmig_3.png");
-
     pos = Point(720, 720);
 }
 
@@ -233,6 +229,6 @@ void DoomGuy::update_state(size_t amount_alive){
         _current_state = DGSates::WARNING;
 }
 
-Fl_PNG_Image* DoomGuy::get_state(){
-    return new Fl_PNG_Image(&_states[(size_t)_current_state][0]);
+DGSates DoomGuy::get_state(){
+    return _current_state;
 }

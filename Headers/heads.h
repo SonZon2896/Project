@@ -232,9 +232,6 @@ enum class DGSates{
 
 class DoomGuy{
 private:
-    std::vector<std::string> _states;
-    Fl_PNG_Image* _img;
-
     DGSates _current_state = DGSates::NORMAL;
 
 public:
@@ -244,7 +241,7 @@ public:
     Point pos;
 
     void update_state(size_t amount_alive);
-    Fl_PNG_Image* get_state();
+    DGSates get_state();
 };
 
 /// @brief Function which takes orientated image of cockroach 

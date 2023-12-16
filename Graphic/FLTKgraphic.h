@@ -59,6 +59,11 @@ private:
     Fl_Image* _cur_img;
     DoomGuy* _guy;
 
+    Fl_PNG_Image* _state_normal;
+    Fl_PNG_Image* _state_little_warning;
+    Fl_PNG_Image* _state_warning;
+    
+
     void draw();
 
 public:

@@ -713,21 +713,39 @@ void Graphic::ShowEnemies()
         mouses.push_back(MakeMouse(all_mouses[i]));
 }
 
-GraphicDoomGuy::GraphicDoomGuy(DoomGuy* guy) : Fl_Box(guy->pos.x - DOOMGUY_WIDTH / 2, guy->pos.y - DOOMGUY_HEIGHT / 2,
-        DOOMGUY_WIDTH, DOOMGUY_HEIGHT){
+GraphicDoomGuy::GraphicDoomGuy(DoomGuy* guy) : Fl_Box(0,0,0,0){
+    resize(
+        guy->pos.x - DOOMGUY_WIDTH / 2, guy->pos.y - DOOMGUY_HEIGHT / 2,
+        DOOMGUY_WIDTH, DOOMGUY_HEIGHT
+    );
 
-        
-std::cout << "!!!!!\n";
-        
+    _state_normal = new Fl_PNG_Image("./PNG/gavkosmig_1.png");
+    _state_little_warning = new Fl_PNG_Image("./PNG/gavkosmig_2.png");
+    _state_warning = new Fl_PNG_Image("./PNG/gavkosmig_3.png");
 
     _guy = guy;
 }
+
 GraphicDoomGuy::~GraphicDoomGuy(){
     delete _cur_img;
 }
 
 void GraphicDoomGuy::UpdateImage(){
-    _cur_img = _guy->get_state();
+    DGSates state = _guy->get_state();
+
+    switch (state){
+        case DGSates::NORMAL:
+            _cur_img = _state_normal;
+            break;
+        case DGSates::LITTLE_WARNING:
+            _cur_img = _state_little_warning;
+            break;
+        case DGSates::WARNING:
+            _cur_img = _state_warning;
+            break;
+        default:
+            _cur_img = _state_normal;
+    }
 }
 
 void GraphicDoomGuy::draw(){

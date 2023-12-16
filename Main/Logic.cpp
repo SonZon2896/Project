@@ -162,6 +162,7 @@ void GameManager::Start()
     labels.wave_started = Graphic::MakeText(500, 720, "Started?");
     labels.fridge_hp = Graphic::MakeText(125, 50, "fridge hp");
 
+
     Graphic::AddDoomGuy(doom_guy);
 }
 
