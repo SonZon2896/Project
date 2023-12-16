@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 
 #include "GameManager.h"
 #include "Waves.h"
@@ -53,6 +54,7 @@ double Fridge::health;
 double Event::money_speed{MONEY_SPEED};
 double Event::money;
 
+bool is_event_on_wave;
 FieldState field_state;
 Labels labels;
 Roads roads;
@@ -78,55 +80,19 @@ void StartWave()
 
 void NextWave()
 {
+    is_event_on_wave = false;
     Wave::EndAll();
     ++field_state.num_of_wave;
     Event::Scholarship();
-}
-
-struct PackWeapon
-{
-    Point pos;
-    Direction direction;
-    EnumWeapon type;
-    PackWeapon(Point pos, Direction direction, EnumWeapon type) : pos{pos}, direction{direction}, type{type} {}
-};
-
-void MakeWeapon(Fl_Widget *w, void *p)
-{
-    auto unpack = (PackWeapon *)p;
-    if (unpack->type == EnumWeapon::slapper)
-    {
-        if (Event::money < SLAPPER_COAST)
-            return;
-        Event::money -= SLAPPER_COAST;
-        w->hide();
-        auto slapper = new Slapper(unpack->pos, unpack->direction);
-        field_state.slappers.push_back(Graphic::MakeSlapper(slapper));
-    }
-    else if (unpack->type == EnumWeapon::dichlorvos)
-    {
-        if (Event::money < DICHLORVOS_COAST)
-            return;
-        Event::money -= DICHLORVOS_COAST;
-        w->hide();
-        auto dichlorvos = new Dichlorvos(unpack->pos, unpack->direction);
-        field_state.dichlorvoses.push_back(Graphic::MakeDichlorvos(dichlorvos));
-    }
-    else if (unpack->type == EnumWeapon::trap)
-    {
-        if (Event::money < TRAP_COAST)
-            return;
-        Event::money -= TRAP_COAST;
-        w->hide();
-        auto trap = new Trap(unpack->pos, unpack->direction);
-        field_state.traps.push_back(Graphic::MakeTrap(trap));
-    }
 }
 
 // Main ===================================================================================
 
 void GameManager::Start()
 {
+    srand(time(0));
+    is_event_on_wave = false;
+
     field_state.timer = 0.;
     Fridge::health = FRIDGE_START_HEALTH;
     Event::money = START_MONEY;
@@ -162,7 +128,6 @@ void GameManager::Start()
     labels.survived = Graphic::MakeText(200, 720, "survived");
     labels.stipubles = Graphic::MakeText(300, 720, "stipubles");
     labels.timer_text = Graphic::MakeText(400, 720, "timer");
-    labels.wave_started = Graphic::MakeText(500, 720, "Started?");
     labels.fridge_hp = Graphic::MakeText(125, 50, "fridge hp");
 
     Graphic::AddDoomGuy(doom_guy);
@@ -197,10 +162,23 @@ void GameManager::Update()
         field_state.timer = 0.;
     }
 
+    if (Wave::IsAllStarted() && !is_event_on_wave && (rand() % 1000000 > 999997))
+    {
+        is_event_on_wave = true;
+        size_t num_event = rand() % 2;
+        switch (num_event)
+        {
+        case 0:
+            labels.events->output = Event::Evil_Woman(Wave::GetAllRunning());
+            break;
+        case 1:
+            labels.events->output = Event::Renovation();
+            break;
+        }
+        std::cout << "event is " << std::to_string(num_event) << std::endl;
+    }
     labels.num_wave_text->output = std::to_string(field_state.num_of_wave);
-    labels.events->output = Event::Evil_Woman(Wave::GetAllRunning());
     labels.survived->output = std::to_string(Wave::GetAllSurvived());
-    labels.wave_started->output = Wave::IsAllStarted() ? "Started" : "Not Started";
     labels.fridge_hp->output = std::to_string((int)Fridge::health);
     labels.stipubles->output = std::to_string((int)Event::money);
     labels.timer_text->output = std::to_string((int)(WAVE_DELAY - field_state.timer + 0.99));

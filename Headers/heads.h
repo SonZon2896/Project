@@ -5,14 +5,8 @@
 #include <map>
 #include <string>
 
-
 #include "../lib/fltk/FL/Fl_Image.H"
 #include "../lib/fltk/FL/Fl_PNG_Image.H"
-
-#define ENEMY_HEALTH 100.
-#define ENEMY_SPEED 100.
-#define ENEMY_DAMAGE 5.
-#define ENEMY_START_POINT 0
 
 #define DOOMGUY_WIDTH 50
 #define DOOMGUY_HEIGHT 50
@@ -126,9 +120,9 @@ class Trigger;
 /// @brief Structure with default common field of all enemies
 struct PrototypeEnemy
 {
-    double health = ENEMY_HEALTH;
-    double speed = ENEMY_SPEED;
-    double damage = ENEMY_DAMAGE;
+    double health;
+    double speed;
+    double damage;
     PrototypeEnemy() = default;
     PrototypeEnemy(double hp, double sp, double dm) : health{hp}, speed{sp}, damage{dm} {}
 };
@@ -144,7 +138,7 @@ protected:
 private:
     Road road;
     Point direction;
-    std::size_t point_on_road = ENEMY_START_POINT;
+    std::size_t point_on_road = 0;
     bool is_in_trig = false;
 
     /// @brief update directory, when turn

@@ -8,10 +8,6 @@ struct FieldState{
 
     size_t num_of_wave;
     double timer;
-
-    std::vector<GraphicSlapper *> slappers;
-    std::vector<GraphicDichlorvos *> dichlorvoses;
-    std::vector<GraphicTrap *> traps;
 };
 
 
@@ -20,7 +16,6 @@ struct Labels{
     Text *events;
     Text *num_wave_text;
     Text *survived;
-    Text *wave_started;
     Text *fridge_hp;
     Text *stipubles;
     Text *timer_text;
