@@ -8,18 +8,10 @@
 #include "../events/events.h"
 #include "../Headers/utils.h"
 
-
-
 /// @brief Start money
 #define START_MONEY 1500.
 /// @brief Speed of money coming
 #define MONEY_SPEED 1500
-/// @brief Coast of slapper
-#define SLAPPER_COAST 400
-/// @brief Coast of dichlorvos
-#define DICHLORVOS_COAST 1000
-/// @brief Coast of trap
-#define TRAP_COAST 150
 
 /// @brief Position of the fridge
 #define FRIDGE_POS {250, 210}

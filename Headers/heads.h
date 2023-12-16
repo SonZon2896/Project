@@ -42,8 +42,8 @@ enum EnumWeapon
 class Point
 {
 public:
-    int x;
-    int y;
+    double x;
+    double y;
 
     Point() = default;
     Point(int x, int y)

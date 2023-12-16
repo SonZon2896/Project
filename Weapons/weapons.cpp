@@ -47,7 +47,7 @@ void Weapon::Action(double time)
 // Slapper
 
 Slapper::Slapper(const Point &pos, Direction direction)
-    : trig({0, 0}, {0, 0}), Weapon(pos, &this->trig, 1.2, 110), direction{direction}
+    : trig({0, 0}, {0, 0}), Weapon(pos, &this->trig, SLAPPER_INTERVAL, SLAPPER_DAMAGE), direction{direction}
 {
     switch (direction)
     {
@@ -68,23 +68,22 @@ Slapper::Slapper(const Point &pos, Direction direction)
         trig.size = {SLAPPER_TRIGGER_SIZE_Y, SLAPPER_TRIGGER_SIZE_X};
         break;
     }
+
+    upgrade_cost = SLAPPER_COAST_UPGRADE;
 }
 
 void Slapper::Upgrade()
 {
-    upgrade_cost += 200;
+    upgrade_cost += SLAPPER_COAST_UPGRADE_PER_LVL;
     ++level;
-    damage += 5;
-    interval -= interval / 100.;
+    damage += SLAPPER_DAMAGE_PER_LVL;
+    interval *= SLAPPER_INTERVAL_PER_LVL;
 }
-
-#undef SLAPPER_TRIGGER_SIZE_X
-#undef SLAPPER_TRIGGER_SIZE_Y
 
 // Dichlorvos
 
 Dichlorvos::Dichlorvos(const Point &pos, Direction direction)
-    : trig({0, 0}, {0, 0}), Weapon(pos, &this->trig, 1, 120), direction{direction}
+    : trig({0, 0}, {0, 0}), Weapon(pos, &this->trig, DICHLORVOS_INTERVAL, DICHLORVOS_DAMAGE), direction{direction}
 {
     switch (direction)
     {
@@ -105,23 +104,22 @@ Dichlorvos::Dichlorvos(const Point &pos, Direction direction)
         trig.size = {DICHLORVOS_TRIGGER_SIZE_Y, DICHLORVOS_TRIGGER_SIZE_X};
         break;
     }
-}
 
-#undef DICHLORVOS_TRIGGER_SIZE_X
-#undef DICHLORVOS_TRIGGER_SIZE_Y
+    upgrade_cost = DICHLORVOS_COAST_UPGRADE;
+}
 
 void Dichlorvos::Upgrade()
 {
-    upgrade_cost += 400;
+    upgrade_cost += DICHLORVOS_COAST_UPGRADE_PER_LVL;
     ++level;
-    damage += 10;
-    interval -= interval / 50.;
+    damage += DICHLORVOS_DAMAGE_PER_LVL;
+    interval *= DICHLORVOS_INTERVAL_PER_LVL;
 }
 
 // Catch
 
 Trap::Trap(const Point &pos, Direction direction)
-    : trig({0, 0}, {0, 0}), Weapon(pos, &this->trig, 3, 200), direction{direction}
+    : trig({0, 0}, {0, 0}), Weapon(pos, &this->trig, TRAP_INTERVAL, TRAP_DAMAGE), direction{direction}
 {
     switch (direction)
     {
@@ -142,15 +140,34 @@ Trap::Trap(const Point &pos, Direction direction)
         trig.size = {TRAP_TRIGGER_SIZE_Y, TRAP_TRIGGER_SIZE_X};
         break;
     }
+
+    upgrade_cost = TRAP_COAST_UPGRADE;
+    slowness = 1.2;
 }
 
-#undef TRAP_TRIGGER_SIZE_X
-#undef TRAP_TRIGGER_SIZE_Y
+void Trap::Attack()
+{
+    for (auto enemy : trigger->enemies)
+    {
+        enemy->speed /= slowness;
+        if (enemy->speed < TRAP_MIN_SLOWED_SPEED)
+            enemy->speed = TRAP_MIN_SLOWED_SPEED;
+        enemy->health -= damage;
+        if (enemy->health <= 0)
+            for (size_t i = 0; i < trigger->enemies.size(); ++i)
+                if (trigger->enemies[i] == enemy)
+                {
+                    trigger->enemies.erase(trigger->enemies.begin() + i);
+                    break;
+                }
+    }
+}
 
 void Trap::Upgrade()
 {
-    upgrade_cost += 100;
+    upgrade_cost += TRAP_COAST_UPGRADE_PER_LVL;
     ++level;
-    damage += 100;
-    interval -= interval / 100.;
+    damage += TRAP_DAMAGE_PER_LVL;
+    slowness *= TRAP_SLOWNESS_PER_LVL;
+    interval *= TRAP_SLOWNESS_PER_LVL;
 }

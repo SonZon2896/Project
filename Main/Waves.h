@@ -3,6 +3,22 @@
 #include "../Headers/heads.h"
 #include "../Weapons/weapons.h"
 
+#define HEALTH_DELTA_MULT 10
+#define SPEED_DELTA_MULT 20
+
+#define COCKROACHES_HEALTH 150.
+#define COCKROACHES_SPEED 60.
+#define COCKROACHES_DAMAGE 5.
+#define COCKROACHES_AMOUNT_START 20
+#define COCKROACHES_AMOUNT_WAVE 5
+#define COCKROACHES_SPAWN_DELAY .2
+
+#define MOUSE_HEALTH 3000
+#define MOUSE_DAMAGE 50
+#define MOUSE_SPEED 50
+#define MOUSE_INTERVAL 10
+#define MOUSE_WAVE_MULTIPLICITY 5
+
 /// @brief Abstract Class
 class Wave
 {
