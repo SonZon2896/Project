@@ -56,7 +56,7 @@ public:
 
 class GraphicDoomGuy : public Fl_Box{
 private:
-    Fl_Image* _cur_img;
+    Fl_PNG_Image* _cur_img;
     DoomGuy* _guy;
 
     Fl_PNG_Image* _state_normal;

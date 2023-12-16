@@ -6,8 +6,6 @@
 
 
 
-
-
 std::map<Direction, std::string> cockroach_direction = {
     {UP, "./PNG/cockroach_px_up.png"},
     {RIGHT, "./PNG/cockroach_px_right.png"},
@@ -216,8 +214,8 @@ Trigger::~Trigger()
         }
 }
 
-DoomGuy::DoomGuy(){
-    pos = Point(720, 720);
+DoomGuy::DoomGuy(int w, int h){
+    pos = Point(w, h);
 }
 
 void DoomGuy::update_state(size_t amount_alive){

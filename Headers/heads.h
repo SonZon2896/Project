@@ -18,8 +18,8 @@
 #define DOOMGUY_HEIGHT 50
 
 #define DOOMGUY_NORMAL 10
-#define DOOMGUY_LITTLE_WARNING 20
-#define DOOMGUY_WARNING 30
+#define DOOMGUY_LITTLE_WARNING 25
+#define DOOMGUY_WARNING 35
 
 /// @brief Enum of directions
 enum Direction
@@ -235,7 +235,7 @@ private:
     DGSates _current_state = DGSates::NORMAL;
 
 public:
-    DoomGuy();
+    DoomGuy(int, int);
     ~DoomGuy(){};
 
     Point pos;

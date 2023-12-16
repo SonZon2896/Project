@@ -715,7 +715,7 @@ void Graphic::ShowEnemies()
 
 GraphicDoomGuy::GraphicDoomGuy(DoomGuy* guy) : Fl_Box(0,0,0,0){
     resize(
-        guy->pos.x - DOOMGUY_WIDTH / 2, guy->pos.y - DOOMGUY_HEIGHT / 2,
+        guy->pos.x, guy->pos.y,
         DOOMGUY_WIDTH, DOOMGUY_HEIGHT
     );
 
