@@ -16,7 +16,6 @@ struct Labels{
     Text *events;
     Text *num_wave_text;
     Text *survived;
-    Text *wave_started;
     Text *fridge_hp;
     Text *stipubles;
     Text *timer_text;

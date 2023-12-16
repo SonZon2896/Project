@@ -4,11 +4,15 @@
 #define HEALTH_DELTA_MULT 10
 #define SPEED_DELTA_MULT 5
 
-#define START_AMOUNT_COCKROACHES 20
-#define AMOUNT_COCKROACHES_DELTA_MULT 5
-#define SPAWN_DELAY .2
 
-#define MOUSE_HEALTH 3000
+#define COCKROACHES_HEALTH 100.
+#define COCKROACHES_SPEED 100.
+#define COCKROACHES_DAMAGE 5.
+#define COCKROACHES_AMOUNT_START 20
+#define COCKROACHES_AMOUNT_WAVE 5
+#define COCKROACHES_SPAWN_DELAY .2
+
+#define MOUSE_HEALTH 1500
 #define MOUSE_DAMAGE 50
 #define MOUSE_SPEED 50
 #define MOUSE_INTERVAL 10
@@ -79,11 +83,11 @@ bool Wave::IsAllStarted()
 
 void WaveCockroaches::Start(size_t num_of_wave) 
 {
-    prototype.health = ENEMY_HEALTH + HEALTH_DELTA_MULT * num_of_wave;
-    prototype.speed = ENEMY_SPEED + HEALTH_DELTA_MULT * num_of_wave;
-    prototype.damage = ENEMY_DAMAGE;
-    num = START_AMOUNT_COCKROACHES + AMOUNT_COCKROACHES_DELTA_MULT * num_of_wave;
-    interval = SPAWN_DELAY * (1 - num_of_wave / (num_of_wave + 10));
+    prototype.health = COCKROACHES_HEALTH + HEALTH_DELTA_MULT * num_of_wave;
+    prototype.speed = COCKROACHES_SPEED + HEALTH_DELTA_MULT * num_of_wave;
+    prototype.damage = COCKROACHES_DAMAGE;
+    num = COCKROACHES_AMOUNT_START + COCKROACHES_AMOUNT_WAVE * num_of_wave;
+    interval = COCKROACHES_SPAWN_DELAY * (1 - num_of_wave / (num_of_wave + 10));
 
     cockroaches.reserve(roads.size() * num);
     // revive old cockroaches

@@ -5,11 +5,6 @@
 #include <map>
 #include <string>
 
-#define ENEMY_HEALTH 100.
-#define ENEMY_SPEED 100.
-#define ENEMY_DAMAGE 5.
-#define ENEMY_START_POINT 0
-
 /// @brief Enum of directions
 enum Direction
 {
@@ -115,9 +110,9 @@ class Trigger;
 /// @brief Structure with default common field of all enemies
 struct PrototypeEnemy
 {
-    double health = ENEMY_HEALTH;
-    double speed = ENEMY_SPEED;
-    double damage = ENEMY_DAMAGE;
+    double health;
+    double speed;
+    double damage;
     PrototypeEnemy() = default;
     PrototypeEnemy(double hp, double sp, double dm) : health{hp}, speed{sp}, damage{dm} {}
 };
@@ -133,7 +128,7 @@ protected:
 private:
     Road road;
     Point direction;
-    std::size_t point_on_road = ENEMY_START_POINT;
+    std::size_t point_on_road = 0;
     bool is_in_trig = false;
 
     /// @brief update directory, when turn
