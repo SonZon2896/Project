@@ -5,10 +5,21 @@
 #include <map>
 #include <string>
 
+
+#include "../lib/fltk/FL/Fl_Image.H"
+#include "../lib/fltk/FL/Fl_PNG_Image.H"
+
 #define ENEMY_HEALTH 100.
 #define ENEMY_SPEED 100.
 #define ENEMY_DAMAGE 5.
 #define ENEMY_START_POINT 0
+
+#define DOOMGUY_WIDTH 50
+#define DOOMGUY_HEIGHT 50
+
+#define DOOMGUY_NORMAL 10
+#define DOOMGUY_LITTLE_WARNING 20
+#define DOOMGUY_WARNING 30
 
 /// @brief Enum of directions
 enum Direction
@@ -208,6 +219,32 @@ public:
     static auto GetAll() { return all_trig; }
 
     ~Trigger();
+};
+
+
+enum class DGSates{
+        NORMAL = 0,
+        LITTLE_WARNING,
+        WARNING,
+        PANIC
+};
+
+
+class DoomGuy{
+private:
+    std::vector<std::string> _states;
+    Fl_PNG_Image* _img;
+
+    DGSates _current_state = DGSates::NORMAL;
+
+public:
+    DoomGuy();
+    ~DoomGuy(){};
+
+    Point pos;
+
+    void update_state(size_t amount_alive);
+    Fl_PNG_Image* get_state();
 };
 
 /// @brief Function which takes orientated image of cockroach 

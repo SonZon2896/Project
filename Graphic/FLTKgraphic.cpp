@@ -75,7 +75,7 @@ Background::~Background()
 void GraphicEnemy::draw()
 {
     Point cur_direction = enemy->GetDirection();
-        UpdateImage();
+    UpdateImage();
     img_now->draw(enemy->pos.x - ENEMY_SIZE_X / 2, enemy->pos.y - ENEMY_SIZE_Y / 2);
 }
 
@@ -83,7 +83,8 @@ GraphicEnemy::GraphicEnemy(Enemy *enemy, std::string path_to_img) : Fl_Box(0, 0,
 {
     resize(
         enemy->pos.x - ENEMY_SIZE_X / 2, enemy->pos.y - ENEMY_SIZE_Y / 2, 
-        ENEMY_SIZE_X, ENEMY_SIZE_Y);
+        ENEMY_SIZE_X, ENEMY_SIZE_Y
+    );
 
     prev_direction = Point{0, 0};
     img_up = new Fl_PNG_Image(&(path_to_img + "_up.png")[0]);
@@ -626,6 +627,13 @@ void Graphic::ShowRoads(const std::vector<Road> &roads)
             window->add(new Line(road[i - 1].x, road[i - 1].y, road[i].x, road[i].y));
 }
 
+
+void Graphic::AddDoomGuy(DoomGuy* doom_guy){
+    auto temp = new GraphicDoomGuy(doom_guy);
+    window->add(temp);
+}
+
+
 // Graphic Fabric
 
 GraphicEnemy *Graphic::MakeCockr(Cockroach *cockr)
@@ -703,4 +711,26 @@ void Graphic::ShowEnemies()
     mouses.reserve(all_mouses.size());
     for (size_t i = mouses.size(); i < all_mouses.size(); ++i)
         mouses.push_back(MakeMouse(all_mouses[i]));
+}
+
+GraphicDoomGuy::GraphicDoomGuy(DoomGuy* guy) : Fl_Box(guy->pos.x - DOOMGUY_WIDTH / 2, guy->pos.y - DOOMGUY_HEIGHT / 2,
+        DOOMGUY_WIDTH, DOOMGUY_HEIGHT){
+
+        
+std::cout << "!!!!!\n";
+        
+
+    _guy = guy;
+}
+GraphicDoomGuy::~GraphicDoomGuy(){
+    delete _cur_img;
+}
+
+void GraphicDoomGuy::UpdateImage(){
+    _cur_img = _guy->get_state();
+}
+
+void GraphicDoomGuy::draw(){
+    UpdateImage();
+    _cur_img->draw(_guy->pos.x - DOOMGUY_WIDTH / 2, _guy->pos.y - DOOMGUY_HEIGHT / 2);
 }
