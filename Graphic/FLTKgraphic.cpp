@@ -719,9 +719,9 @@ GraphicDoomGuy::GraphicDoomGuy(DoomGuy* guy) : Fl_Box(0,0,0,0){
         DOOMGUY_WIDTH, DOOMGUY_HEIGHT
     );
 
-    _state_normal = new Fl_PNG_Image("./PNG/gavkosmig_1.png");
-    _state_little_warning = new Fl_PNG_Image("./PNG/gavkosmig_2.png");
-    _state_warning = new Fl_PNG_Image("./PNG/gavkosmig_3.png");
+    _state_normal = new Fl_PNG_Image("./PNG/gavkoshmig_1.png");
+    _state_little_warning = new Fl_PNG_Image("./PNG/gavkoshmig_2.png");
+    _state_warning = new Fl_PNG_Image("./PNG/gavkoshmig_3.png");
 
     _guy = guy;
 }
