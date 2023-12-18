@@ -594,7 +594,7 @@ void Graphic::MakeBackground(std::string path)
 void Graphic::ClearWindow()
 {
     window->clear();
-    cockroaches.clear();
+    //cockroaches.clear();
 }
 
 void Graphic::Show(){

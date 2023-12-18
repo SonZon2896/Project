@@ -38,7 +38,7 @@ public:
     Point pos;
     Fl_PNG_Image *image = nullptr;
     GraphicButton(int x, int y, int w, int h, const char* name = "");
-    ~GraphicButton();
+    virtual ~GraphicButton();
 };
 
 /// @brief class to draw a background
@@ -50,7 +50,7 @@ private:
 
 public:
     Background(std::string);
-    ~Background();
+    virtual ~Background();
 };
 
 
@@ -68,7 +68,7 @@ private:
 
 public:
     GraphicDoomGuy(DoomGuy *guy);
-    ~GraphicDoomGuy();
+    virtual ~GraphicDoomGuy();
 
     void UpdateImage();
 };
@@ -95,7 +95,7 @@ public:
 
     GraphicEnemy(Enemy *enemy, std::string path_to_image);
     void UpdateImage();
-    ~GraphicEnemy();
+    virtual ~GraphicEnemy();
 };
 
 /// @brief class to output anyone text
@@ -109,6 +109,7 @@ public:
     std::string output = "";
 
     Text(int x, int y, std::string name = "");
+    virtual ~Text() = default;
 };
 
 #define pb_size_x 50
@@ -126,7 +127,7 @@ public:
     double progress;
 
     ProgressBar(const Point &pos);
-    ~ProgressBar();
+    virtual ~ProgressBar();
 };
 
 /// @brief class to draw triggers
@@ -138,6 +139,7 @@ private:
 
 public:
     GraphicTrigger(const Trigger *trig);
+    virtual ~GraphicTrigger() = default;
 };
 
 /// @brief absolute class for drawing weapons
@@ -154,6 +156,7 @@ private:
 public:
     std::string name;
     GraphicWeapon() = delete;
+    virtual ~GraphicWeapon() = default;  
 };
 
 /// @brief struct to UpgradeWeapon()
@@ -162,6 +165,7 @@ struct PackUpgrade
     Weapon *weapon;
     EnumWeapon type;
     PackUpgrade(Weapon *weapon, EnumWeapon type) : weapon{weapon}, type{type} {}
+    virtual ~PackUpgrade() = default;
 };
 
 /// @brief class to draw Slapper
@@ -238,6 +242,8 @@ public:
 
     ButtonMakeWeapon() = delete;
     ButtonMakeWeapon(Point pos);
+
+    virtual ~ButtonMakeWeapon() = default;
 };
 
 

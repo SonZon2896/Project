@@ -46,7 +46,7 @@ private:
     static void StartFixedUpdate();
     static void StartUpdate();
 
-    static inline bool is_started = false;
+    static inline volatile bool is_started = false;
 public:
     GameManager() = delete;
 

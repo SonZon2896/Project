@@ -81,7 +81,9 @@ Direction Enemy::GetOrientation()
 void Enemy::UpdateDir()
 {
 
-    ++point_on_road;
+    point_on_road++;
+    if (point_on_road == road.size()) return;
+    
     double distance = (road[point_on_road] - road[point_on_road - 1]).Dist() * !is_death;
     direction = {(this->road[point_on_road] - this->road[point_on_road - 1]) / distance};
 }

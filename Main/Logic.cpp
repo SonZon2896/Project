@@ -128,14 +128,21 @@ void GameManager::Start()
 
 void GameManager::FixedUpdate()
 {
+    std::cout << "start FUpdate" << std::endl;
+
     if (Wave::IsAllStarted())
     {
         Wave::ActionAll(time::fixed);
         if (Wave::GetAllSurvived() <= 0)
             NextWave();
     }
+    std::cout << "start11 ending" << std::endl;
+
     for (auto enemy : Enemy::GetAll())
         enemy->CheckTrigger();
+
+    std::cout << "start22 ending" << std::endl;
+    
     for (auto weapon : Weapon::GetAll())
         weapon->Action(time::fixed);
     if (Fridge::health <= 0)
