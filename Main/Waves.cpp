@@ -175,3 +175,62 @@ void WaveMouses::End()
     survived = 0;
     is_started = false;
 }
+
+// WaveRadCockroaches
+
+void WaveRadCockroaches::Start(size_t num_of_wave) 
+{
+    prototype.health = RAD_COCKROACHES_HEALTH + HEALTH_DELTA_MULT * num_of_wave;
+    prototype.speed = RAD_COCKROACHES_SPEED + sqrt(HEALTH_DELTA_MULT * num_of_wave);
+    prototype.damage = RAD_COCKROACHES_DAMAGE;
+    num = RAD_COCKROACHES_AMOUNT_START + COCKROACHES_AMOUNT_WAVE * num_of_wave;
+    interval = RAD_COCKROACHES_SPAWN_DELAY * (1 - num_of_wave / (num_of_wave + 5));
+
+    radcockroaches.reserve(roads.size() * num);
+    // revive old cockroaches
+    for (auto cockr : radcockroaches)
+        cockr->Revive(prototype);
+
+    // add new cockroaches
+    for (size_t i = radcockroaches.size() / roads.size(); i < num; ++i)
+        for (size_t j = 0; j < roads.size(); ++j)
+            radcockroaches.push_back(new RadCockroach(roads[j], prototype));
+
+    survived = radcockroaches.size();
+    active_enemy = 0;
+    time_from_start = 0.;
+    is_started = true;
+}
+
+void WaveRadCockroaches::Action(double time)
+{
+    time_from_start += time;
+    active_enemy = time_from_start / interval + 1;
+    if (active_enemy > radcockroaches.size())
+        active_enemy = radcockroaches.size();
+    for (size_t i = 0; i < active_enemy; ++i)
+    {
+        if (radcockroaches[i]->is_death)
+            continue;
+        if (radcockroaches[i]->health <= 0)
+        {
+            radcockroaches[i]->is_death = true;
+            --survived;
+            continue;
+        }
+        if (radcockroaches[i]->Move(time))
+        {
+            Fridge::health -= radcockroaches[i]->damage;
+            radcockroaches[i]->pos = {-1000, -1000};
+            radcockroaches[i]->is_death = true;
+            --survived;
+        }
+    }
+}
+
+void WaveRadCockroaches::End()
+{
+    Event::money += WaveRadCockroaches::num * 200;
+    survived = 0;
+    is_started = false;
+}

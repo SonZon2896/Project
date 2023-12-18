@@ -50,15 +50,8 @@ void GameManager::EndGame(GameOverStatus status)
 
     is_started = false;
 
-    std::cout << "start ending" << std::endl;
-
     fix_thr.join();
-
-    std::cout << "start ending" << std::endl;
-
     upd_thr.join();
-
-    std::cout << "end ending" << std::endl;
 
     if (status == GAMEOVER_WASTED)
         End();

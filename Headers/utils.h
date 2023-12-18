@@ -5,6 +5,7 @@
 struct FieldState{
     WaveCockroaches wave_cockroaches;
     WaveMouses wave_mouses;
+    WaveRadCockroaches wave_rad_cockroaches;
 
     size_t num_of_wave;
     double timer;

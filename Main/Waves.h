@@ -19,6 +19,13 @@
 #define MOUSE_INTERVAL 10
 #define MOUSE_WAVE_MULTIPLICITY 5
 
+#define RAD_COCKROACHES_HEALTH 200.
+#define RAD_COCKROACHES_SPEED 40.
+#define RAD_COCKROACHES_DAMAGE 10.
+#define RAD_COCKROACHES_AMOUNT_START 2
+#define RAD_COCKROACHES_AMOUNT_WAVE 1
+#define RAD_COCKROACHES_SPAWN_DELAY 0.5
+
 /// @brief Abstract Class
 class Wave
 {
@@ -82,6 +89,20 @@ private:
 
 public:
     WaveMouses() = default;
+
+    void Start(size_t num_of_wave) final;
+    void Action(double time) final;
+    void End() final;
+};
+
+class WaveRadCockroaches : public Wave
+{
+private:
+    std::vector<RadCockroach *> radcockroaches;
+    PrototypeEnemy prototype;
+
+public:
+    WaveRadCockroaches() = default;
 
     void Start(size_t num_of_wave) final;
     void Action(double time) final;

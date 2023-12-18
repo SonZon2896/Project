@@ -177,6 +177,24 @@ Mouse::~Mouse()
         }
 }
 
+// Cockroaches
+
+RadCockroach::RadCockroach(const Road &road, PrototypeEnemy prototype)
+    : Enemy(road, prototype)
+{
+    all_rad_cockroaches.push_back(this);
+}
+
+RadCockroach::~RadCockroach()
+{
+    for (size_t i = 0; i < all_rad_cockroaches.size(); ++i)
+        if (all_rad_cockroaches[i] == this)
+        {
+            all_rad_cockroaches.erase(all_rad_cockroaches.begin() + i);
+            break;
+        }
+}
+
 // Triggers
 
 Trigger::Trigger(Point pos, Point size)

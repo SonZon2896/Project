@@ -257,6 +257,7 @@ private:
     /// @brief all cockroaches to output
     static inline std::vector<GraphicEnemy *> cockroaches;
     static inline std::vector<GraphicEnemy *> mouses;
+    static inline std::vector<GraphicEnemy *> radcockroaches;
 
     /// @brief function to redraw window by timer
     /// @param userdata something
@@ -271,6 +272,7 @@ public:
     static GraphicButton *MakeButton(int x, int y, int w, int h, const char *name = "");
     static GraphicEnemy *MakeCockr(Cockroach *cockr);
     static GraphicEnemy *MakeMouse(Mouse *mouse);
+    static GraphicEnemy *MakeRadCockr(RadCockroach *rad_cockr);
     static Text *MakeText(int x, int y, std::string name = "");
     static ProgressBar *MakeProgressBar(const Point &pos);
     static GraphicTrigger *MakeTrigger(const Trigger *trig);

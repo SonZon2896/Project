@@ -8,6 +8,7 @@
 
 #define PATH_IMAGE_DEFAULT_COCKROACH "./PNG/cockroach_px"
 #define PATH_IMAGE_MOUSE "./PNG/mouse"
+#define PATH_IMAGE_RAD_COCKROACH "./PNG/cockroach_radioactive"
 
 #define PATH_IMAGE_DICHLORVOS_UP "./PNG/dichlorvos_up.png"
 #define PATH_IMAGE_DICHLORVOS_DOWN "./PNG/dichlorvos_down.png"
@@ -594,7 +595,9 @@ void Graphic::MakeBackground(std::string path)
 void Graphic::ClearWindow()
 {
     window->clear();
-    //cockroaches.clear();
+    cockroaches.clear();
+    mouses.clear();
+    radcockroaches.clear();
 }
 
 void Graphic::Show(){
@@ -646,6 +649,13 @@ GraphicEnemy *Graphic::MakeCockr(Cockroach *cockr)
 GraphicEnemy *Graphic::MakeMouse(Mouse *mouse)
 {
     auto temp = new GraphicEnemy(mouse, PATH_IMAGE_MOUSE);
+    window->add(temp);
+    return temp;
+}
+
+GraphicEnemy *Graphic::MakeRadCockr(RadCockroach *rad_cockr)
+{
+    auto temp = new GraphicEnemy(rad_cockr, PATH_IMAGE_RAD_COCKROACH);
     window->add(temp);
     return temp;
 }
@@ -711,6 +721,11 @@ void Graphic::ShowEnemies()
     mouses.reserve(all_mouses.size());
     for (size_t i = mouses.size(); i < all_mouses.size(); ++i)
         mouses.push_back(MakeMouse(all_mouses[i]));
+
+    auto all_rad_cockr = RadCockroach::GetAll();
+    radcockroaches.reserve(all_rad_cockr.size());
+    for (size_t i = radcockroaches.size(); i < all_rad_cockr.size(); ++i)
+        radcockroaches.push_back(MakeRadCockr(all_rad_cockr[i]));
 }
 
 GraphicDoomGuy::GraphicDoomGuy(DoomGuy* guy) : Fl_Box(0,0,0,0){

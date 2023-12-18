@@ -190,6 +190,19 @@ public:
     static auto GetAll() {return all_mouses;}
 };
 
+/// @brief Class of mouse
+class RadCockroach : public Enemy
+{
+private:
+    static inline std::vector<RadCockroach *> all_rad_cockroaches;
+public:
+    RadCockroach() = delete;
+    RadCockroach(const Road &road, PrototypeEnemy prototype);
+    ~RadCockroach();
+
+    static auto GetAll() {return all_rad_cockroaches;}
+};
+
 /// @brief Class of enter trigger 
 class Trigger
 {

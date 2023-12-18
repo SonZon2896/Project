@@ -91,6 +91,7 @@ void GameManager::Start()
 
     field_state.wave_cockroaches.roads = roads.cockroach_roads;
     field_state.wave_mouses.roads = roads.mouse_roads;
+    field_state.wave_rad_cockroaches.roads = roads.cockroach_roads;
 
     field_state.num_of_wave = 0;
     Graphic::MakeWindow(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -128,20 +129,15 @@ void GameManager::Start()
 
 void GameManager::FixedUpdate()
 {
-    std::cout << "start FUpdate" << std::endl;
-
     if (Wave::IsAllStarted())
     {
         Wave::ActionAll(time::fixed);
         if (Wave::GetAllSurvived() <= 0)
             NextWave();
     }
-    std::cout << "start11 ending" << std::endl;
 
     for (auto enemy : Enemy::GetAll())
         enemy->CheckTrigger();
-
-    std::cout << "start22 ending" << std::endl;
     
     for (auto weapon : Weapon::GetAll())
         weapon->Action(time::fixed);
