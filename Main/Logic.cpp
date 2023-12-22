@@ -187,11 +187,11 @@ void GameManager::End()
     Graphic::ClearWindow();
     Graphic::MakeBackground(PATH_IMAGE_WASTED_SCREEN);
 
-    GraphicButton* btn_restart = Graphic::MakeButton(590, 285, 256, 128, "");
+    GraphicButton* btn_restart = Graphic::MakeButton(WINDOW_WIDTH / 2 - 142, 285, 256, 128, "");
     btn_restart->callback([](Fl_Widget *w){w->hide(); StartGame();});
     btn_restart->image = new Fl_PNG_Image(PATH_IMAGE_BUTTON_RESTART);
 
-    GraphicButton* btn_quit = Graphic::MakeButton(590, 423, 256, 128, "");
+    GraphicButton* btn_quit = Graphic::MakeButton(WINDOW_WIDTH / 2 - 142, 423, 256, 128, "");
     btn_quit->callback([](Fl_Widget *w){GameManager::QuitGame();});
     btn_quit->image = new Fl_PNG_Image(PATH_IMAGE_BUTTON_QUIT);
 }

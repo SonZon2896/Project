@@ -536,8 +536,38 @@ void ButtonMakeWeapon::StageAccept()
 
 void ButtonMakeWeapon::MakeWeapon()
 {
-    if(Event::money < 300)
-        return;
+
+    switch (type)
+    {
+    case EnumWeapon::slapper:
+    {
+        if(Event::money < SLAPPER_COAST)
+            return;
+        Event::money -= SLAPPER_COAST;
+        auto slapper = new Slapper(pos, direction);
+        Graphic::MakeSlapper(slapper);
+        break;
+    }
+    case EnumWeapon::dichlorvos:
+    {
+        if(Event::money < DICHLORVOS_COAST)
+            return;
+        Event::money -= DICHLORVOS_COAST;
+        auto dichlorvos = new Dichlorvos(pos, direction);
+        Graphic::MakeDichlorvos(dichlorvos);
+        break;
+    }
+    case EnumWeapon::trap:
+    {
+        if(Event::money < TRAP_COAST)
+            return;
+        Event::money -= TRAP_COAST;
+        auto trap = new Trap(pos, direction);
+        Graphic::MakeTrap(trap);
+        break;
+    }
+    }
+    
     btn_back->hide();
     btn_accept->hide();
     btn_make_slapper->hide();
@@ -548,31 +578,6 @@ void ButtonMakeWeapon::MakeWeapon()
     btn_dir_left->hide();
     btn_dir_right->hide();
     this->hide();
-
-    switch (type)
-    {
-    case EnumWeapon::slapper:
-    {
-        Event::money -= 400;
-        auto slapper = new Slapper(pos, direction);
-        Graphic::MakeSlapper(slapper);
-        break;
-    }
-    case EnumWeapon::dichlorvos:
-    {
-        Event::money -= 1000;
-        auto dichlorvos = new Dichlorvos(pos, direction);
-        Graphic::MakeDichlorvos(dichlorvos);
-        break;
-    }
-    case EnumWeapon::trap:
-    {
-        Event::money -= 400;
-        auto trap = new Trap(pos, direction);
-        Graphic::MakeTrap(trap);
-        break;
-    }
-    }
 }
 
 // Graphic
